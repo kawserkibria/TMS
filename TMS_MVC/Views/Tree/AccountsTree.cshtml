@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "AccountsTree";
+
+}
+
+<script src="../dist/jquery.table2excel.min.js"></script>
+
+<h4 class="panel-heading" style="text-align: center; text-decoration: underline;background-color:#ffffff">Chart of Accounts</h4>
+@* TreeView *@
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />*@
+@*  *@
+<button title="Add Item" style="margin: 2px; text-transform: capitalize;" id="exportToExcel" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="Export();"> <i class="fa fa-plus-circle"></i>&nbsp;Export Excel</button>
+<div class="form-body">
+
+   
+    <div id="jstree">
+
+    </div>
+</div>
+<input class="form-control" name="brandName" id="textarea" form="usrform">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
+<div class="table-responsive">
+    <table id="datatable4" class="table-bordered display" style="width:100%"></table>
+</div>
+
+@section scripts {
+    <script>
+       
+
+        function Export() {
+            
+               
+           
+            $.ajax({
+                url: "/Tree/ExportsExcelAccounts",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    //$('#textarea').val(JSON.stringify(result));
+                    if (result == "OK") {
+                        Swal.fire('Download Complete')
+                    } else {
+                        swal("Warning!", result)
+                        //clearFromData();
+                    };
+
+                },
+                error: function (ex) {
+
+
+                }
+            });
+        }
+
+
+
+
+        $(function () {
+
+            $('#jstree').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Tree/GetJsTree3AccountsData',
+                        'dataType': 'json'
+                        //'data': arrayCollection
+
+                    }
+                },
+                'types': {
+                    'first': {
+                        'icon': 'fa fa-folder'
+                    },
+                    'second': {
+                        'icon': 'fa fa-file-text-o'
+                    },
+                    'third': {
+                        'icon': 'fa fa-exclamation-triangle'
+                    }
+
+
+                },
+                'plugins': ['types'],
+
+            });
+        });
+
+    </script>
+}

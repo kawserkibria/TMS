@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "InventoryTree";
+}
+
+@*<h2>Inventory</h2>*@
+<h4 class="panel-heading" style="text-align: center; text-decoration: underline;background-color:#ffffff">Chart of Inventory</h4>
+@* TreeView *@
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />*@
+@*  *@
+<div class="form-body">
+    <div id="jstree">
+
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+
+            $('#jstree').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Tree/GetJsTree3Data',
+                        'dataType': 'json'
+                    }
+                },
+                'types': {
+                    'first': {
+                        'icon': 'fa fa-folder'
+                    },
+                    'second': {
+                        'icon': 'fa fa-file-text-o'
+                    },
+                    'third': {
+                        'icon': 'fa fa-exclamation-triangle'
+                    }
+
+
+                },
+                'plugins': ['types'],
+            });
+        });
+
+    </script>
+}

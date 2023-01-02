@@ -1,0 +1,252 @@
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+C:\Users\Kibria\OneDrive\Desktop\New folder (3)\TMS_MVC_25-10-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_27-10-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_01-11-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_05-11-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_06-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_08-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+D:\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+D:\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+D:\New folder\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+D:\New folder\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+D:\New folder\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+D:\New folder\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+D:\New folder\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+D:\New folder\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+E:\MVC WEB ALL APPLICATION\New folder\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll.config
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Jagoron.Web.pdb
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Microsoft.Web.Infrastructure.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\WebGrease.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\gobjVoucherName.pdb
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Helpers.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Mvc.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Optimization.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.Razor.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\System.Web.WebPages.Razor.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Newtonsoft.Json.xml
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\bin\Antlr3.Runtime.pdb
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.dll
+G:\Tailors Management System\TMS_MVC_09-11-22\TMS_MVC\TMS_MVC\obj\Debug\Jagoron.Web.pdb

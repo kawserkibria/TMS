@@ -1,0 +1,589 @@
+﻿@{
+    ViewBag.Title = "AccGroup";
+}
+<style type="text/css">
+    .reqError {
+        color: #ff0000; /*Red Color*/
+        font-weight: bold;
+    }
+</style>
+@* ***************Header *@
+<div class="container-fluid">
+    <div class="panel panel-danger">
+        <h4 class="panel-heading" style="text-align: center; color: white; text-decoration: underline; background-color: #146fee">সংস্থার নামের তালিকা</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="btn-group">
+                <button title="Add Item" style="margin: 2px; text-transform: capitalize;" id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#CompanyConfig" onclick="clearFromData();"> <i class="fa fa-plus-circle"></i>&nbsp;অ্যাড নিউ</button>
+                @*<button title="Refresh" style="margin: 2px; text-transform: capitalize;" class="btn btn-success" id="btnrefresh" onclick="refreshformdata();"> <i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
+            </div>
+
+        </div>
+    </div><br />
+</div>
+@* ***************End Header *@
+
+<div class="table-responsive">
+    <table id="datatable4" class="table-bordered display" style="width:100%"></table>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="CompanyConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
+                <h5 style="text-align: center; text-decoration: underline;">Branch Configuration</h5>
+
+
+                <button type="button" id="btnCancel"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span>&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div style="margin-left: 10px;">
+                                <label>কোম্পানীর নাম:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtCompanyName" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <label>মোবাইল নাম্বার:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtMobile" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div class="col-sm-12">
+                                <label id="Inactive">একটিভ:</label>
+                                <select id="cboInactive" class="form-control">
+                                    <option value="0">হা</option>
+                                    <option value="1">না</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+
+                            <label id="Inactive">Company Icon</label>
+                            <div class="col-sm-12">
+
+                                @*<img src="@ViewBag.Base64String" width=" 120" height="120" id="productImage" />*@
+                                <img src="~/images/defaultProduct.jpg" width="120" height="120" id="productImage" />
+                                <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
+
+
+                            </div>
+                            @*<div class="form-group">
+                                <label class="control-label col-md-3">Picture</label>
+                                <div class="col-md-12" style="height:150px;">
+                                    <img src="~/images/defaultProduct.jpg" width="120" height="120" id="productImage" />
+                                    <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
+                                </div>
+                            </div>*@
+
+                            @*@if (ViewBag.Base64String != null)
+                        {
+                            <hr />
+                            <img alt="" src="@ViewBag.Base64String" style="height:100px;width:100px;" />
+                        }*@
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer border-0" style="text-align:center">
+                <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন"></></span>
+                <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="বাতিল করুন" onclick="clearFromData();"></></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        function showimagepreview(input) {
+            if (input.files && input.files[0]) {
+                var a = (input.files[0].size);
+                if (a > 200000) {
+                    alert('Photo too large. Maximum allowed size is 200 KB');
+                }
+                else {
+                    //$('#WarningMsg').val('');
+                    var filerdr = new FileReader();
+                    filerdr.onload = function (e) {
+                        $('#productImage').attr('src', e.target.result);
+                    }
+                    filerdr.readAsDataURL(input.files[0]);
+                }
+            }
+        };
+
+        var selectdataId = 0;
+        var mstrPrimaryFields = 0;
+
+        var BranchID = "";
+        var BranchName = "";
+        $(document).ready(function () {
+            $('#btnsaveOrder').val('সেভ করুন');
+            showGrid();
+            $("#BranchConfig").on('shown.bs.modal', function () {
+                $(this).find('#txtbranchName').focus();
+            });
+       
+        })
+        function ValidationClear() {
+            var name = $('#txtbranchName').val();
+            if (name.trim() != "") {
+                document.getElementById("reqBranchName").innerHTML = "";
+
+            }
+
+        }
+        function ChangeLocation() {
+            var x = $('#txtbranchName').val() + ' Depot';
+            $('#txtlocation').val(x)
+
+        }
+
+        $("#btnsaveItem").click(function () {
+            $('#txtcostcategory').val("");
+        });
+        $("#btnCancel").click(function () {
+            $("#Costcategory").modal("hide");
+            $('#btnsaveOrder').val('Save');
+        });
+        $("#btncen").click(function () {
+            $("#Costcategory").modal("hide");
+            $('#btnsaveOrder').val('Save');
+        });
+        function saveOrUpdates() {
+            //if (checkReqFields() == false) {
+            //    return;
+            //}
+            var btn = $('#btnsaveOrder').val();
+            if (btn == "সেভ করুন") {
+                swal({
+                    title: "Do You Want to Save?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                    }
+                    else {
+                        save();
+                        clearFromData();
+                        $('#txtbranchName').focus();
+                    }
+
+                });
+
+
+            } else {
+
+
+                swal({
+                    title: "Do You Want to Update?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+
+                    }
+                    else {
+
+                        Update(mstrPrimaryFields);
+                        clearFromData();
+                        $('#btncen').click();
+
+                    }
+
+                });
+            }
+
+        }
+        function checkVariable(variable) {
+
+            if (variable == null) {
+                return "1";
+            }
+            else {
+                return "2";
+            }
+        }
+
+        function toTitleCase(str) {
+            return str.replace(
+              /\w\S*/g,
+              function (txt) {
+                  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+              }
+            );
+        }
+        function save() {
+
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("CompanayName", $('#txtCompanyName').val());
+            fd.append("inStatus", $('#cboInactive option:selected').val());
+            fd.append("MobileNumber", $('#txtMobile').val());
+            console.log(fd);
+            $.ajax({
+
+                url: "/Company/mCompanaySave",
+                processData: false,
+                contentType: false,
+                type: "POST",
+                datatype: "json",
+                data: fd,
+                success: function (result) {
+
+                    if (result == "OK") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function Update() {
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("CompanayName", $('#txtCompanyName').val());
+            fd.append("inStatus", $('#cboInactive option:selected').val());
+            fd.append("MobileNumber", $('#txtMobile').val());
+            fd.append("Id", $('#txtOldbranchID').val());
+            console.log(fd);
+            $.ajax({
+
+                url: "/Company/mCompanayUpdate",
+                processData: false,
+                contentType: false,
+                type: "POST",
+                datatype: "json",
+                data: fd,
+                success: function (result) {
+
+                    if (result == "OK") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function showGrid() {
+
+            detailsList = [];
+            table = $('#datatable4').DataTable({
+                "bDestroy": true,
+                "select": true,
+                //"gridlines": true,
+                "ajax": {
+                    "url": "/Company/mFillShowGrid",
+                    "type": "POST",
+                    "datatype": "json",
+
+                    "dataSrc": function (response) {
+
+                        detailsList = response;
+                        response.draw = response.draw;
+                        response.recordsTotal = response.recordsTotal;
+                        response.recordsFiltered = response.recordsFiltered;
+                        //console.log('request.responseText', response);
+
+                        return response;
+                    }
+
+                },
+
+                //"order": [[1, 'Asc']],
+                "columns": [
+
+
+                      {
+                          title: 'SL',
+                          render: function (
+                              data,
+                              type,
+                              row,
+                              meta
+                          ) {
+                              return '<span>' + (meta.row + 1) + '</span>';
+                          },
+                      },
+
+                        {
+                            title: 'Company ID',
+                            data: 'CompanayID',
+                            name: 'Branch ID',
+                            visible: false,
+                        },
+                         {
+                             title: 'কোম্পানীর নাম',
+                             data: 'CompanayName',
+                             name: 'Branch ID',
+                         },
+                               {
+                                   title: 'মোবাইল নাম্বার',
+                                   data: 'MobileNumber',
+                                   name: 'Branch ID',
+                               },
+
+                            {
+                                title: 'একটিভ',
+                                data: 'inStatus',
+                                name: 'Branch ID',
+                            },
+                             {
+                                 "data": "inStatus", "autowidth": true,
+                                 "render": function (inStatus) {
+                                     if (inStatus == 1) {
+                                         return "In Active";
+                                     }
+                                     else {
+                                         return "Active";
+                                     }
+
+                                 }
+                             },
+
+                              {
+                                  'data': 'Data',
+                                  'sortable': false,
+                                  'searchable': false,
+                                  'render': function (Data) {
+                                      if (!Data) {
+                                          return 'N/A';
+                                      } else {
+                                          var img = 'data:image/png;base64,' + Data;
+                                          return '<img src="' + img + '" height="50px" width="50px" />';
+                                      }
+                                  }
+                              },
+
+                                 {
+                                     title: 'Edit',
+
+                                     render: function (data, type, row) {
+                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#CompanyConfig">   <i class="fa fa-pencil"></i></button>';
+                                     }
+                                 },
+                                  {
+                                      title: 'Delete',
+                                      render: function (data, type, row) {
+                                          return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                                      }
+                                  },
+
+
+                ],
+
+                "responsive": true,
+                "rowCallback": function (row, data) {
+                    var rowdata = data;
+
+                    $(row).find(".sales-sloat-ak").click(function () {
+                        selectdata = data;
+                        //console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        edit(selectdata);
+
+                    });
+                    $(row).find(".delete-sloat-ak").click(function () {
+                        selectdata = data;
+                        deleteCompany(selectdata);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+        function edit(data) {
+            $('#btnsaveOrder').val('আপডেট করুন ');
+            $('#txtOldbranchID').val(data.CompanayID);
+            $('#txtCompanyName').val(data.CompanayName);
+            $("#txtMobile").val(data.MobileNumber);
+            $('#cboInactive').val(data.inStatus).trigger('change');
+            var img = 'data:image/png;base64,' + data.Data;
+
+            $('#productImage').attr('src', img);
+            var empObj = {
+                Id: (data.CompanayID)
+            };
+
+   
+    
+        }
+
+        function deleteCompany(selectdata) {
+
+            var empObj = {
+                Id: (selectdata.Id),
+            };
+            //console.log('hello ', empObj);
+            swal({
+                title: "Do You Want to Delete?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+
+                if (isConfirm) {
+                }
+                else {
+                    $.ajax({
+                        url: "/Company/DeleteCompany",
+                        type: "POST",
+                        data: JSON.stringify(empObj),
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+
+                            if (result == "OK") {
+                                showGrid();
+                                swal("Delete!", "Delete success.", "success");
+                            }
+                            else {
+                                swal("Warning!", result);
+                            };
+
+
+                        }
+                    });
+                }
+
+            });
+
+
+
+        }
+
+        function checkReqFields() {
+            var returnValue;
+
+            var name = document.getElementById("txtbranchName").value;
+            returnValue = true;
+            if (name.trim() == "") {
+                document.getElementById("reqBranchName").innerHTML = " * Name is required.";
+                returnValue = false;
+            }
+            return returnValue;
+        }
+
+        function refreshformdata() {
+            showGrid();
+        }
+        function clearFromData() {
+
+            $('#btnsaveOrder').val('সেভ করুন');
+            $('#txtOldbranchID').val('');
+            $('#txtCompanyName').val('');
+            $("#txtMobile").val('');
+            $('#cboInactive').val("Active").trigger('change');
+            $('#productImage').attr('src', '');
+            //$('#productImage').length();
+            //$("#productImage").replaceWith($("#productImage").val('').clone(true));
+
+        }
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+1. git init
+2. git clone https://github.com/kawserkibria/Sales-Order-MVC.git
+3. cd Sales-Order-MVCgit
+4. git add .
+5. git commit -m "dsfd"
+6.git remote add origin https://github.com/kawserkibria/HRM.git
+7. git branch -M main
+8. git push -u origin main

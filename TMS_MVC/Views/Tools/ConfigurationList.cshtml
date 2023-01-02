@@ -1,0 +1,610 @@
+﻿@{
+    ViewBag.Title = "AccGroup";
+}
+
+
+
+
+
+
+    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
+                <h5 style="text-align: center; text-decoration: underline;">Configuration</h5>
+                <button type="button" class="close" style="background:  #194771; color: white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+            </div>
+            <div class="modal-body">
+                @*@Html.Partial("SalesOrderNew", Model.Count == 0 ? new Jagoron.Web.Models.SalesOrder() : Model.FirstOrDefault())*@
+                <div class="form-group">
+                    <div class="row">
+
+
+                        <div class="col-md-12 col-sm-12">
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbBankingInformation" class="form-check-input">
+                                    <label id="lblBankingInformation" style="margin-top:2px;" class="form-check-label" for="exampleCheck1">Banking Information </label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbMoneyReceiptFoarmat" class="form-check-input">
+                                    <label id="lblMoneyReceiptFoarmat" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Money Receipt Foarmat</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbBlockCreditCash" class="form-check-input">
+                                    <label id="lblBlockCreditCash" class="form-check-label" style="margin-top:2px" for="exampleCheck1">Block Credit Cash</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbAdmissionForm" class="form-check-input">
+                                    <label style="margin-top:2px" id="lblAdmissionForm" class="form-check-label" for="exampleCheck1">Admission Form(Real Estate)</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbHideCompanyName" class="form-check-input">
+                                    <label id="lblHideCompanyName" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Hide Company Name</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbStockItemBangla" class="form-check-input">
+                                    <label id="lblStockItemBangla" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Stock Item Bangla</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSeveralLocation" class="form-check-input">
+                                    <label id="lblSeveralLocation" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Several Location</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbHideInitialCompanyFromlist" class="form-check-input">
+                                    <label id="lblHideInitialCompanyFromlist" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Hide Initial Company From list</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbItemSerial" class="form-check-input">
+                                    <label id="lblItemSerial" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Item Serial</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbDeveral Branch" class="form-check-input">
+                                    <label id="lblDeveralBranch" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Deveral Branch</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbHideInitialCompanyFromlist" class="form-check-input">
+                                    <label id="lblBlockNagetiveStock" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Block Nagetive Stock</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbAttendance&Payroll" class="form-check-input">
+                                    <label id="lblAttendance & Payroll" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Attendance & Payroll</label>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+
+
+                    <div class="row" style="margin-top:30px">
+
+
+                        <div class="col-md-12 col-sm-12">
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSingleStockTransfer" class="form-check-input">
+                                    <label id="lblSingleStockTransfer" style="margin-top:2px;" class="form-check-label" for="exampleCheck1">Single Stock Transfer</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbEffectInventoryInvoice" class="form-check-input">
+                                    <label id="lblEffectInventoryInvoice" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Effect Inventory in direct Sales invoice</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="card" style="font-weight:bold">
+                                    345345435545fFG5767
+
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbLockedCreditLimit" class="form-check-input">
+                                    <label id="lblLockedCreditLimit" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Locked Credit Limit</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbDifferentStockTransfer" class="form-check-input">
+                                    <label style="margin-top:2px" id="lblDifferentStockTransfer" class="form-check-label" for="exampleCheck1">Different Stock Transfer</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbEffectInv.in" class="form-check-input">
+                                    <label id="lblEffectInv.in" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Effect Inv.in Direct Purchase Invoice</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbInvoiceMismatchAmount" class="form-check-input">
+                                    <label id="lblInvoiceMismatchAmount" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Block Sales Invoice Mismatch Amount</label>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbManufacturing System" class="form-check-input">
+                                    <label id="lblManufacturing System" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Manufacturing System</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbBothDr/Cr(SI&PI)" class="form-check-input">
+                                    <label id="lblBothDr/Cr(SI&PI)" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Both Dr/Cr (SI & PI)</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSalesRepresentativeFiter" class="form-check-input">
+                                    <label id="lblSalesRepresentativeFiter" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Representative Fiter</label>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbPsysicalStock" class="form-check-input">
+                                    <label id="lblPsysicalStock" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Psysical Stock</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbPDCScheduleDetails" class="form-check-input">
+                                    <label id="lblPDCScheduleDetails" style="margin-top:2px" class="form-check-label" for="exampleCheck1">PDC Schedule Details Follow up</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <label id="" style="margin-top:2px" class="form-check-label" for="exampleCheck1"></label>
+                                    <label id="lblGuaranteeCafrdUse" style="margin-top: 2px; visibility:hidden" class="form-check-label" for="exampleCheck1">------------</label><br />
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbGuaranteeCardUse" class="form-check-input">
+                                    <label id="lblGuaranteeCardUse" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Guarantee Card Use</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbPurchaseInvoiceWithItemDes" class="form-check-input">
+                                    <label id="lblPurchaseInvoiceWithItemDes" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Purchase Invoice With Item Des</label>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+
+                                    <label id="lblPurchaseInvoiceWithItemDes" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">----------</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbItem Product Code" class="form-check-input">
+                                    <label id="lblItem Product Code" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Item Product Code</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbAccountTransactionReport" class="form-check-input">
+                                    <label id="lblAccountTransactionReport" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Compare Account Transaction</label>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+
+                                    <label id="lblPurchaseInvoiceWithItemDes" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">----------</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbItemImage" class="form-check-input">
+                                    <label id="lblItemImage" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Item Image</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSlipReport(SalesInv)" class="form-check-input">
+                                    <label id="lblSlipReport(SalesInv)" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Slip Report(Sales Inv)</label>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+
+                                    <label id="lblPurchaseInvoiceWithItemDes" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">----------</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSingleNarration" class="form-check-input">
+                                    <label id="lblSingleNarration" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Single Narration</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbFooterOption" class="form-check-input">
+                                    <label id="lblFooterOption" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Invoice More Footer Option</label>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+
+                                    <label id="lblPurchaseInvoiceWithItemDes" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">----------</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbHalfPageAutoChequeNo" class="form-check-input">
+                                    <label id="lblHalfPageAutoChequeNo" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Money Receipt Half Page Auto Cheque No</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbIntegratedSalesPrice" class="form-check-input">
+                                    <label id="lblIntegratedSalesPrice" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Integrated Sales Price With Pos</label>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-3">
+                                <div class="card" style="font-weight:bold">
+                                    Base Currency
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    
+                                    <label id="lblInterestCalculation" style="margin-top: 2px; visibility:hidden;" class="form-check-label" for="exampleCheck1">Interest Calculation</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbInterestCalculation" class="form-check-input">
+                                    <label id="lblInterestCalculation" style="margin-top:2px; " class="form-check-label" for="exampleCheck1">Interest Calculation</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbMoneyReceiptNoAuto" class="form-check-input">
+                                    <label id="lblMoneyReceiptNoAuto" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Money Receipt No Auto </label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSalesMinimumPrice" class="form-check-input">
+                                    <label id="lblSalesMinimumPrice" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Minimum Price</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbBackLockPosting" class="form-check-input">
+                                    <label id="lblBackLockPosting" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Back Lock Posting</label>
+
+                                </div>
+                            </div>
+
+
+
+                        
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSalesQtyInword" class="form-check-input">
+                                    <label id="lblSalesQtyInword" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Qty Inword</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbBackLockPosting" class="form-check-input">
+                                    <label id="lblBackLockPosting" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Back Lock Posting</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <label id="lblInventoryIntegretedWithAccounts" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">Inventory Integreted With Accounts</label>
+
+                                </div>
+                            </div>
+
+
+                            
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSalesQtyInword" class="form-check-input">
+                                    <label id="lblSalesQtyInword" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Printer Section</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSalesQtyInword" class="form-check-input">
+                                    <label id="lblSalesQtyInword" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Invoice Rpt. With Item Des.</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <label id="lblInventoryIntegretedWithAccounts" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">Inventory Integreted With Accounts</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbSMS" class="form-check-input">
+                                    <label id="lblSMS" style="margin-top:2px" class="form-check-label" for="exampleCheck1">SMS</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbcal With Total" class="form-check-input">
+                                    <label id="lblcal With Total" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Add/Less cal With Total</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <label id="lblInventoryIntegretedWithAccounts" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">Inventory Integreted With Accounts</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbForeignCurrency" class="form-check-input">
+                                    <label id="lblForeignCurrency" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Foreign Currency</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" id="cbRptWithChallan" class="form-check-input">
+                                    <label id="lblRptWithChallan" style="margin-top:2px" class="form-check-label" for="exampleCheck1">Sales Inv Rpt With Challan Details</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-md-4" style="margin-bottom:4px;">
+                                <div class="form-check">
+                                    <label id="lblInventoryIntegretedWithAccounts" style="margin-top:2px; visibility:hidden" class="form-check-label" for="exampleCheck1">Inventory Integreted With Accounts</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div>
+                                    <label id="lblToMail">To Mail</label>
+                                    <input id="txtToMail" type="email" class="form-control" style="text-align: left" value=""></ >
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div>
+                                    <label id="lblFromMail">Form Mail:</label>
+                                    <input id="txtFromMail" type="email" class="form-control" style="text-align: left" value=""></ >
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div>
+                                    <label id="lblAltMail">Alt. Mail:</label>
+                                    <input id="txtAltMail" class="form-control" style="text-align: left" value=""></ >
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div>
+                                    <label id="lblPassword" style="margin-top:4px;">Password</label>
+                                    <input id="txtPassword" class="form-control" style="text-align: left" value=""></ >
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div>
+                                    <label id="lblConfirmPassword" style="margin-top:4px;">Confirm Password</label>
+                                    <input id="txtConfirmPassword" class="form-control" style="text-align: left" value=""></ >
+                                </div>
+
+                            </div>
+                            
+
+                           
+
+
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer border-0">
+
+                        <span><input type="button" class="btn btn-primary" id="btnsaveOrder" value="Save" onclick="saveOrUpdates();"></></span>
+                        <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" onclick="clearFromData();" value="Cancel" (click)="bsModalRef.hide()"></></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+

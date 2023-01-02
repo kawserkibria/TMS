@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gentelella Alela! | </title>
+
+
+    <link href="../Tms.Lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../Tms.Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    @* Mayhedi *@
+    <link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />
+    @* Datable then update buget jquery *@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    @* end bootstrap datatble *@
+
+    @* ---Sweetalert tost--*@
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css" rel="stylesheet" />
+    @* ---End Sweetalert tost--*@
+    @* Sereching drop down *@
+    <link href="~/Content/select2.css" rel="stylesheet" />
+
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view" >
+                    <div class="navbar nav_title" style="border: 0; background: #2587ed">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            @*<img src="images/img.jpg" alt="..." class="img-circle profile_img">*@
+                            <img src="~/images/cropper.jpg" alt="..." class="img-circle profile_img" />
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>John Doe</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3 style="color:red">Live..</h3>
+
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a style="font-size:20px"><i class="fa fa-cogs"></i> মাস্টার <span class="fa fa-chevron-down"></span></a>
+
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("CreateCompany", "Company")" class="nav-link">সংস্থার নাম সেভ</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("BranchEntry", "BranchEntry")" class="nav-link">ব্রাঞ্চ সেভ </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px">  বেসিক সেটিং  <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+
+                                                <li class="sub_menu">
+                                                    <a style="font-size:18px" href="@Url.Action("ButtonEntry", "Button")" class="nav-link">বাটন সেটিং </a>
+                                                </li>
+                                                <li class="sub_menu">
+                                                    <a style="font-size:18px" href="@Url.Action("Groupconfigurationlist","Accountsgroup")" class="nav-link">কলার সেটিং </a>
+                                                </li>
+                                                <li>
+                                                    <a style="font-size:18px" href="@Url.Action("LedgerConfigurationList", "Ledger")">গলার মডেল সেটিং </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">কাস্টমার সেভ </a>
+                                        </li>
+                                        
+
+                                    </ul>
+                                </li>
+                                <li style="font-size:20px">
+                                    <a style="font-size:19px"><i class="fa fa-cart-arrow-down"></i> অর্ডার <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("DaynamicallyTextBoxCreateView", "DaynamicallyTextBoxCreate")" class="nav-link">DaynamicallyTextBoxCreate </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>অর্ডার দিন</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>অর্ডার কাজ সম্পুন্ন করুন </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>ডেলিভারি তারিখ পরিবর্তন করুন </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>ডেলিভারি দিন </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li style="font-size:20px">
+                                    <a style="font-size:19px"><i class="fa fa-desktop"></i> রিপোর্ট <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+
+                                        <li>
+                                            <a style="font-size:18px"><i></i>অর্ডার রিপোর্ট </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>কলেক্টশন রিপোর্ট </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>কাস্টমার  রিপোর্ট </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px"><i></i>ডেলিভারি দিন </a>
+                                        </li>
+
+
+
+
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a style="font-size:20px"><i class="fa fa-cogs"></i> টুলস <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+
+
+                                        <li class="sub_menu">
+                                            <a style="font-size:18px" href="@Url.Action("BranchConfigList", "BranchConfig")" class="nav-link"> টুলস সেটিং </a>
+                                        </li>
+                                        <li class="sub_menu">
+                                            <a style="font-size:18px" href="@Url.Action("Groupconfigurationlist","Accountsgroup")" class="nav-link">কলার সেটিং </a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("LedgerConfigurationList", "Ledger")">গলার মডেল সেটিং </a>
+                                        </li>
+
+
+                                        <li>
+                                            <a style="font-size:18px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">কাস্টমার সেভ </a>
+
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+                                <li style="font-size:20px">
+                                    <a><i class="fa fa-bar-chart-o"></i> সিকিউরিটি <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li style="font-size:18px"><a href="#">User Configuration</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="menu_section">
+                            <h3>Live On</h3>
+
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    @*<img src="images/img.jpg" alt="">John Doe*@
+                                    <img src="~/images/cropper.jpg" alt="">John doe
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="@Url.Action("ConfigurationList", "Configuration")">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Configuration</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Indtall New Company</a>
+                                    <a class="dropdown-item" href="@Url.Action("companyinformationlist", "CompanyInformation")"><i class="fa fa-sign-out pull-right"></i>Edit Company</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Select Company</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Statistics</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Audit Report</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Change Password</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> user Managment</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> Registration</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> About</a>
+                                    <a class="dropdown-item" href="@Url.Action("CreateCompany", "Company")"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </div>
+                            </li>
+
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+
+                <section class="content">
+
+                    <div class="container-fluid">
+                        <!-- Small boxes (Stat box) -->
+                        <br><br><br>
+                        @RenderBody()
+                        <!-- /.row (main row) -->
+                    </div><!-- /.container-fluid -->
+                </section>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="../Tms.Lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../Tms.Lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Tms.Lib/moment/min/moment.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    @* Tree *@
+    <script src="~/Scripts/jsTree3/jstree.min.js"></script>
+    @* end *@
+
+    @* Data Table *@
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    @* end datable *@
+
+    @* ---Sweetalert--*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @* end *@
+    @* doe seaching *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    @* Multi Column Dropdown *@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.js"></script>
+    @* end *@
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

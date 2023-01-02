@@ -1,0 +1,390 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    fieldset.scheduler-border {
+        border: 1px solid #ccc;
+        padding: 0px 5px 10px 5px;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+        height: 335px !important;
+    }
+
+    legend.scheduler-border {
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: left;
+        width: auto;
+        padding: 0 0px;
+        border-bottom: none;
+        margin-left: -15px;
+    }
+</style>
+
+@*<div class="row" style="margin-top:20px;">
+    <label class="col-md-2 control-label"> Total Rows :</label>
+    <div class="col-md-4">
+        <input id="totalDiv" onchange="createBlock(this.value)" class="form-control form-group" />
+    </div>
+</div>*@
+<hr />
+<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+    <div id="divsection">
+    </div>
+</div>
+
+<style>
+    fieldset.scheduler-border {
+        border: 1px solid #ccc;
+        padding: 0px 5px 10px 5px;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+        height: 310px !important;
+    }
+
+    legend.scheduler-border {
+        margin-bottom: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+        width: auto;
+        padding: 0 0px;
+        border-bottom: none;
+        margin-left: 5px;
+    }
+
+    .label {
+        font-size: 13px !important;
+        color: black !important;
+    }
+    .container-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 110px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <div class="row" style="margin-top:20px;">
+                    <label class="col-md-2 control-label"> Category :</label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="CategoryId" id="CategoryId" onchange="createBlock(this.value)" required>
+                            <option value="" selected>--Select--</option>
+                        </select>
+                    </div>
+                    <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন"></></span>
+                </div>
+                <hr />
+            
+
+             
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+    <div id="divsection">
+    </div>
+</div>
+
+<script src="~/Scripts/App.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    var txtid = 0;
+    var totaltext = 0;
+    $(document).ready(function () {
+        GetCategoryList();
+
+
+        function GetCategoryList() {
+            var ddlUnder = $("#CategoryId");
+            $.ajax({
+                url: "/DaynamicallyTextBoxCreate/GetCategoryList",
+                datatype: "json",
+                data: {},
+                success: function (data) {
+                    ddlUnder.html('');
+                    ddlUnder.append($('<option value="Select">Select</option>'));
+                    $.each(data, function (id, option) {
+                        ddlUnder.append($('<option value="' + option.Id + '">' + option.Name + '</option>'));
+                    });
+                    //$('#ddlUnder').val(selectdata.strCostCenter);
+
+                }
+            })
+        }
+
+
+      
+        function GetCategoryList2() {
+            var ddlUnder = $("#CategoryId");
+            $.ajax({
+                //type: 'GET',
+                //url: baseUrl + 'DaynamicallyTextBoxCreate/GetCategoryList/',
+                url: "/DaynamicallyTextBoxCreate/GetCategoryList",
+                type: "POST",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    ddlUnder.html('');
+                    ddlUnder.append($('<option value="Select">Select55</option>'));
+                    console.log('kibria',res),
+                    //$.each(res.result, function (i, option) {
+                        //$('#CategoryId').append($('<option>', {
+                        //    value: item.Id,
+                        //    text: item.Name
+                    //}));
+                        $.each(data, function (id, option) {
+                        ddlUnder.append($('<option value="' + option.Id + '">' + option.Name + '</option>'));
+                    });
+                }
+            });
+        };
+
+        //$("body").on('change', 'input', function () {
+        //    var value = $(this).val();
+        //    console.log(value);
+        //});
+
+
+        var data = {};
+
+        $("body").on('change', 'input', function () {
+            $('fieldset> label, input').each(function () {
+                data[$(this).attr('id')] = $(this).val();
+            });
+            console.log(data);
+        });
+
+    });
+    function saveOrUpdates() {
+        //if (checkReqFields() == false) {
+        //    return;
+        //}
+        var btn = $('#btnsaveOrder').val();
+        if (btn == "সেভ করুন") {
+            swal({
+                title: "Do You Want to Save?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                }
+                else {
+                    save();
+                    clearFromData();
+                    $('#txtbranchName').focus();
+                }
+
+            });
+
+
+        } else {
+
+
+            swal({
+                title: "Do You Want to Update?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                }
+                else {
+
+                    Update(mstrPrimaryFields);
+                    clearFromData();
+                    $('#btncen').click();
+
+                }
+
+            });
+        }
+
+    }
+    function save() {
+
+        //var fd = new FormData();
+        //var files = $('input[type="file"]')[0].files;
+
+        var allInputs = document.getElementsByTagName('input');
+        for (var i = 1; i < totaltext; i++) {
+          alert(allInputs[i].value);
+       
+        }
+        fd.append("strBUTTON_NAME", $('#txtButtonName').val());
+        fd.append("inStatus", $('#cboInactive option:selected').val());
+        console.log(fd);
+        $.ajax({
+
+            url: "/Button/mButtonSave",
+            processData: false,
+            contentType: false,
+            type: "POST",
+            datatype: "json",
+            data: fd,
+            success: function (result) {
+
+                if (result == "OK") {
+                    //console.log('save')
+
+                    var toastMixin = Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        title: 'General Title',
+                        animation: false,
+                        //position: 'top-right',
+                        position: 'center',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                    toastMixin.fire({
+                        animation: true,
+                        title: 'Save Successfully',
+                    });
+                    showGrid();
+                    clearFromData();
+
+
+                } else {
+                    swal("Warning!", result);
+                    //clearFromData();
+                };
+            }
+        });
+
+    }
+    function Update() {
+        var fd = new FormData();
+        var files = $('input[type="file"]')[0].files;
+        for (var i = 0; i < files.length; i++) {
+            fd.append("Picture", files[i]);
+        }
+        fd.append("strBUTTON_NAME", $('#txtButtonName').val());
+        fd.append("inStatus", $('#cboInactive option:selected').val());
+        fd.append("intBUTTON_ID", $('#txtOldbuttonID').val());
+        console.log(fd);
+        $.ajax({
+
+            url: "/Button/mButtonUpdate",
+            processData: false,
+            contentType: false,
+            type: "POST",
+            datatype: "json",
+            data: fd,
+            success: function (result) {
+
+                if (result == "OK") {
+                    //console.log('save')
+
+                    var toastMixin = Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        title: 'General Title',
+                        animation: false,
+                        //position: 'top-right',
+                        position: 'center',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                    toastMixin.fire({
+                        animation: true,
+                        title: 'Save Successfully',
+                    });
+                    showGrid();
+                    clearFromData();
+
+
+                } else {
+                    swal("Warning!", result);
+                    //clearFromData();
+                };
+            }
+        });
+
+    }
+    function createBlock(val) {
+         txtid = 0;
+         totaltext  = 0;
+        if (val != "") {
+            $.ajax({
+                //type: "GET",
+                //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
+                //contentType: "application/json; charset=utf-8",
+
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val,
+                type: "POST",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+
+                success: function (res) {
+                    console.log("dd", res);
+                    let htmlData = '';
+                    htmlData += "<div class='row'>";
+                    htmlData += "<div class='col-sm-12 col-xs-12 col-md-12 col-lg-12'>";
+                    htmlData += "<div class='row'>";
+                    for (i = 0; i < res.length; i++) {
+                        htmlData +=
+                            "<div class='col-sm-4 col-xs-4 col-md-4 col-lg-4'>"
+                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                        let lblTxt = [];
+                        var txt = "";
+                       
+                        var concatTxt = "";
+                        lblTxt = res[i]['LabelTxt'].split(',');
+                        for (j = 0; j < lblTxt.length; j++) {
+                            txt = lblTxt[j];
+                            concatTxt = txt.replace(" ", ",");
+                            htmlData += "<label class='label' for=" + concatTxt + "> " + txt + " ";
+                            htmlData += "</label > ";
+                            htmlData += "<input class='form-control' id=" + txtid + " name=" + concatTxt + " />";
+                            txtid += 1;
+                            console.log("id",txtid)
+                        }
+                        
+                        htmlData += "</fieldset>"
+                            + "</div>"
+                    };
+                    console.log("totaltext", totaltext = txtid)
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+
+                    $("#divsection").html(htmlData);
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+    };
+
+
+</script>

@@ -1,0 +1,77 @@
+
+DROP TABLE COMPANY_ICON
+DROP TABLE COMPANY_NAME
+
+CREATE TABLE COMPANY_NAME(
+SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+COMPANY_ID numeric(6) NOT NULL,
+COMPANY_NAME varchar(25) NOT NULL,
+MOBILE_NUMBER varchar(11)  NOT NULL CONSTRAINT PK_MOBILE_NUMBER PRIMARY KEY,
+COMPANY_STATUS smallint DEFAULT 0 
+)
+
+CREATE TABLE COMPANY_ICON(
+	SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	COMPANY_ID numeric(6) NOT NULL,
+	COMPANY_IMAGE image NULL,
+)
+
+DROP proc COMPANY_NAME
+create proc INSERT_COMPANY_NAME @CompanyID numeric (6),@CompanyName varchar(60),@MobileNumber varchar(11),@status smallint as INSERT INTO  COMPANY_NAME(COMPANY_ID,COMPANY_NAME,MOBILE_NUMBER,COMPANY_STATUS) VALUES (@CompanyID,@CompanyName,@MobileNumber,@status) 
+
+DROP proc INSERT_COMPANY_ICON
+create proc INSERT_COMPANY_ICON @CompanyID numeric (6), @img image  as INSERT INTO  COMPANY_ICON(COMPANY_ID,COMPANY_IMAGE) VALUES (@CompanyID,@img) 
+
+
+DROP proc UPDATE_COMPANY_NAME
+create proc UPDATE_COMPANY_NAME @CompanyID numeric (6), @CompanyName varchar(60),@MobileNumber varchar(11),@status smallint as 
+UPDATE COMPANY_NAME SET COMPANY_NAME=@CompanyName,MOBILE_NUMBER=@MobileNumber,COMPANY_STATUS=@status WHERE COMPANY_ID=@CompanyID
+
+DROP proc  UPDATE_COMPANY_ICON
+create proc  UPDATE_COMPANY_ICON SET COMPANY_NAME=@CompanyName,MOBILE_NUMBER=@MobileNumber,COMPANY_STATUS=@status WHERE COMPANY_ID=@CompanyID
+------------------------------------------END
+DROP TABLE BRANCH_NAME
+CREATE TABLE BRANCH_NAME(
+	SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	COMPANY_ID numeric(6) NOT NULL,
+	BRANCH_ID numeric(6) NOT NULL,
+	BRANCH_NAME varchar(25) NOT NULL,
+	BRANCH_ADDRESS varchar(250)  NULL,
+	MOBILE_NUMBER1 varchar(11) NOT NULL,
+	MOBILE_NUMBER2 varchar(11) NOT NULL,
+	MOBILE_NUMBER3 varchar(11) NOT NULL,
+	EMAIL_ADDRES varchar(11) NOT NULL,
+	FACEBOOK_ID varchar(50) NOT NULL,
+	BRANCH_STATUS smallint DEFAULT 0 
+)
+-----------------------------BUTTON--------------
+CREATE TABLE BUTTON_NAME_INFO(
+	SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	BUTTON_ID numeric(6) NOT NULL,
+	BUTTON_NAME varchar(25) NOT NULL Constraint PK_BUTTON_NAME Primary key ,
+	BUTTON_IMAGE image NULL,
+	BUTTON_STATUS smallint DEFAULT 0 
+)
+DROP proc INSERT_BUTTON_NAME_INFO
+create proc INSERT_BUTTON_NAME_INFO @ButtonID numeric (6),@ButtonName varchar(60), @img image,@ButtonStatus numeric (1)  as INSERT INTO  INSERT_BUTTON_NAME_INFO(BUTTON_ID,BUTTON_NAME,BUTTON_IMAGE,BUTTON_STATUS) VALUES (@ButtonID,@ButtonName,@img,@ButtonStatus) 
+
+alter proc INSERT_BUTTON_ICON @ButtonID numeric (6), @img image  as INSERT INTO  BUTTON_ICON(BUTTON_ID,BUTTON_IMAGE) VALUES (@ButtonID,@img) 
+
+
+create proc UPDATE_BUTTON_NAME @ButtonID numeric (6), @ButtonName varchar(60),@status smallint as 
+UPDATE BUTTON_NAME_INFO SET BUTTON_NAME=@ButtonName,BUTTON_STATUS=@status WHERE BUTTON_ID=@ButtonID
+
+CREATE TABLE BUTTON_ICON(
+	SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	BUTTON_ID numeric(6) NOT NULL,
+	BUTTON_IMAGE image NULL,
+)
+---------------------------------
+CREATE TABLE MESURMENTSETING(
+	SERIAL numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	DRESS_NAME varchar(60)  NULL,
+	MESURMENT_NAME varchar(60)  NULL,
+	MESURMENT_SUB_NAME varchar(60)  NULL,
+	POSITION numeric(18, 2)  NULL
+	
+)
