@@ -15,7 +15,92 @@ namespace TMS.Repository
     {
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
+        #region "Order"
+        public string mInsertOrder(OrderM obj)
+        {
+            string strSQL = "";
+            List<OrderDList> OrderDList = new List<OrderDList>();
+            List<OrderDD> Mesurmentlist = new List<OrderDD>();
+            List<OrderandFabrics> OrderandFabrics = new List<OrderandFabrics>();
 
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+
+                    int intBranchID = 0;
+
+                    SqlDataReader dr;
+                    SqlCommand cmdInsert = new SqlCommand();
+                    SqlTransaction myTrans;
+                    myTrans = gcnMain.BeginTransaction();
+                    cmdInsert.Connection = gcnMain;
+                    cmdInsert.Transaction = myTrans;
+
+
+                    OrderDList = obj.detailsList[0].OrderDList;
+                    OrderandFabrics = obj.detailsList[0].OrderandFabrics;
+                    Mesurmentlist = obj.detailsList[0].Mesurmentlist;
+                    for (int i = 0; i < Mesurmentlist.Count; i++)
+                    {
+                        strSQL = "INSERT INTO ORDER_DRESS_TEXT_INFO";
+                        strSQL = strSQL + "(ORDER_NO, DRESS_ID, TEXT_ID, TEXT_VAL)";
+                        strSQL = strSQL + "VALUES(";
+                        strSQL = strSQL + "'" + Mesurmentlist[i].strorderNo + "'," + Mesurmentlist[i].intDressId + ",'" + Mesurmentlist[i].inttxtid + "','" + Mesurmentlist[i].dbltxtVal + "' ";
+                        strSQL = strSQL + ")";
+                        cmdInsert.CommandText = strSQL;
+                        cmdInsert.ExecuteNonQuery();
+                    }
+
+                    for (int i = 0; i < OrderandFabrics.Count; i++)
+                    {
+                        strSQL = "INSERT INTO ORDER_CHILD_PURPOSE_INFO";
+                        strSQL = strSQL + "(ORDER_NO, DRESS_ID, PURPOSE, ORDER_QTY, ORDER_RATE, ORDER_VAL)";
+                        strSQL = strSQL + "VALUES(";
+                        strSQL = strSQL + "'" + OrderandFabrics[i].strorderNo + "'," + OrderandFabrics[i].intDressId + ",'" + OrderandFabrics[i].strFabricsName + "','" + OrderandFabrics[i].intQty + "','" + OrderandFabrics[i].intRate + "','" + OrderandFabrics[i].dbltotalVal + "' ";
+                        strSQL = strSQL + ")";
+                        cmdInsert.CommandText = strSQL;
+                        cmdInsert.ExecuteNonQuery();
+                    }
+                    for (int i = 0; i < OrderDList.Count; i++)
+                    {
+                        strSQL = "INSERT INTO ORDER_CHILD_INFO";
+                        strSQL = strSQL + "( ORDER_NO, DRESS_ID, ORDER_QTY, ORDER_VAL)";
+                        strSQL = strSQL + "VALUES(";
+                        strSQL = strSQL + "'" + OrderDList[i].strOrderNo + "'," + OrderDList[i].intDressId + "," + OrderDList[i].intIDressQty + "," + OrderDList[i].dblTotalAmount + " ";
+                        strSQL = strSQL + ")";
+                        cmdInsert.CommandText = strSQL;
+                        cmdInsert.ExecuteNonQuery();
+                    }
+
+                    strSQL = "INSERT INTO ORDER_MASTER_INFO";
+                    strSQL = strSQL + "(ORDER_NO, CUSTOMER_ID, ORDER_VAL)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "'" + obj.strorderNo + "'," + obj.strCustomerId + "," + obj.dblVal + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                    cmdInsert.Transaction.Commit();
+                    gcnMain.Close();
+                    return "OK";
+
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
+
+
+            }
+
+        }
+        #endregion
         #region "Companay Entry"
         public string mInsertEmployeeImage(string strDeComID, string strCompanyName, string strMobileNumber, int intStatus, byte[] vImage)
         {

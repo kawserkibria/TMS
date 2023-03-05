@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -25,11 +24,11 @@
 </style>
 
 @*<div class="row" style="margin-top:20px;">
-    <label class="col-md-2 control-label"> Total Rows :</label>
-    <div class="col-md-4">
-        <input id="totalDiv" onchange="createBlock(this.value)" class="form-control form-group" />
-    </div>
-</div>*@
+        <label class="col-md-2 control-label"> Total Rows :</label>
+        <div class="col-md-4">
+            <input id="totalDiv" onchange="createBlock(this.value)" class="form-control form-group" />
+        </div>
+    </div>*@
 <hr />
 
 
@@ -57,6 +56,7 @@
         font-size: 13px !important;
         color: black !important;
     }
+
     .container-fluid {
         width: 100%;
         padding-right: 15px;
@@ -66,35 +66,122 @@
     }
 </style>
 
+
 <div class="jumbotron">
+
+
+
     <div class="container">
         <div class="row">
-            <div class="container">
-                <div class="row" style="margin-top:20px;">
-                    <label class="col-md-2 control-label"> Category :</label>
-                    <div class="col-md-4">
-                        <select class="form-control" name="CategoryId" id="CategoryId" onchange="createBlock(this.value)" required>
-                            <option value="" selected>--Select--</option>
-                        </select>
-                    </div>
-              
+            <div class="col-lg-7">
+
+                <div style="margin-left: 10px;">
+                    <label>Customer Code:</label><span id="reqCommenst" class="reqError"></span><br />
                 </div>
-                <hr />           
-             
-                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-                    <div id="divsection">
-                    </div>
+                <div class="col-sm-12">
+                    <input class="form-control" value="1" name="brandName" id="txtCustomerCode" form="usrform" style="text-transform:capitalize">
                 </div>
-              
+
+                <div class="container">
+                    <div class="row" style="margin-top:20px;">
+                        <label class="col-md-2 control-label"> Category :</label>
+                        <div class="col-md-4">
+                            <select class="form-control" name="CategoryId" id="CategoryId" onchange="createBlock(this.value)" required>
+                                <option value="" selected>--Select--</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <hr />
+
+                    <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                        <div id="divsection">
+                        </div>
+                    </div>
+                    @*<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                            <br />
+                            <input type="button" class="btn btn-primary pull-right" id="btnsaveOrderdd" onclick="adddata();" value="Add" />
+                        </div>*@
+                </div>
+
+
+
             </div>
-            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-                <br />
-              <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন" />
+            <div class="col-lg-5">
+                <div class="table-responsive">
+                    <table id="datatableseles" class="table-bordered" style="width:100%"></table>
+                </div>
             </div>
-           
         </div>
 
+        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+            <br />
+            <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন" />
+        </div>
+
+        <div style="margin-left: 10px;">
+            <label>বিস্তারিত বিবরণ:</label><span id="reqAddress1" class="reqError"></span><br />
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+
+            <input class="form-control" multiple name="brandName" id="txtDetailsComments" form="usrform" style="text-transform:capitalize">
+        </div>
+
+
+        <div style="margin-left: 10px;">
+            <label>খরচ যুক্ত করুন :</label><span id="reqAddress1" class="reqError"></span><br />
+        </div>
       
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    @*<div >
+                        <input class="form-control" name="brandName" id="txtkibabod" form="usrform" placeholder="কি বাবদ" style="text-transform:capitalize">
+                    </div>*@
+                    <div>
+                        <select class="form-control" name="CategoryId" id="CategoryId" onchange="createBlock(this.value)" required>
+                            <option  value="0" selected>--কি বাবদ--</option>
+                            <option value="1" selected>মজুরি</option>
+                            <option value="2" selected>এম্বোডারি</option>
+                        </select>
+                    </div>
+                        <div>
+
+                            <input class="form-control" name="brandName" id="txtTotalQty" form="usrform" placeholder="মোট পোশাক" style="text-transform:capitalize">
+                        </div>
+
+                        <div>
+                            <input class="form-control" name="brandName" id="txtval" placeholder="কত টাকা" form="usrform" style="text-transform:capitalize">
+                        </div>
+
+                        <div>
+                            <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="DressMojoreadd();" value="যুক্ত করুন" />
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+       
+            <div class="col-lg-5">
+                <div class="table-responsive">
+                    <table id="daressQty" class="table-bordered" style="width:100%"></table>
+                </div>
+                <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="Orderadd();" value="অর্ডার যুক্ত করুন " />
+            </div>
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col-lg-5">
+                    <br />
+           
+            </div>
+        </div>
 
     </div>
 </div>
@@ -106,10 +193,25 @@
 <script>
     var txtid = 0;
     var totaltext = 0;
+    var tempDataList = [];
+    var tempaddDressQty = [];
+    var tempaddDressQtyfinal = [];
+    var tempOrderDetails = [];
+    var empObj = "";
+    var DressList = [];
+    var megerment = [];
+    var Details = [];
+    var dbltxtVal = "";
+    var inttxtid = 0;
+    var dbltxtVal = "";
+    var dbltxtVal = "";
+    var Mesurmentlist = [];
+    var detailsList = [];
+    var showgridList = [];
     $(document).ready(function () {
         GetCategoryList();
-
-
+        showGridSeles();
+        showDressQty();
         function GetCategoryList() {
             var ddlUnder = $("#CategoryId");
             $.ajax({
@@ -129,7 +231,7 @@
         }
 
 
-      
+
         function GetCategoryList2() {
             var ddlUnder = $("#CategoryId");
             $.ajax({
@@ -143,15 +245,15 @@
                 success: function (data) {
                     ddlUnder.html('');
                     ddlUnder.append($('<option value="Select">Select55</option>'));
-                    console.log('kibria',res),
+                    console.log('kibria', res),
                     //$.each(res.result, function (i, option) {
-                        //$('#CategoryId').append($('<option>', {
-                        //    value: item.Id,
-                        //    text: item.Name
+                    //$('#CategoryId').append($('<option>', {
+                    //    value: item.Id,
+                    //    text: item.Name
                     //}));
                         $.each(data, function (id, option) {
-                        ddlUnder.append($('<option value="' + option.Id + '">' + option.Name + '</option>'));
-                    });
+                            ddlUnder.append($('<option value="' + option.Id + '">' + option.Name + '</option>'));
+                        });
                 }
             });
         };
@@ -172,6 +274,400 @@
         });
 
     });
+
+    function showGridSeles() {
+
+
+        //table = $('#datatableseles').DataTable({
+        //    "bDestroy": true,
+        //    "select": true,
+
+        //    "ajax": {
+        //        "url": '/Values/GetTotalDressCategoryInfoList/',
+        //        "type": "GET",
+        //        "datatype": "json",
+
+        //        "dataSrc": function (response) {
+
+
+        //            tempDataList = response.result;
+        //            response = tempDataList;
+
+        //            response.recordsTotal = response.recordsTotal;
+        //            response.recordsFiltered = response.recordsFiltered;
+        //            return response;
+        //        }
+
+        //    },
+        $('#datatableseles').DataTable({
+            data: this.tempOrderDetails,
+            "bDestroy": true,
+            "dataSrc": function (response) {
+                response.draw = response.draw;
+                this.rowCount = response.recordsTotal;
+                $('#counttotal').val(this.rowCount);
+                response.recordsTotal = response.recordsTotal;
+                response.recordsFiltered = response.recordsFiltered;
+                //console.log('request.responseText', response);
+                return response;
+            },
+            "order": [[1, 'asc']],
+            "select": true,
+            "searching": false,
+            "paging": false,
+            "bInfo": false,
+
+            "order": [[1, 'asc']],
+            "columns": [
+                //{
+                //    title: 'SL',
+                //    data: 'SL',
+                //    name: 'SL',
+                //},
+                   {
+                       title: 'অর্ডার নং',
+                       data: 'strOrderNo',
+                       name: 'SL',
+                   },
+             
+                {
+                    title: 'DressId',
+                    data: 'intDressId',
+                    name: 'Id',
+                    visible: false,
+                },
+                {
+                    title: 'পোশাক',
+                    data: 'strDressName',
+                    name: 'Name',
+                    visible: false,
+                },
+
+                {
+                    title: 'মোট পোশাক ',
+                    data: 'intIDressQty',
+                    name: 'ClientId',
+                },
+                  {
+                      title: 'মোট টাকা ',
+                      data: 'dblTotalAmount',
+                      name: 'ClientId',
+                  },
+                {
+                    title: 'Edit',
+
+                    render: function (data, type, row) {
+                        return '<button class="btn btn-info fontsize  sales-sloat-ak" data-toggle="modal" data-target="#DrerssCategory"><i class="fa fa-pencil"></i></button>';
+                    }
+                },
+                {
+                    title: 'Delete',
+                    render: function (data, type, row) {
+
+                        return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                    }
+                },
+
+
+            ],
+
+            "responsive": true,
+            "rowCallback": function (row, data) {
+                var rowdata = data;
+                $(row).find(".sales-sloat-ak").click(function () {
+                    selectdata = data;
+                    edit(selectdata);
+
+                });
+                $(row).find(".delete-sloat-ak").click(function () {
+                    selectdata = data;
+                    deleteDressCategory(selectdata.Id);
+
+                });
+                $(row).find(".print-sloat-ak").click(function () {
+                    selectdata = data;
+                    orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                });
+
+            }
+
+        });
+
+    }
+    function DressMojoreadd() {
+
+        //var selecteddressID = $('#CategoryId option:selected').val();
+        var selecteddressID = $('#txtkibabod').val();
+        var addStaus = "";
+        $.each(tempaddDressQty, function (key, itemddd) {
+            console.log('new list add item', tempaddDressQty);
+
+            if (itemddd.strFabricsName == selecteddressID) {
+
+                addStaus = 'True';
+                return
+            }
+
+
+        });
+        if (addStaus == 'True') {
+            swal("Adding Failed!", "You Alrady Add This Item.", "warning");
+
+        }
+        else {
+
+            tempaddDressQtyfinal.push({
+                strorderNo: 1,
+                intDressId: $('#CategoryId option:selected').val(),
+                strComments: $('#txtComments').val(),
+                strFabricsName: $('#txtkibabod').val(),
+                intQty: $('#txtTotalQty').val(),
+                dblVal: $('#txtval').val(),
+                dbltotalVal: $('#txtTotalQty').val() * $('#txtval').val(),
+            });
+
+
+            tempaddDressQty.push({
+                strorderNo: 1,
+                intDressId: $('#CategoryId option:selected').val(),
+                strComments: $('#txtComments').val(),
+                strFabricsName: $('#txtkibabod').val(),
+                intQty: $('#txtTotalQty').val(),
+                dblVal: $('#txtval').val(),
+                dbltotalVal: $('#txtTotalQty').val() * $('#txtval').val(),
+            });
+            //removeDuplicates(tempaddDressQtyfinal, vledgerName);
+            console.log('tempaddDressQty', tempaddDressQty);
+            showDressQty();
+        }
+    }
+    function Orderadd() {
+        var intqty = 0;
+        var itemWiseval = 0;
+        var addStaus = "";
+
+        dbltxtVal = "";
+        inttxtid = "";
+        var selecteddressID = $('#CategoryId option:selected').val();
+        var allInputs = document.getElementsByTagName('input');
+
+        var addStaus = "";
+
+
+        for (var i = 0; i < totaltext; i++) {
+            var j = i + 1;
+            megerment.push({
+                strorderNo:1,
+                intDressId: $('#CategoryId option:selected').val(),
+                dbltxtVal: allInputs[j].value,
+                inttxtid: i,
+            });
+
+        }
+
+        if (tempaddDressQty.length > 0) {
+            //tempaddDressQtyfinal.push(tempaddDressQty);
+       
+
+          
+            for (i = 0; i < tempaddDressQty.length; i++) {
+                itemWiseval = itemWiseval + tempaddDressQty[i].dbltotalVal;
+                    if (i === 0) {
+                        intqty = tempaddDressQty[i].intQty;
+                             
+                    }
+              
+                }
+            tempOrderDetails.push({
+                strOrderNo:1,
+                intDressId: $('#CategoryId option:selected').val(),
+                strDressName: $('#CategoryId option:selected').text(),
+                intIDressQty: intqty,
+                dblTotalAmount: itemWiseval,
+              
+            });
+
+          
+            showGridSeles();
+            ClearData();
+       
+            
+        }
+        //showGridSeles();
+
+
+    }
+    function Submitdata() {
+        var i = 0;
+        dbltxtVal = "";
+        inttxtid = "";
+        var addStaus = "";
+        var i = 0;
+     
+
+
+
+        console.log('kibria2', megerment);
+        DressList = [];
+        DressList.push({
+            intDressId: $('#CategoryId option:selected').val(),///DresssId
+            Mesurmentlist: megerment,
+            OrderandFabrics: tempaddDressQtyfinal,
+            OrderDList: tempOrderDetails
+        });
+        empObj = "";
+
+        var intQty = 0;
+        var dblTotalVal = 0;
+
+        for (var i = 0; i < tempOrderDetails.length; i++) {
+            intQty = intQty + tempOrderDetails[i].intQty
+            dblTotalVal = dblTotalVal + tempOrderDetails[i].dblTotalAmount
+        }
+        console.log('tempOrderDetails', tempOrderDetails);
+        empObj = {
+            strorderNo: 1,
+            strCustomerId: $('#txtCustomerCode').val(), //CustomerID
+            intQty: intQty,
+            dblVal: dblTotalVal,
+            detailsList: DressList
+
+        }
+
+        console.log('kibria22', empObj);
+
+
+
+
+    }
+    function ClearData() {
+        tempaddDressQty = [];
+        showDressQty();
+        $('#txtkibabod').val('');
+        $('#txtTotalQty').val('');
+        $('#txtval').val('');
+        var i = 0;
+        inttxtid = "";
+        var allInputs = document.getElementsByTagName('input');
+        for (var i = 0; i < totaltext; i++) {
+            var j = i + 1;
+
+            allInputs[j].value = "";
+            //megerment.push({
+
+            //    dbltxtVal: allInputs[j].value,
+            //    inttxtid: i,
+            //});
+
+        }
+
+    }
+    function showDressQty() {
+
+        this.detailsList = this.tempaddDressQty;
+        $('#daressQty').DataTable({
+            data: this.tempaddDressQty,
+            "bDestroy": true,
+            "dataSrc": function (response) {
+                response.draw = response.draw;
+                this.rowCount = response.recordsTotal;
+                $('#counttotal').val(this.rowCount);
+                response.recordsTotal = response.recordsTotal;
+                response.recordsFiltered = response.recordsFiltered;
+                //console.log('request.responseText', response);
+                return response;
+            },
+            "order": [[1, 'asc']],
+            "select": true,
+            "searching": false,
+            "paging": false,
+            "bInfo": false,
+            "columns": [
+
+
+                {
+                    title: 'SL',
+                    visible: false,
+                    render: function (
+                        data,
+                        type,
+                        row,
+                        meta
+                    ) {
+                        return '<span>' + (meta.row + 1) + '</span>';
+                    },
+                },
+
+                {
+                    title: 'Id',
+                    data: 'intDressId',
+                    name: 'Id',
+                    visible: false,
+                },
+                {
+                    title: 'কি বাবদ',
+                    data: 'strFabricsName',
+                    name: 'Name',
+                },
+
+                {
+                    title: 'মোট পোশাক',
+                    data: 'intQty',
+                    name: 'ClientId',
+                },
+                  {
+                      title: 'প্রতি পিছ ',
+                      data: 'dblVal',
+                      name: 'ClientId',
+                  },
+                       {
+                           title: 'মোট ',
+                           data: 'dbltotalVal',
+                           name: 'ClientId',
+                       },
+                {
+                    title: 'Edit',
+
+                    render: function (data, type, row) {
+                        return '<button class="btn btn-info fontsize  sales-sloat-ak" data-toggle="modal" data-target="#DrerssCategory"><i class="fa fa-pencil"></i></button>';
+                    }
+                },
+                {
+                    title: 'Delete',
+                    render: function (data, type, row) {
+
+                        return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                    }
+                },
+
+
+            ],
+
+            "responsive": true,
+            "rowCallback": function (row, data) {
+                var rowdata = data;
+                $(row).find(".sales-sloat-ak").click(function () {
+                    selectdata = data;
+                    edit(selectdata);
+
+                });
+                $(row).find(".delete-sloat-ak").click(function () {
+                    selectdata = data;
+                    deleteDressCategory(selectdata.Id);
+
+                });
+                $(row).find(".print-sloat-ak").click(function () {
+                    selectdata = data;
+                    orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                });
+
+            }
+
+        });
+
+    }
     function saveOrUpdates() {
         //if (checkReqFields() == false) {
         //    return;
@@ -192,8 +688,8 @@
                 }
                 else {
                     save();
-                    clearFromData();
-                    $('#txtbranchName').focus();
+                    //clearFromData();
+                    //$('#txtbranchName').focus();
                 }
 
             });
@@ -217,7 +713,7 @@
                 }
                 else {
 
-                    Update(mstrPrimaryFields);
+                    //Update(mstrPrimaryFields);
                     clearFromData();
                     $('#btncen').click();
 
@@ -228,26 +724,17 @@
 
     }
     function save() {
+        Submitdata();
+        console.log('dddddsss', empObj);
 
-        //var fd = new FormData();
-        //var files = $('input[type="file"]')[0].files;
-
-        var allInputs = document.getElementsByTagName('input');
-        for (var i = 1; i < totaltext; i++) {
-          alert(allInputs[i].value);
-       
-        }
-        fd.append("strBUTTON_NAME", $('#txtButtonName').val());
-        fd.append("inStatus", $('#cboInactive option:selected').val());
-        console.log(fd);
         $.ajax({
 
-            url: "/Button/mButtonSave",
-            processData: false,
-            contentType: false,
+            url: "/DaynamicallyTextBoxCreate/OrderSave",
+            data: JSON.stringify(empObj),
+            contentType: "application/json; charset=utf-8",
             type: "POST",
-            datatype: "json",
-            data: fd,
+            dataType: "json",
+
             success: function (result) {
 
                 if (result == "OK") {
@@ -268,8 +755,8 @@
                         animation: true,
                         title: 'Save Successfully',
                     });
-                    showGrid();
-                    clearFromData();
+                    //showGrid();
+                    //clearFromData();
 
 
                 } else {
@@ -278,6 +765,7 @@
                 };
             }
         });
+
 
     }
     function Update() {
@@ -331,8 +819,8 @@
 
     }
     function createBlock(val) {
-         txtid = 0;
-         totaltext  = 0;
+        txtid = 0;
+        totaltext = 0;
         if (val != "") {
             $.ajax({
                 //type: "GET",
@@ -357,7 +845,7 @@
                         + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
                         let lblTxt = [];
                         var txt = "";
-                       
+
                         var concatTxt = "";
                         lblTxt = res[i]['LabelTxt'].split(',');
                         for (j = 0; j < lblTxt.length; j++) {
@@ -367,9 +855,9 @@
                             htmlData += "</label > ";
                             htmlData += "<input class='form-control' id=" + txtid + " name=" + concatTxt + " />";
                             txtid += 1;
-                            console.log("id",txtid)
+                            console.log("id", txtid)
                         }
-                        
+
                         htmlData += "</fieldset>"
                             + "</div>"
                     };
@@ -387,5 +875,17 @@
         }
     };
 
+    //function removeDuplicates(arr, ledger) {
+    //    var unique = [];
+    //    for (i = 0; i < arr.length; i++) {
+    //        if (ledger === arr[i].strLedgerName) {
+    //            //unique.push(arr[i]);
+    //            tempEffInventoryListFinal.splice(i, 1);
+    //        }
+    //    }
 
+    //    return unique;
+    //}
+
+  
 </script>

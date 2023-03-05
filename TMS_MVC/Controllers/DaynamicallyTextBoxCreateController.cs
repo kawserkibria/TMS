@@ -31,5 +31,13 @@ namespace Jagoron.Web.Controllers
             oogrp = objrepository.mFillDressMesermen(Id);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
+        public JsonResult OrderSave(OrderM objStockItem)
+        {
+
+
+            string strmassage = "";
+            strmassage = objrepository.mInsertOrder(objStockItem);
+            return new JsonResult() { Data = "", JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
 	}
 }

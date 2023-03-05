@@ -139,6 +139,7 @@
     <Compile Include="Models\jsTree3Node.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\OrderSave.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Treenode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
