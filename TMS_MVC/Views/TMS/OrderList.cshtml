@@ -1,0 +1,670 @@
+﻿@{
+    ViewBag.Title = "AccGroup";
+}
+<style type="text/css">
+    .reqError {
+        color: #ff0000; /*Red Color*/
+        font-weight: bold;
+    }
+</style>
+@* ***************Header *@
+<div class="container-fluid">
+    <div class="panel panel-danger">
+        <h4 class="panel-heading" style="text-align: center; text-decoration: underline;background-color:#ffffff">Branch Condiguration List</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="btn-group">
+                <button title="Add Item" style="margin: 2px; text-transform: capitalize;" id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData();"> <i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+                <button title="Refresh" style="margin: 2px; text-transform: capitalize;" class="btn btn-success" id="btnrefresh" onclick="refreshformdata();"> <i class="fa fa-refresh"></i>&nbsp;Refresh</button>
+            </div>
+
+        </div>
+    </div><br />
+</div>
+@* ***************End Header *@
+@* ***************End Header *@
+<div class="table-responsive">
+    <table id="datatable4" class="table-bordered display" style="width:100%"></table>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="BranchConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
+                <h5 style="text-align: center; text-decoration: underline;">Branch Configuration</h5>
+
+
+                <button type="button" id="btnCancel"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span>&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+                @*@Html.Partial("SalesOrderNew", Model.Count == 0 ? new Jagoron.Web.Models.SalesOrder() : Model.FirstOrDefault())*@
+                <div class="row">
+
+                    <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
+                    <div class="col-sm-6">
+                        <div style="margin-left: 10px;">
+                            <label>Branch Name:</label><span id="reqBranchName" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtbranchName" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Address1:</label><span id="reqAddress1" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtAddress1" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Address2:</label><span id="reqAddress2" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtAddress2" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Country:</label><span id="reqCountry" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtCountry" form="usrform" value="Bangladesh" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Telephone:</label><span id="reqTelephone" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="Telephone" id="txtTelephone" form="usrform" style="text-transform:capitalize">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div style="margin-left: 10px;">
+                            <label>Fax:</label><span id="reqFax" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtFax" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Location:</label><span id="reqlocation" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtlocation" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <div style="margin-left: 10px;">
+                                <label>Default Branch:</label><span id="reqDefaultBranch" class="reqError"></span><br />
+                            </div>
+                            <select id="cbodefaultBrach" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+
+                        </div>
+                        <div class="col-sm-12">
+                            <label id="Inactive">Inactive:</label>
+                            <select id="cboInactive" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>Comments:</label><span id="reqCommenst" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtComments" form="usrform" style="text-transform:capitalize">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0">
+                    <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="Save"></></span>
+                    <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+
+        function showimagepreview(input) {
+            if (input.files && input.files[0]) {
+                var a = (input.files[0].size);
+                if (a > 200000) {
+                    alert('Photo too large. Maximum allowed size is 200 KB');
+                }
+                else {
+                    //$('#WarningMsg').val('');
+                    var filerdr = new FileReader();
+                    filerdr.onload = function (e) {
+                        $('#productImage').attr('src', e.target.result);
+                    }
+                    filerdr.readAsDataURL(input.files[0]);
+                }
+            }
+        };
+
+        var selectdataId = 0;
+        var mstrPrimaryFields = 0;
+
+        var BranchID = "";
+        var BranchName = "";
+        $(document).ready(function () {
+            $('#btnsaveOrder').val('Save');
+            showGrid();
+            $("#BranchConfig").on('shown.bs.modal', function () {
+                $(this).find('#txtbranchName').focus();
+            });
+        })
+        function ValidationClear() {
+            var name = $('#txtbranchName').val();
+            if (name.trim() != "") {
+                document.getElementById("reqBranchName").innerHTML = "";
+
+            }
+
+        }
+        function ChangeLocation() {
+            var x = $('#txtbranchName').val() + ' Depot';
+            $('#txtlocation').val(x)
+
+        }
+
+        $("#btnsaveItem").click(function () {
+            $('#txtcostcategory').val("");
+        });
+        $("#btnCancel").click(function () {
+            $("#Costcategory").modal("hide");
+            $('#btnsaveOrder').val('Save');
+        });
+        $("#btncen").click(function () {
+            $("#Costcategory").modal("hide");
+            $('#btnsaveOrder').val('Save');
+        });
+        function saveOrUpdates() {
+            if (checkReqFields() == false) {
+                return;
+            }
+            var btn = $('#btnsaveOrder').val();
+            if (btn == "Save") {
+                swal({
+                    title: "Do You Want to Save?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                    }
+                    else {
+                        save();
+                        clearFromData();
+                        $('#txtbranchName').focus();
+                    }
+
+                });
+
+
+            } else {
+
+
+                swal({
+                    title: "Do You Want to Update?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+
+                    }
+                    else {
+
+                        Update(mstrPrimaryFields);
+                        clearFromData();
+                        $('#btncen').click();
+
+                    }
+
+                });
+            }
+
+        }
+        function checkVariable(variable) {
+
+            if (variable == null) {
+                return "1";
+            }
+            else {
+                return "2";
+            }
+        }
+
+        function toTitleCase(str) {
+            return str.replace(
+              /\w\S*/g,
+              function (txt) {
+                  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+              }
+            );
+        }
+        function save() {
+            //alert(toTitleCase($('#txtbranchName').val()));
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("Name", $('#txtEmpName').val());
+            var empObj = {
+                BranchName: toTitleCase($('#txtbranchName').val()),
+                BranchAddress1: toTitleCase($('#txtAddress1').val()),
+                BranchAddress2: toTitleCase($('#txtAddress2').val()),
+                Country: toTitleCase($('#txtCountry').val()),
+                Phone: $('#txtTelephone').val(),
+                Fax: toTitleCase($('#txtFax').val()),
+                Comments: toTitleCase($('#txtComments').val()),
+                Godown: toTitleCase($('#txtlocation').val()),
+                Status: $('#cboInactive').val(),
+                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
+                //Status: $('#cboInactive option:selected').text(),
+                //Status: $('#cboInactive option:selected').text(),
+                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
+            };
+
+            $.ajax({
+
+                url: "/BranchConfig/SaveBranchInfo",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function Update(id) {
+            //alert($('#cboInactive').val())
+            var empObj = {
+                BranchID: toTitleCase($('#txtOldbranchID').val()),
+                BranchName: toTitleCase($('#txtbranchName').val()),
+                BranchAddress1: toTitleCase($("#txtAddress1").val()),
+                BranchAddress2: toTitleCase($('#txtAddress2').val()),
+                Country: toTitleCase($("#txtCountry").val()),
+                Phone: toTitleCase($('#txtTelephone').val()),
+                Fax: toTitleCase($("#txtFax").val()),
+                Comments: toTitleCase($('#txtlocation').val()),
+                Status: $('#cboInactive').val(),
+                Godown: toTitleCase($('#txtlocation').val()),
+                Status: $('#cboInactive').val(),
+                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
+                Comments: toTitleCase($('#txtComments').val())
+
+                //Status: $('#cboInactive option:selected').text(),
+                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
+                //DefaultBranch: "NO",
+
+            };
+
+            $.ajax({
+                url: "/BranchConfig/mUpdateBranchInfo",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "Update") {
+                        //console.log('Update')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Update Successfully',
+
+                        });
+
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result, '');
+                        clearFromData();
+                    };
+                }
+            });
+
+        }
+        function showGrid() {
+
+
+            table = $('#datatable4').DataTable({
+                "bDestroy": true,
+                "select": true,
+                //"gridlines": true,
+                "ajax": {
+                    "url": "/BranchConfig/mFillShowGrid",
+                    "type": "POST",
+                    "datatype": "json",
+
+                    "dataSrc": function (response) {
+
+                        detailsList = response;
+                        response.draw = response.draw;
+                        response.recordsTotal = response.recordsTotal;
+                        response.recordsFiltered = response.recordsFiltered;
+                        //console.log('request.responseText', response);
+
+                        return response;
+                    }
+
+                },
+
+                //"order": [[1, 'Asc']],
+                "columns": [
+
+
+                      {
+                          title: 'SL',
+                          render: function (
+                              data,
+                              type,
+                              row,
+                              meta
+                          ) {
+                              return '<span>' + (meta.row + 1) + '</span>';
+                          },
+                      },
+
+                        {
+                            title: 'Branch ID',
+                            data: 'BranchID',
+                            name: 'Branch ID',
+                            visible: false,
+                        },
+                         {
+                             title: 'Branch ID',
+                             data: 'BranchName',
+                             name: 'Branch ID',
+                         },
+                          {
+                              title: 'Address1',
+                              data: 'BranchAddress1',
+                              name: 'Address1',
+                          },
+                           {
+                               title: 'Address2',
+                               data: 'BranchAddress2',
+                               name: 'Address2',
+                           },
+                            {
+                                title: 'Country',
+                                data: 'Country',
+                                name: 'Country',
+                                "visible": false,
+
+                            },
+                            {
+                                title: 'Godown',
+                                data: 'Godown',
+                                name: 'Godown',
+                                "visible": true,
+
+                            },
+                                {
+                                    title: 'Phone',
+                                    data: 'Phone',
+                                    name: 'Phone',
+                                    "visible": false,
+                                },
+                                 {
+                                     title: 'Fax',
+                                     data: 'Fax',
+                                     name: 'Fax',
+                                     "visible": false,
+                                 },
+                                  {
+                                      title: 'Comments',
+                                      data: 'Comments',
+                                      name: 'Comments',
+                                      "visible": false,
+                                  },
+                                   {
+                                       title: 'Inactive',
+                                       data: 'Status',
+                                       name: 'Inactive',
+                                       "visible": false,
+                                   },
+                                    {
+                                        title: 'Default',
+                                        data: 'DefaultBranch',
+                                        name: 'Default',
+                                        "visible": false,
+                                    },
+                                   {
+                                       title: 'Inactive',
+                                       data: 'Statusstring',
+                                       name: 'Inactive',
+                                   },
+                                 {
+                                     title: 'Edit',
+
+                                     render: function (data, type, row) {
+                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
+                                     }
+                                 },
+                                  {
+                                      title: 'Delete',
+                                      render: function (data, type, row) {
+                                          return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                                      }
+                                  },
+
+
+                ],
+
+                "responsive": true,
+                "rowCallback": function (row, data) {
+                    var rowdata = data;
+
+                    $(row).find(".sales-sloat-ak").click(function () {
+                        selectdata = data;
+                        //console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        edit(selectdata);
+
+                    });
+                    $(row).find(".delete-sloat-ak").click(function () {
+                        selectdata = data;
+                        deleteBranch(selectdata);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+        function edit(data) {
+
+            ////alert(data.DefaultBranch)
+            $('#btnsaveOrder').val('Update');
+
+            $('#txtOldbranchID').val(data.BranchID);
+            $('#txtbranchName').val(data.BranchName);
+            $("#txtAddress1").val(data.BranchAddress1);
+            $('#txtAddress2').val(data.BranchAddress2);
+            $("#txtCountry").val(data.Country);
+            $('#txtTelephone').val(data.Phone);
+            $('#txtlocation').val(data.Godown);
+            $("#txtFax").val(data.Fax);
+            $('#cboInactive').val(data.Status);
+            $('#cbodefaultBrach').val(data.DefaultBranch);
+            ////$('#txtlocation').val(data.Comments);
+            //$("#cbodefaultBrach").val(data.);
+
+            //if (data.Status == "NO") {
+            //    $("#cboInactive").val("0");
+            //}
+            //else {
+            //    $("#cboInactive").val("1");
+            //}
+
+            $('#txtComments').val(data.Comments);
+
+
+
+        }
+
+        function deleteBranch(selectdata) {
+
+            var empObj = {
+                BranchID: (selectdata.BranchID),
+                BranchName: (selectdata.BranchName),
+            };
+            //console.log('hello ', empObj);
+            swal({
+                title: "Do You Want to Delete?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+
+                if (isConfirm) {
+                }
+                else {
+                    $.ajax({
+                        url: "/BranchConfig/DeleteBranchInfo",
+                        type: "POST",
+                        data: JSON.stringify(empObj),
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+
+                            if (result == "OK") {
+                                showGrid();
+                                swal("Delete!", "Delete success.", "success");
+                            }
+                            else {
+                                swal("Warning!", result);
+                            };
+
+
+                        }
+                    });
+                }
+
+            });
+
+
+
+        }
+
+        function checkReqFields() {
+            var returnValue;
+
+            var name = document.getElementById("txtbranchName").value;
+            returnValue = true;
+            if (name.trim() == "") {
+                document.getElementById("reqBranchName").innerHTML = " * Name is required.";
+                returnValue = false;
+            }
+            return returnValue;
+        }
+
+        function refreshformdata() {
+            showGrid();
+        }
+        function clearFromData() {
+
+            $('#btnsaveOrder').val('Save');
+            selectdataId = 0;
+
+            $('#txtGroupName').val('')
+            $("#cboUnder").prop("selectedIndex", '0').val();
+            $("#cboNature").prop("selectedIndex", '0').val();
+            $("#cbocashflow").prop("selectedIndex", '0').val();
+
+            document.getElementById("reqBranchName").innerHTML = "";
+            $('#txtOldbranchID').val('');
+            $('#txtbranchName').val('');
+            $("#txtAddress1").val('');
+            $('#txtAddress2').val('');
+            $("#txtCountry").val('Bangladesh');
+            $('#txtTelephone').val('');
+            $("#txtFax").val('');
+            $('#txtlocation').val('');
+            $("#cbodefaultBrach").prop("selectedIndex", '0').val();
+            $("#cboInactive").prop("selectedIndex", '0').val();
+            $('#txtComments').val('');
+
+        }
+
+    </script>
+}
+
+

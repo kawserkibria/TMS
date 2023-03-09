@@ -17,7 +17,10 @@ namespace Jagoron.Web.Controllers
         {
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
-
+        public ActionResult OrderList()
+        {
+            return View("~/Views/TMS/OrderList.cshtml");
+        }
         public ActionResult GetCategoryList()
         {
             List<DressSetup> oogrp = new List<DressSetup>();

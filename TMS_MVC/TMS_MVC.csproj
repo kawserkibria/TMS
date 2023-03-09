@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DaynamicallyTextBoxCreate\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -6886,6 +6887,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\TMS\DressOrder.cshtml" />
+    <Content Include="Views\TMS\OrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
