@@ -131,40 +131,40 @@
         <div style="margin-left: 10px;">
             <label>খরচ যুক্ত করুন :</label><span id="reqAddress1" class="reqError"></span><br />
         </div>
-      
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
                     @*<div >
-                        <input class="form-control" name="brandName" id="txtkibabod" form="usrform" placeholder="কি বাবদ" style="text-transform:capitalize">
-                    </div>*@
+                            <input class="form-control" name="brandName" id="txtkibabod" form="usrform" placeholder="কি বাবদ" style="text-transform:capitalize">
+                        </div>*@
                     <div>
-                        <select class="form-control" name="CategoryId" id="CategoryId" onchange="createBlock(this.value)" required>
-                            <option  value="0" selected>--কি বাবদ--</option>
+                        <select class="form-control" name="ParticularId" id="ParticularId"  required>
+                            <option value="0" selected>--কি বাবদ--</option>
                             <option value="1" selected>মজুরি</option>
                             <option value="2" selected>এম্বোডারি</option>
                         </select>
                     </div>
-                        <div>
+                    <div>
 
-                            <input class="form-control" name="brandName" id="txtTotalQty" form="usrform" placeholder="মোট পোশাক" style="text-transform:capitalize">
-                        </div>
-
-                        <div>
-                            <input class="form-control" name="brandName" id="txtval" placeholder="কত টাকা" form="usrform" style="text-transform:capitalize">
-                        </div>
-
-                        <div>
-                            <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="DressMojoreadd();" value="যুক্ত করুন" />
-                        </div>
+                        <input class="form-control" name="brandName" id="txtTotalQty" form="usrform" placeholder="মোট পোশাক" style="text-transform:capitalize">
                     </div>
+
+                    <div>
+                        <input class="form-control" name="brandName" id="txtval" placeholder="কত টাকা" form="usrform" style="text-transform:capitalize">
+                    </div>
+
+                    <div>
+                        <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="DressMojoreadd();" value="যুক্ত করুন" />
+                    </div>
+                </div>
             </div>
 
         </div>
 
 
         <div class="row">
-       
+
             <div class="col-lg-5">
                 <div class="table-responsive">
                     <table id="daressQty" class="table-bordered" style="width:100%"></table>
@@ -178,8 +178,8 @@
         <div class="row">
 
             <div class="col-lg-5">
-                    <br />
-           
+                <br />
+
             </div>
         </div>
 
@@ -329,7 +329,7 @@
                        data: 'strOrderNo',
                        name: 'SL',
                    },
-             
+
                 {
                     title: 'DressId',
                     data: 'intDressId',
@@ -421,7 +421,7 @@
                 strorderNo: 1,
                 intDressId: $('#CategoryId option:selected').val(),
                 strComments: $('#txtComments').val(),
-                strFabricsName: $('#txtkibabod').val(),
+                strFabricsName: $('#ParticularId').val(),
                 intQty: $('#txtTotalQty').val(),
                 dblVal: $('#txtval').val(),
                 dbltotalVal: $('#txtTotalQty').val() * $('#txtval').val(),
@@ -432,7 +432,7 @@
                 strorderNo: 1,
                 intDressId: $('#CategoryId option:selected').val(),
                 strComments: $('#txtComments').val(),
-                strFabricsName: $('#txtkibabod').val(),
+                strFabricsName: $('#ParticularId').val(),
                 intQty: $('#txtTotalQty').val(),
                 dblVal: $('#txtval').val(),
                 dbltotalVal: $('#txtTotalQty').val() * $('#txtval').val(),
@@ -458,7 +458,7 @@
         for (var i = 0; i < totaltext; i++) {
             var j = i + 1;
             megerment.push({
-                strorderNo:1,
+                strorderNo: 1,
                 intDressId: $('#CategoryId option:selected').val(),
                 dbltxtVal: allInputs[j].value,
                 inttxtid: i,
@@ -468,31 +468,31 @@
 
         if (tempaddDressQty.length > 0) {
             //tempaddDressQtyfinal.push(tempaddDressQty);
-       
 
-          
+
+
             for (i = 0; i < tempaddDressQty.length; i++) {
                 itemWiseval = itemWiseval + tempaddDressQty[i].dbltotalVal;
-                    if (i === 0) {
-                        intqty = tempaddDressQty[i].intQty;
-                             
-                    }
-              
+                if (i === 0) {
+                    intqty = tempaddDressQty[i].intQty;
+
                 }
+
+            }
             tempOrderDetails.push({
-                strOrderNo:1,
+                strOrderNo: 1,
                 intDressId: $('#CategoryId option:selected').val(),
                 strDressName: $('#CategoryId option:selected').text(),
                 intIDressQty: intqty,
                 dblTotalAmount: itemWiseval,
-              
+
             });
 
-          
+
             showGridSeles();
             ClearData();
-       
-            
+
+
         }
         //showGridSeles();
 
@@ -504,7 +504,7 @@
         inttxtid = "";
         var addStaus = "";
         var i = 0;
-     
+
 
 
 
@@ -887,5 +887,5 @@
     //    return unique;
     //}
 
-  
+
 </script>

@@ -19,6 +19,7 @@ namespace TMS.Repository
         public string mInsertOrder(OrderM obj)
         {
             string strSQL = "";
+            string strstringNew = "";
             List<OrderDList> OrderDList = new List<OrderDList>();
             List<OrderDD> Mesurmentlist = new List<OrderDD>();
             List<OrderandFabrics> OrderandFabrics = new List<OrderandFabrics>();
@@ -76,6 +77,55 @@ namespace TMS.Repository
                         strSQL = strSQL + ")";
                         cmdInsert.CommandText = strSQL;
                         cmdInsert.ExecuteNonQuery();
+
+
+
+                        strSQL = "SELECT * FROM DivCreates where CategoryId=" + OrderDList[i].intDressId + " ";
+                        cmdInsert.CommandText = strSQL;
+                        dr = cmdInsert.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            //string strCategoryId = "";
+                            //if (dr["CategoryId"].ToString() != "")
+                            //{
+                            //    strCategoryId = Convert.ToDateTime(dr["CategoryId"]).ToString("dd/MM/yyyy");
+                            //}
+                            //else
+                            //{
+                            //    strCategoryId = "";
+                            //}
+                            strstringNew = strstringNew + dr["LabelTxt"].ToString() + "~";
+
+                        }
+                        dr.Close();
+
+
+                        if (strstringNew != "")
+                        {
+
+                            string[] words = strstringNew.Split('~');
+                            foreach (string ooassets in words)
+                            {
+                                string[] oAssets = ooassets.Split('|');
+                                if (oAssets[0] != "")
+                                {
+                                    //strSQL = "UPDATE ACC_VOUCHER_PARENT SET ";
+                                    //strSQL = strSQL + "CHEQUE_NO='" + oAssets[1].ToString() + "' ";
+
+                                    strSQL = "INSERT INTO ORDER_DRESS_CATEGORY_INFO";
+                                    strSQL = strSQL + "(ORDER_NO,INVOICE_NO,CUSTOMER_ID,DRESS_ID,LABEL_TEXT)";
+                                    strSQL = strSQL + "VALUES(";
+                                    strSQL = strSQL + "'" + obj.strorderNo + "','1'," + obj.strCustomerId + "," + OrderDList[i].intDressId + ",'" + oAssets[0].ToString() + "' ";
+                                    strSQL = strSQL + ")";
+                                    cmdInsert.CommandText = strSQL;
+                                    cmdInsert.ExecuteNonQuery();
+
+
+                                }
+                            }
+                        }
+
+
                     }
 
                     strSQL = "INSERT INTO ORDER_MASTER_INFO";
@@ -85,6 +135,19 @@ namespace TMS.Repository
                     strSQL = strSQL + ")";
                     cmdInsert.CommandText = strSQL;
                     cmdInsert.ExecuteNonQuery();
+
+
+                    //strSQL = "SELECT * FROM DivCreates where CategoryId=2 ";
+                    //SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    //dr = cmd.ExecuteReader();
+                    //if (dr.Read())
+                    //{
+                    //    strYesNo = "Y";
+                    //}
+
+
+
+
 
                     cmdInsert.Transaction.Commit();
                     gcnMain.Close();

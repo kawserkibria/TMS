@@ -37,7 +37,7 @@ namespace Jagoron.Web.Controllers
 
             string strmassage = "";
             strmassage = objrepository.mInsertOrder(objStockItem);
-            return new JsonResult() { Data = "", JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+            return new JsonResult() { Data = strmassage, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 	}
 }
