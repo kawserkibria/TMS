@@ -106,8 +106,10 @@
                                     <a style="font-size:19px"><i class="fa fa-cart-arrow-down"></i> অর্ডার <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a style="font-size:18px" href="@Url.Action("DaynamicallyTextBoxCreateView", "DaynamicallyTextBoxCreate")" class="nav-link"> অর্ডার দিন</a>
+                                            <a style="font-size:18px" href="@Url.Action("DaynamicallyTextBoxCreateView", "DaynamicallyTextBoxCreate", new { intval = 3 })" class="nav-link"> অর্ডার দিন</a>
                                         </li>
+
+                                 
                                         <li>
                                             <a style="font-size:18px" href="@Url.Action("OrderListView", "DaynamicallyTextBoxCreate")" class="nav-link">অর্ডার তালিকা</a>
                                         </li>

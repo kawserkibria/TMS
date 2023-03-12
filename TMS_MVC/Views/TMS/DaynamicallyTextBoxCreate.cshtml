@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-lg-7">
                 <div style="margin-left: 10px;">
-                    <h5  class="modal-title  text-right" style="margin: 0 auto;" id="lblledgerName">@ViewBag.custcode</h5>
+                    <h5  class="modal-title  text-right" style="margin: 0 auto;" id="lblCustomerEditmode">@ViewBag.custcode</h5>
                 </div>
                 <div style="margin-left: 10px;">
                     <label>Customer Code:</label><span id="reqCommenst" class="reqError"></span><br />
@@ -779,6 +779,11 @@
 
     }
     function createBlock(val) {
+        alert(val);
+        var intEditMode = 0;
+
+        intEditMode = $('#lblCustomerEditmode').val()
+        alert(intEditMode);
         createBlockNew(val);
     };
     function createBlockNew(val) {

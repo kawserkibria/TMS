@@ -13,8 +13,9 @@ namespace Jagoron.Web.Controllers
         RepTMS objrepository = new RepTMS();
         //
         // GET: /DaynamicallyTextBoxCreate/
-        public ActionResult DaynamicallyTextBoxCreateView()
+        public ActionResult DaynamicallyTextBoxCreateView(int intval)
         {
+            ViewBag.custcode = intval;
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
 
