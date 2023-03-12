@@ -24,7 +24,7 @@ namespace Jagoron.Web.Controllers
             ViewBag.custcode = intval;
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
-        public ActionResult OrderListView()
+        public ActionResult OrderListView( )
         {
             return View("~/Views/TMS/OrderList.cshtml");
         }

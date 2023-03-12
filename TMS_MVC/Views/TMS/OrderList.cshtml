@@ -312,9 +312,10 @@
             //    detailsList: DressList
 
             //}
-
-            window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")?intval=1';
-
+            let orderno = data.intCustomer;
+            alert(orderno);
+            //window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")?intval="+ data.strOrderNo +"';
+            window.location = '@Url.Action("DaynamicallyTextBoxCreateView")?intval=' + orderno + '';
             //"url": "/SalesOrder/mShowMasterData?strUserName=" + strUserName + " &intStatusCol=" + rbtnStatus,
             //window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")' + $(this).val();
             //$('#txtOldbranchID').val(data.BranchID);
