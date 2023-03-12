@@ -17,7 +17,13 @@ namespace Jagoron.Web.Controllers
         {
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
-        public ActionResult OrderList()
+
+        public ActionResult DaynamicallyTextBoxCreateViewEdit(int intval)
+        {
+            ViewBag.custcode = intval;
+            return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
+        }
+        public ActionResult OrderListView()
         {
             return View("~/Views/TMS/OrderList.cshtml");
         }
@@ -42,5 +48,12 @@ namespace Jagoron.Web.Controllers
             strmassage = objrepository.mInsertOrder(objStockItem);
             return new JsonResult() { Data = strmassage, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
+        public ActionResult OrderList()
+        {
+            List<OrderList> oogrp = new List<OrderList>();
+            oogrp = objrepository.OrderList();
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+       
 	}
 }

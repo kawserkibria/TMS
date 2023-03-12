@@ -163,6 +163,53 @@ namespace TMS.Repository
             }
 
         }
+        public List<OrderList> OrderList()
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+
+
+            List<OrderList> ooCategory = new List<OrderList>();
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "SELECT SERIAL, ORDER_NO, CUSTOMER_ID, ORDER_VAL, ORDER_DATE FROM ORDER_MASTER_INFO";
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        OrderList oCat = new OrderList();
+                        oCat.intSerialNo = Convert.ToInt32(dr["SERIAL"]);
+                        oCat.strOrderNo = dr["ORDER_NO"].ToString();
+                        oCat.intCustomer = Convert.ToInt32( dr["CUSTOMER_ID"]);
+                        oCat.dblOrderValue = Convert.ToDouble(dr["ORDER_VAL"]);
+                        oCat.strOrderDate = Convert.ToDateTime(dr["ORDER_DATE"]).ToString("dd-MM-yyyy");
+                        ooCategory.Add(oCat);
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+                    return ooCategory;
+                }
+                catch (Exception ex)
+                {
+                    OrderList oCat = new OrderList();
+                    oCat.strOrderNo = "";
+                    oCat.intCustomer = 0;
+                    oCat.intSerialNo = 0;
+                    ooCategory.Add(oCat);
+                    return ooCategory;
+                }
+            }
+
+        }
         #endregion
         #region "Companay Entry"
         public string mInsertEmployeeImage(string strDeComID, string strCompanyName, string strMobileNumber, int intStatus, byte[] vImage)
@@ -820,8 +867,6 @@ namespace TMS.Repository
 
         }
         #endregion
-
-
         public List<DressSetup> mFillMeserment(string strDeComID)
         {
             string strSQL = null;
@@ -868,7 +913,6 @@ namespace TMS.Repository
             }
 
         }
-
         public List<CategoryViewModel> mFillDressMesermen(int intid)
         {
             string strSQL = null;

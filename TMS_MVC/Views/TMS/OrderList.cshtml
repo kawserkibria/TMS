@@ -12,15 +12,7 @@
     <div class="panel panel-danger">
         <h4 class="panel-heading" style="text-align: center; text-decoration: underline;background-color:#ffffff">Branch Condiguration List</h4>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="btn-group">
-                <button title="Add Item" style="margin: 2px; text-transform: capitalize;" id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData();"> <i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
-                <button title="Refresh" style="margin: 2px; text-transform: capitalize;" class="btn btn-success" id="btnrefresh" onclick="refreshformdata();"> <i class="fa fa-refresh"></i>&nbsp;Refresh</button>
-            </div>
 
-        </div>
-    </div><br />
 </div>
 @* ***************End Header *@
 @* ***************End Header *@
@@ -161,11 +153,9 @@
         var BranchID = "";
         var BranchName = "";
         $(document).ready(function () {
-            $('#btnsaveOrder').val('Save');
+  
             showGrid();
-            $("#BranchConfig").on('shown.bs.modal', function () {
-                $(this).find('#txtbranchName').focus();
-            });
+        
         })
         function ValidationClear() {
             var name = $('#txtbranchName').val();
@@ -181,72 +171,6 @@
 
         }
 
-        $("#btnsaveItem").click(function () {
-            $('#txtcostcategory').val("");
-        });
-        $("#btnCancel").click(function () {
-            $("#Costcategory").modal("hide");
-            $('#btnsaveOrder').val('Save');
-        });
-        $("#btncen").click(function () {
-            $("#Costcategory").modal("hide");
-            $('#btnsaveOrder').val('Save');
-        });
-        function saveOrUpdates() {
-            if (checkReqFields() == false) {
-                return;
-            }
-            var btn = $('#btnsaveOrder').val();
-            if (btn == "Save") {
-                swal({
-                    title: "Do You Want to Save?",
-                    text: "",
-                    icon: "warning",
-                    buttons: [
-                        'Yes',
-                        'No'
-                    ],
-                    dangerMode: true,
-                }).then(function (isConfirm) {
-                    if (isConfirm) {
-                    }
-                    else {
-                        save();
-                        clearFromData();
-                        $('#txtbranchName').focus();
-                    }
-
-                });
-
-
-            } else {
-
-
-                swal({
-                    title: "Do You Want to Update?",
-                    text: "",
-                    icon: "warning",
-                    buttons: [
-                        'Yes',
-                        'No'
-                    ],
-                    dangerMode: true,
-                }).then(function (isConfirm) {
-                    if (isConfirm) {
-
-                    }
-                    else {
-
-                        Update(mstrPrimaryFields);
-                        clearFromData();
-                        $('#btncen').click();
-
-                    }
-
-                });
-            }
-
-        }
         function checkVariable(variable) {
 
             if (variable == null) {
@@ -265,140 +189,15 @@
               }
             );
         }
-        function save() {
-            //alert(toTitleCase($('#txtbranchName').val()));
-            var fd = new FormData();
-            var files = $('input[type="file"]')[0].files;
-            for (var i = 0; i < files.length; i++) {
-                fd.append("Picture", files[i]);
-            }
-            fd.append("Name", $('#txtEmpName').val());
-            var empObj = {
-                BranchName: toTitleCase($('#txtbranchName').val()),
-                BranchAddress1: toTitleCase($('#txtAddress1').val()),
-                BranchAddress2: toTitleCase($('#txtAddress2').val()),
-                Country: toTitleCase($('#txtCountry').val()),
-                Phone: $('#txtTelephone').val(),
-                Fax: toTitleCase($('#txtFax').val()),
-                Comments: toTitleCase($('#txtComments').val()),
-                Godown: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-                //Status: $('#cboInactive option:selected').text(),
-                //Status: $('#cboInactive option:selected').text(),
-                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-            };
-
-            $.ajax({
-
-                url: "/BranchConfig/SaveBranchInfo",
-                type: "POST",
-                data: JSON.stringify(empObj),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-
-                    if (result == "save") {
-                        //console.log('save')
-
-                        var toastMixin = Swal.mixin({
-                            toast: true,
-                            icon: 'success',
-                            title: 'General Title',
-                            animation: false,
-                            //position: 'top-right',
-                            position: 'center',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                        });
-                        toastMixin.fire({
-                            animation: true,
-                            title: 'Save Successfully',
-                        });
-                        showGrid();
-                        clearFromData();
-
-
-                    } else {
-                        swal("Warning!", result);
-                        //clearFromData();
-                    };
-                }
-            });
-
-        }
-        function Update(id) {
-            //alert($('#cboInactive').val())
-            var empObj = {
-                BranchID: toTitleCase($('#txtOldbranchID').val()),
-                BranchName: toTitleCase($('#txtbranchName').val()),
-                BranchAddress1: toTitleCase($("#txtAddress1").val()),
-                BranchAddress2: toTitleCase($('#txtAddress2').val()),
-                Country: toTitleCase($("#txtCountry").val()),
-                Phone: toTitleCase($('#txtTelephone').val()),
-                Fax: toTitleCase($("#txtFax").val()),
-                Comments: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                Godown: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-                Comments: toTitleCase($('#txtComments').val())
-
-                //Status: $('#cboInactive option:selected').text(),
-                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-                //DefaultBranch: "NO",
-
-            };
-
-            $.ajax({
-                url: "/BranchConfig/mUpdateBranchInfo",
-                type: "POST",
-                data: JSON.stringify(empObj),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-
-                    if (result == "Update") {
-                        //console.log('Update')
-
-                        var toastMixin = Swal.mixin({
-                            toast: true,
-                            icon: 'success',
-                            title: 'General Title',
-                            animation: false,
-                            position: 'center',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                        });
-                        toastMixin.fire({
-                            animation: true,
-                            title: 'Update Successfully',
-
-                        });
-
-                        showGrid();
-                        clearFromData();
-
-
-                    } else {
-                        swal("Warning!", result, '');
-                        clearFromData();
-                    };
-                }
-            });
-
-        }
+      
         function showGrid() {
-
 
             table = $('#datatable4').DataTable({
                 "bDestroy": true,
                 "select": true,
                 //"gridlines": true,
                 "ajax": {
-                    "url": "/BranchConfig/mFillShowGrid",
+                    "url": "/DaynamicallyTextBoxCreate/OrderList",
                     "type": "POST",
                     "datatype": "json",
 
@@ -431,76 +230,35 @@
                           },
                       },
 
+
                         {
-                            title: 'Branch ID',
-                            data: 'BranchID',
+                            title: 'SL',
+                            data: 'intSerialNo',
                             name: 'Branch ID',
                             visible: false,
                         },
-                         {
-                             title: 'Branch ID',
-                             data: 'BranchName',
-                             name: 'Branch ID',
-                         },
+
                           {
-                              title: 'Address1',
-                              data: 'BranchAddress1',
+                              title: 'Order No',
+                              data: 'strOrderNo',
                               name: 'Address1',
                           },
                            {
-                               title: 'Address2',
-                               data: 'BranchAddress2',
+                               title: 'Customer Code',
+                               data: 'intCustomer',
                                name: 'Address2',
                            },
                             {
-                                title: 'Country',
-                                data: 'Country',
+                                title: 'Order Value',
+                                data: 'dblOrderValue',
                                 name: 'Country',
-                                "visible": false,
-
                             },
                             {
-                                title: 'Godown',
-                                data: 'Godown',
+                                title: 'Order Date',
+                                data: 'strOrderDate',
                                 name: 'Godown',
-                                "visible": true,
-
                             },
-                                {
-                                    title: 'Phone',
-                                    data: 'Phone',
-                                    name: 'Phone',
-                                    "visible": false,
-                                },
-                                 {
-                                     title: 'Fax',
-                                     data: 'Fax',
-                                     name: 'Fax',
-                                     "visible": false,
-                                 },
-                                  {
-                                      title: 'Comments',
-                                      data: 'Comments',
-                                      name: 'Comments',
-                                      "visible": false,
-                                  },
-                                   {
-                                       title: 'Inactive',
-                                       data: 'Status',
-                                       name: 'Inactive',
-                                       "visible": false,
-                                   },
-                                    {
-                                        title: 'Default',
-                                        data: 'DefaultBranch',
-                                        name: 'Default',
-                                        "visible": false,
-                                    },
-                                   {
-                                       title: 'Inactive',
-                                       data: 'Statusstring',
-                                       name: 'Inactive',
-                                   },
+
                                  {
                                      title: 'Edit',
 
@@ -546,34 +304,45 @@
 
         }
         function edit(data) {
+            //empObj = {
+            //    strorderNo: 1,
+            //    strCustomerId: $('#txtCustomerCode').val(), //CustomerID
+            //    intQty: intQty,
+            //    dblVal: dblTotalVal,
+            //    detailsList: DressList
 
-            ////alert(data.DefaultBranch)
-            $('#btnsaveOrder').val('Update');
-
-            $('#txtOldbranchID').val(data.BranchID);
-            $('#txtbranchName').val(data.BranchName);
-            $("#txtAddress1").val(data.BranchAddress1);
-            $('#txtAddress2').val(data.BranchAddress2);
-            $("#txtCountry").val(data.Country);
-            $('#txtTelephone').val(data.Phone);
-            $('#txtlocation').val(data.Godown);
-            $("#txtFax").val(data.Fax);
-            $('#cboInactive').val(data.Status);
-            $('#cbodefaultBrach').val(data.DefaultBranch);
-            ////$('#txtlocation').val(data.Comments);
-            //$("#cbodefaultBrach").val(data.);
-
-            //if (data.Status == "NO") {
-            //    $("#cboInactive").val("0");
-            //}
-            //else {
-            //    $("#cboInactive").val("1");
             //}
 
-            $('#txtComments').val(data.Comments);
+            window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")?intval=1';
 
-
-
+            //"url": "/SalesOrder/mShowMasterData?strUserName=" + strUserName + " &intStatusCol=" + rbtnStatus,
+            //window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")' + $(this).val();
+            //$('#txtOldbranchID').val(data.BranchID);
+            //$('#txtbranchName').val(data.BranchName);
+            //$("#txtCountry").val(data.Country);
+            //$('#txtTelephone').val(data.Phone);
+            //$('#txtlocation').val(data.Godown);
+            //$("#txtFax").val(data.Fax);
+            //$('#cboInactive').val(data.Status);
+            //$('#cbodefaultBrach').val(data.DefaultBranch);
+            //$('#txtComments').val(data.Comments);
+       
+            //var url = "http://localhost:12836/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateView";
+            //window.open(url);
+            //window.location.href('https://google.com');
+            //var url = "http://localhost:12836/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateView";
+            //window.location(url);
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateViewEdit",
+            //    success: function (data) {
+            //        var url = "http://www.(url).com";
+            //        window.location(url);
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        debugger;
+            //    }
+            //});
         }
 
         function deleteBranch(selectdata) {

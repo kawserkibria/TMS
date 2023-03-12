@@ -74,7 +74,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
-
+                <div style="margin-left: 10px;">
+                    <h5  class="modal-title  text-right" style="margin: 0 auto;" id="lblledgerName">@ViewBag.custcode</h5>
+                </div>
                 <div style="margin-left: 10px;">
                     <label>Customer Code:</label><span id="reqCommenst" class="reqError"></span><br />
                 </div>
@@ -276,29 +278,6 @@
     });
 
     function showGridSeles() {
-
-
-        //table = $('#datatableseles').DataTable({
-        //    "bDestroy": true,
-        //    "select": true,
-
-        //    "ajax": {
-        //        "url": '/Values/GetTotalDressCategoryInfoList/',
-        //        "type": "GET",
-        //        "datatype": "json",
-
-        //        "dataSrc": function (response) {
-
-
-        //            tempDataList = response.result;
-        //            response = tempDataList;
-
-        //            response.recordsTotal = response.recordsTotal;
-        //            response.recordsFiltered = response.recordsFiltered;
-        //            return response;
-        //        }
-
-        //    },
         $('#datatableseles').DataTable({
             data: this.tempOrderDetails,
             "bDestroy": true,
@@ -319,11 +298,7 @@
 
             "order": [[1, 'asc']],
             "columns": [
-                //{
-                //    title: 'SL',
-                //    data: 'SL',
-                //    name: 'SL',
-                //},
+
                    {
                        title: 'অর্ডার নং',
                        data: 'strOrderNo',
@@ -468,16 +443,11 @@
 
         if (tempaddDressQty.length > 0) {
             //tempaddDressQtyfinal.push(tempaddDressQty);
-
-
-
             for (i = 0; i < tempaddDressQty.length; i++) {
                 itemWiseval = itemWiseval + tempaddDressQty[i].dbltotalVal;
                 if (i === 0) {
                     intqty = tempaddDressQty[i].intQty;
-
                 }
-
             }
             tempOrderDetails.push({
                 strOrderNo: 1,
@@ -485,62 +455,13 @@
                 strDressName: $('#CategoryId option:selected').text(),
                 intIDressQty: intqty,
                 dblTotalAmount: itemWiseval,
-
             });
-
-
             showGridSeles();
             ClearData();
-
-
         }
         //showGridSeles();
-
-
     }
-    function Submitdata() {
-        var i = 0;
-        dbltxtVal = "";
-        inttxtid = "";
-        var addStaus = "";
-        var i = 0;
 
-
-
-
-        console.log('kibria2', megerment);
-        DressList = [];
-        DressList.push({
-            intDressId: $('#CategoryId option:selected').val(),///DresssId
-            Mesurmentlist: megerment,
-            OrderandFabrics: tempaddDressQtyfinal,
-            OrderDList: tempOrderDetails
-        });
-        empObj = "";
-
-        var intQty = 0;
-        var dblTotalVal = 0;
-
-        for (var i = 0; i < tempOrderDetails.length; i++) {
-            intQty = intQty + tempOrderDetails[i].intQty
-            dblTotalVal = dblTotalVal + tempOrderDetails[i].dblTotalAmount
-        }
-        console.log('tempOrderDetails', tempOrderDetails);
-        empObj = {
-            strorderNo: 1,
-            strCustomerId: $('#txtCustomerCode').val(), //CustomerID
-            intQty: intQty,
-            dblVal: dblTotalVal,
-            detailsList: DressList
-
-        }
-
-        console.log('kibria22', empObj);
-
-
-
-
-    }
     function ClearData() {
         tempaddDressQty = [];
         showDressQty();
@@ -818,7 +739,49 @@
         });
 
     }
+    function Submitdata() {
+        var i = 0;
+        dbltxtVal = "";
+        inttxtid = "";
+        var addStaus = "";
+        var i = 0;
+        console.log('kibria2', megerment);
+        DressList = [];
+        DressList.push({
+            intDressId: $('#CategoryId option:selected').val(),///DresssId
+            Mesurmentlist: megerment,
+            OrderandFabrics: tempaddDressQtyfinal,
+            OrderDList: tempOrderDetails
+        });
+        empObj = "";
+
+        var intQty = 0;
+        var dblTotalVal = 0;
+
+        for (var i = 0; i < tempOrderDetails.length; i++) {
+            intQty = intQty + tempOrderDetails[i].intQty
+            dblTotalVal = dblTotalVal + tempOrderDetails[i].dblTotalAmount
+        }
+        console.log('tempOrderDetails', tempOrderDetails);
+        empObj = {
+            strorderNo: 1,
+            strCustomerId: $('#txtCustomerCode').val(), //CustomerID
+            intQty: intQty,
+            dblVal: dblTotalVal,
+            detailsList: DressList
+
+        }
+
+        console.log('kibria22', empObj);
+
+
+
+
+    }
     function createBlock(val) {
+        createBlockNew(val);
+    };
+    function createBlockNew(val) {
         txtid = 0;
         totaltext = 0;
         if (val != "") {
@@ -874,18 +837,60 @@
             });
         }
     };
+    function createBlockEditMode(val) {
+        txtid = 0;
+        totaltext = 0;
+        if (val != "") {
+            $.ajax({
+                //type: "GET",
+                //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
+                //contentType: "application/json; charset=utf-8",
 
-    //function removeDuplicates(arr, ledger) {
-    //    var unique = [];
-    //    for (i = 0; i < arr.length; i++) {
-    //        if (ledger === arr[i].strLedgerName) {
-    //            //unique.push(arr[i]);
-    //            tempEffInventoryListFinal.splice(i, 1);
-    //        }
-    //    }
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val,
+                type: "POST",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
 
-    //    return unique;
-    //}
+                success: function (res) {
+                    console.log("dd", res);
+                    let htmlData = '';
+                    htmlData += "<div class='row'>";
+                    htmlData += "<div class='col-sm-12 col-xs-12 col-md-12 col-lg-12'>";
+                    htmlData += "<div class='row'>";
+                    for (i = 0; i < res.length; i++) {
+                        htmlData +=
+                            "<div class='col-sm-4 col-xs-4 col-md-4 col-lg-4'>"
+                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                        let lblTxt = [];
+                        var txt = "";
 
+                        var concatTxt = "";
+                        lblTxt = res[i]['LabelTxt'].split(',');
+                        for (j = 0; j < lblTxt.length; j++) {
+                            txt = lblTxt[j];
+                            concatTxt = txt.replace(" ", ",");
+                            htmlData += "<label class='label' for=" + concatTxt + "> " + txt + " ";
+                            htmlData += "</label > ";
+                            htmlData += "<input class='form-control' id=" + txtid + " name=" + concatTxt + " />";
+                            txtid += 1;
+                            console.log("id", txtid)
+                        }
 
+                        htmlData += "</fieldset>"
+                            + "</div>"
+                    };
+                    console.log("totaltext", totaltext = txtid)
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+
+                    $("#divsection").html(htmlData);
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+    };
 </script>
