@@ -115,7 +115,7 @@ namespace TMS.Repository
                                     strSQL = "INSERT INTO ORDER_DRESS_CATEGORY_INFO";
                                     strSQL = strSQL + "(ORDER_NO,INVOICE_NO,CUSTOMER_ID,DRESS_ID,LABEL_TEXT)";
                                     strSQL = strSQL + "VALUES(";
-                                    strSQL = strSQL + "'" + obj.strorderNo + "','1'," + obj.strCustomerId + "," + OrderDList[i].intDressId + ",'" + oAssets[0].ToString() + "' ";
+                                    strSQL = strSQL + "'" + obj.strorderNo + "','1'," + obj.strCustomerId + "," + OrderDList[i].intDressId + ",N'" + oAssets[0].ToString() + "' ";
                                     strSQL = strSQL + ")";
                                     cmdInsert.CommandText = strSQL;
                                     cmdInsert.ExecuteNonQuery();
@@ -913,7 +913,7 @@ namespace TMS.Repository
             }
 
         }
-        public List<CategoryViewModel> mFillDressMesermen(int intid)
+        public List<CategoryViewModel> mFillDressMesermen(int intid,int intAddmode)
         {
             string strSQL = null;
             SqlDataReader dr;
@@ -929,20 +929,40 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    strSQL = "SELECT DC.CategoryId, C.Name, DC.LabelTxt, DC.Total ";
-                     strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN ";
-                     strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId AND C.IsDeleted = 0 ";
-                     strSQL = strSQL + "WHERE (DC.CategoryId = " + intid + ") AND (DC.IsDeleted = 0)"; 
+                    if (intAddmode == 0)
+                    {
+                        strSQL = "SELECT DC.CategoryId, C.Name, DC.LabelTxt, DC.Total ";
+                        strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN ";
+                        strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId AND C.IsDeleted = 0 ";
+                        strSQL = strSQL + "WHERE (DC.CategoryId = " + intid + ") AND (DC.IsDeleted = 0)";
+                    }
+                    else
+                    {
+
+                        strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
+                       strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
+                       strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0  ";
+                       strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1 ";
+                    }
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
                         CategoryViewModel oCat = new CategoryViewModel();
-
-                        oCat.CategoryId = Convert.ToInt32(dr["CategoryId"]);
-                        oCat.Name = dr["Name"].ToString();
-                        oCat.LabelTxt = dr["LabelTxt"].ToString();
-                        oCat.Total = Convert.ToInt32(dr["Total"]);
+                        if (intAddmode == 0)
+                        {
+                            oCat.CategoryId = Convert.ToInt32(dr["CategoryId"]);
+                            oCat.Name = dr["Name"].ToString();
+                            oCat.LabelTxt = dr["LabelTxt"].ToString();
+                            oCat.Total = Convert.ToInt32(dr["Total"]);
+                        }
+                        else
+                        {
+                            oCat.CategoryId = Convert.ToInt32(dr["DRESS_ID"]);
+                            oCat.Name = dr["Name"].ToString();
+                            oCat.LabelTxt = dr["LABEL_TEXT"].ToString();
+                            oCat.Total = Convert.ToInt32(dr["Total"]);
+                        }
                         ooCategory.Add(oCat);
                     }
 

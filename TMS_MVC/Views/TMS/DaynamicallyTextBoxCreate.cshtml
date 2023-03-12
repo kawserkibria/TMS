@@ -779,23 +779,34 @@
 
     }
     function createBlock(val) {
-        alert(val);
+    
         var intEditMode = 0;
 
-        intEditMode = $('#lblCustomerEditmode').val()
-        alert(intEditMode);
-        createBlockNew(val);
+        intEditMode = $('#lblCustomerEditmode').text();
+        //alert(intEditMode);
+        if (intEditMode == 0)
+        {
+            createBlockNew(val);
+        }
+        else {
+            createBlockEditMode(val);
+        }
+    
     };
     function createBlockNew(val) {
         txtid = 0;
         totaltext = 0;
+
+        var intEditMode = 0;
+
+        intEditMode = $('#lblCustomerEditmode').text();
         if (val != "") {
             $.ajax({
                 //type: "GET",
                 //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
                 //contentType: "application/json; charset=utf-8",
 
-                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val,
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode,
                 type: "POST",
                 data: "",
                 contentType: "application/json;charset=utf-8",
@@ -845,13 +856,19 @@
     function createBlockEditMode(val) {
         txtid = 0;
         totaltext = 0;
+
+        var intEditMode = 0;
+
+        intEditMode = $('#lblCustomerEditmode').text();
+
+
         if (val != "") {
             $.ajax({
                 //type: "GET",
                 //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
                 //contentType: "application/json; charset=utf-8",
 
-                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val,
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode,
                 type: "POST",
                 data: "",
                 contentType: "application/json;charset=utf-8",

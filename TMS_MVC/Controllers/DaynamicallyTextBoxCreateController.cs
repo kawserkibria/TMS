@@ -35,12 +35,21 @@ namespace Jagoron.Web.Controllers
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
-        public ActionResult getDataList(int Id)
+        public ActionResult getDataList(int Id, int intAddMode)
         {
             List<CategoryViewModel> oogrp = new List<CategoryViewModel>();
-            oogrp = objrepository.mFillDressMesermen(Id);
+            if (intAddMode == 0)
+            {
+                oogrp = objrepository.mFillDressMesermen(Id,0);
+            }
+            else
+            {
+                oogrp = objrepository.mFillDressMesermen(Id,1);
+            }
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
+
+       
         public JsonResult OrderSave(OrderM objStockItem)
         {
 
