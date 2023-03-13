@@ -49,6 +49,14 @@ namespace Jagoron.Web.Controllers
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
+
+        public ActionResult getTextVal(int intid, string strOrderNo)
+        {
+            List<OrderDList> oogrp = new List<OrderDList>();
+            oogrp = objrepository.mGetTextVal(intid, strOrderNo);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+
        
         public JsonResult OrderSave(OrderM objStockItem)
         {

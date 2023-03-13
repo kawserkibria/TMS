@@ -16,6 +16,49 @@ namespace TMS.Repository
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
         #region "Order"
+
+        public List<OrderDList> mGetTextVal(int intid,string strorderNo)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+
+
+            List<OrderDList> ooCategory = new List<OrderDList>();
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "select TEXT_VAL from ORDER_DRESS_TEXT_INFO WHERE (DRESS_ID = 1) AND  ORDER_NO=1 order by TEXT_ID asc ";
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        OrderDList oCat = new OrderDList();
+                        oCat.dblDressRate = Convert.ToInt32(dr["TEXT_VAL"]);
+                        ooCategory.Add(oCat);
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+                    return ooCategory;
+                }
+                catch (Exception ex)
+                {
+                    OrderDList oCat = new OrderDList();
+                    oCat.dblDressRate = 0;
+                    ooCategory.Add(oCat);
+                    return ooCategory;
+                }
+            }
+
+        }
+
         public string mInsertOrder(OrderM obj)
         {
             string strSQL = "";
@@ -917,7 +960,7 @@ namespace TMS.Repository
         {
             string strSQL = null;
             SqlDataReader dr;
-
+            int intDressid = 0;
 
             List<CategoryViewModel> ooCategory = new List<CategoryViewModel>();
             using (SqlConnection gcnMain = new SqlConnection(connectionString))
@@ -929,20 +972,29 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    if (intAddmode == 0)
+
+
+                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1  ";
+                    SqlCommand cmdd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmdd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        intDressid = Convert.ToInt32(dr["ORDER_NO"]);
+                    }
+                    dr.Close();
+                    if (intDressid > 0)
+                    {
+                            strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
+                            strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
+                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0  ";
+                            strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1 ";
+                    }
+                    else
                     {
                         strSQL = "SELECT DC.CategoryId, C.Name, DC.LabelTxt, DC.Total ";
                         strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN ";
                         strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId AND C.IsDeleted = 0 ";
                         strSQL = strSQL + "WHERE (DC.CategoryId = " + intid + ") AND (DC.IsDeleted = 0)";
-                    }
-                    else
-                    {
-
-                        strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
-                       strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
-                       strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0  ";
-                       strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1 ";
                     }
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();

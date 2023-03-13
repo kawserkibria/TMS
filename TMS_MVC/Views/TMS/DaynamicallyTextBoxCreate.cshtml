@@ -790,6 +790,9 @@
         }
         else {
             createBlockEditMode(val);
+
+
+            textvalueset(val);
         }
     
     };
@@ -902,7 +905,7 @@
                         htmlData += "</fieldset>"
                             + "</div>"
                     };
-                    console.log("totaltext", totaltext = txtid)
+                    console.log("totaltexteeee", totaltext = txtid)
                     htmlData += "</div>";
                     htmlData += "</div>";
                     htmlData += "</div>";
@@ -913,6 +916,50 @@
                     console.log(res);
                 }
             });
+           
+
+           
         }
+
+   
+
     };
+    function textvalueset(val) {
+        var i = 0;
+        inttxtid = "";
+
+        var strEditMode = 1;
+
+        //intEditMode = $('#lblCustomerEditmode').text();
+
+        if (val != "") {
+            $.ajax({
+                url: "/DaynamicallyTextBoxCreate/getTextVal?intid=" + val + " &strOrderNo='" + strEditMode,
+                type: "POST",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+
+                success: function (res) {
+                    console.log('od',res);
+                    var allInputs = document.getElementsByTagName('input');
+
+                    for (var i = 0; i < res.length; i++) {
+                        var j = i + 1;
+
+                        allInputs[i].value = res[i].dblDressRate;
+
+
+                    }
+
+                }
+            });
+
+
+
+        }
+
+
+      
+    }
 </script>
