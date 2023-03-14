@@ -792,9 +792,9 @@
             createBlockEditMode(val);
 
 
-            textvalueset(val);
+        
         }
-    
+        textvalueset(val);
     };
     function createBlockNew(val) {
         txtid = 0;
@@ -921,8 +921,13 @@
            
         }
 
-   
-
+        for (var i = 0; i < 500000000; i++) {
+            if(i==500000000)
+            {
+                return
+            }
+        }
+        textvalueset(val);
     };
     function textvalueset(val) {
         var i = 0;
@@ -943,11 +948,16 @@
                 success: function (res) {
                     console.log('od',res);
                     var allInputs = document.getElementsByTagName('input');
-
+                    var addStaus = "";
                     for (var i = 0; i < res.length; i++) {
+               
                         var j = i + 1;
 
-                        allInputs[i].value = res[i].dblDressRate;
+                   
+            
+
+
+                        allInputs[j].value = res[i].dblDressRate;
 
 
                     }

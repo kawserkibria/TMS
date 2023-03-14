@@ -33,7 +33,7 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    strSQL = "select TEXT_VAL from ORDER_DRESS_TEXT_INFO WHERE (DRESS_ID = 1) AND  ORDER_NO=1 order by TEXT_ID asc ";
+                    strSQL = "select TEXT_VAL from ORDER_DRESS_TEXT_INFO WHERE (DRESS_ID = " + intid + ") AND  ORDER_NO=1 order by TEXT_ID asc ";
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -974,7 +974,7 @@ namespace TMS.Repository
                     gcnMain.Open();
 
 
-                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1  ";
+                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=" + intAddmode + "  ";
                     SqlCommand cmdd = new SqlCommand(strSQL, gcnMain);
                     dr = cmdd.ExecuteReader();
                     if (dr.Read())
