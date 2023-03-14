@@ -17,7 +17,7 @@ namespace TMS.Repository
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
         #region "Order"
 
-        public List<OrderDList> mGetTextVal(int intid,string strorderNo)
+        public List<OrderDList> mGetTextVal(int intid, string strorderNo)
         {
             string strSQL = null;
             SqlDataReader dr;
@@ -33,7 +33,7 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    strSQL = "select TEXT_VAL from ORDER_DRESS_TEXT_INFO WHERE (DRESS_ID = " + intid + ") AND  ORDER_NO=1 order by TEXT_ID asc ";
+                    strSQL = "select TEXT_VAL from ORDER_DRESS_TEXT_INFO WHERE (DRESS_ID = " + intid + ") AND  ORDER_NO=" + strorderNo + " order by TEXT_ID asc ";
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -62,7 +62,7 @@ namespace TMS.Repository
         public string mInsertOrder(OrderM obj)
         {
             string strSQL = "";
-            string strstringNew = "";
+            string strstringNew = "", strOrderNO = "OR1";
             List<OrderDList> OrderDList = new List<OrderDList>();
             List<OrderDD> Mesurmentlist = new List<OrderDD>();
             List<OrderandFabrics> OrderandFabrics = new List<OrderandFabrics>();
@@ -87,6 +87,20 @@ namespace TMS.Repository
                     cmdInsert.Transaction = myTrans;
 
 
+
+                    strSQL = "SELECT COUNT(SERIAL) as OrderNO from ORDER_MASTER_INFO";
+                    cmdInsert.CommandText = strSQL;
+                    dr = cmdInsert.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        strOrderNO = "";
+                        strOrderNO = "OR" + Convert.ToInt32(dr["OrderNO"]);
+                    }
+                    dr.Close();
+
+                    
+
+
                     OrderDList = obj.detailsList[0].OrderDList;
                     OrderandFabrics = obj.detailsList[0].OrderandFabrics;
                     Mesurmentlist = obj.detailsList[0].Mesurmentlist;
@@ -95,7 +109,7 @@ namespace TMS.Repository
                         strSQL = "INSERT INTO ORDER_DRESS_TEXT_INFO";
                         strSQL = strSQL + "(ORDER_NO, DRESS_ID, TEXT_ID, TEXT_VAL)";
                         strSQL = strSQL + "VALUES(";
-                        strSQL = strSQL + "'" + Mesurmentlist[i].strorderNo + "'," + Mesurmentlist[i].intDressId + ",'" + Mesurmentlist[i].inttxtid + "','" + Mesurmentlist[i].dbltxtVal + "' ";
+                        strSQL = strSQL + "'" + strOrderNO + "'," + Mesurmentlist[i].intDressId + ",'" + Mesurmentlist[i].inttxtid + "','" + Mesurmentlist[i].dbltxtVal + "' ";
                         strSQL = strSQL + ")";
                         cmdInsert.CommandText = strSQL;
                         cmdInsert.ExecuteNonQuery();
@@ -106,7 +120,7 @@ namespace TMS.Repository
                         strSQL = "INSERT INTO ORDER_CHILD_PURPOSE_INFO";
                         strSQL = strSQL + "(ORDER_NO, DRESS_ID, PURPOSE, ORDER_QTY, ORDER_RATE, ORDER_VAL)";
                         strSQL = strSQL + "VALUES(";
-                        strSQL = strSQL + "'" + OrderandFabrics[i].strorderNo + "'," + OrderandFabrics[i].intDressId + ",'" + OrderandFabrics[i].strFabricsName + "','" + OrderandFabrics[i].intQty + "','" + OrderandFabrics[i].intRate + "','" + OrderandFabrics[i].dbltotalVal + "' ";
+                        strSQL = strSQL + "'" + strOrderNO + "'," + OrderandFabrics[i].intDressId + ",'" + OrderandFabrics[i].strFabricsName + "','" + OrderandFabrics[i].intQty + "','" + OrderandFabrics[i].intRate + "','" + OrderandFabrics[i].dbltotalVal + "' ";
                         strSQL = strSQL + ")";
                         cmdInsert.CommandText = strSQL;
                         cmdInsert.ExecuteNonQuery();
@@ -116,7 +130,7 @@ namespace TMS.Repository
                         strSQL = "INSERT INTO ORDER_CHILD_INFO";
                         strSQL = strSQL + "( ORDER_NO, DRESS_ID, ORDER_QTY, ORDER_VAL)";
                         strSQL = strSQL + "VALUES(";
-                        strSQL = strSQL + "'" + OrderDList[i].strOrderNo + "'," + OrderDList[i].intDressId + "," + OrderDList[i].intIDressQty + "," + OrderDList[i].dblTotalAmount + " ";
+                        strSQL = strSQL + "'" + strOrderNO + "'," + OrderDList[i].intDressId + "," + OrderDList[i].intIDressQty + "," + OrderDList[i].dblTotalAmount + " ";
                         strSQL = strSQL + ")";
                         cmdInsert.CommandText = strSQL;
                         cmdInsert.ExecuteNonQuery();
@@ -158,7 +172,7 @@ namespace TMS.Repository
                                     strSQL = "INSERT INTO ORDER_DRESS_CATEGORY_INFO";
                                     strSQL = strSQL + "(ORDER_NO,INVOICE_NO,CUSTOMER_ID,DRESS_ID,LABEL_TEXT)";
                                     strSQL = strSQL + "VALUES(";
-                                    strSQL = strSQL + "'" + obj.strorderNo + "','1'," + obj.strCustomerId + "," + OrderDList[i].intDressId + ",N'" + oAssets[0].ToString() + "' ";
+                                    strSQL = strSQL + "'" + strOrderNO + "','1'," + obj.strCustomerId + "," + OrderDList[i].intDressId + ",N'" + oAssets[0].ToString() + "' ";
                                     strSQL = strSQL + ")";
                                     cmdInsert.CommandText = strSQL;
                                     cmdInsert.ExecuteNonQuery();
@@ -174,7 +188,7 @@ namespace TMS.Repository
                     strSQL = "INSERT INTO ORDER_MASTER_INFO";
                     strSQL = strSQL + "(ORDER_NO, CUSTOMER_ID, ORDER_VAL)";
                     strSQL = strSQL + "VALUES(";
-                    strSQL = strSQL + "'" + obj.strorderNo + "'," + obj.strCustomerId + "," + obj.dblVal + " ";
+                    strSQL = strSQL + "'" + strOrderNO + "'," + obj.strCustomerId + "," + obj.dblVal + " ";
                     strSQL = strSQL + ")";
                     cmdInsert.CommandText = strSQL;
                     cmdInsert.ExecuteNonQuery();
@@ -956,7 +970,7 @@ namespace TMS.Repository
             }
 
         }
-        public List<CategoryViewModel> mFillDressMesermen(int intid,int intAddmode)
+        public List<CategoryViewModel> mFillDressMesermen(int intDid,int intAddmode,string strOrderNo)
         {
             string strSQL = null;
             SqlDataReader dr;
@@ -974,7 +988,7 @@ namespace TMS.Repository
                     gcnMain.Open();
 
 
-                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=" + intAddmode + "  ";
+                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intDid + ") AND  DC.ORDER_NO='" + strOrderNo + "'  ";
                     SqlCommand cmdd = new SqlCommand(strSQL, gcnMain);
                     dr = cmdd.ExecuteReader();
                     if (dr.Read())
@@ -986,22 +1000,22 @@ namespace TMS.Repository
                     {
                             strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
                             strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
-                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0  ";
-                            strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intid + ") AND  DC.ORDER_NO=1 ";
+                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0   ";
+                            strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intDid + ") AND DC.ORDER_NO='" + strOrderNo + "' ";
                     }
                     else
                     {
                         strSQL = "SELECT DC.CategoryId, C.Name, DC.LabelTxt, DC.Total ";
                         strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN ";
                         strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId AND C.IsDeleted = 0 ";
-                        strSQL = strSQL + "WHERE (DC.CategoryId = " + intid + ") AND (DC.IsDeleted = 0)";
+                        strSQL = strSQL + "WHERE (DC.CategoryId = " + intDid + ") AND (DC.IsDeleted = 0)";
                     }
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
                         CategoryViewModel oCat = new CategoryViewModel();
-                        if (intAddmode == 0)
+                        if (intDressid == 0)
                         {
                             oCat.CategoryId = Convert.ToInt32(dr["CategoryId"]);
                             oCat.Name = dr["Name"].ToString();

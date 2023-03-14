@@ -304,46 +304,14 @@
 
         }
         function edit(data) {
-            //empObj = {
-            //    strorderNo: 1,
-            //    strCustomerId: $('#txtCustomerCode').val(), //CustomerID
-            //    intQty: intQty,
-            //    dblVal: dblTotalVal,
-            //    detailsList: DressList
-
-            //}
-            let orderno = data.intCustomer;
-            //alert(orderno);
+        
+            let intCustomer = data.intCustomer;
+            var strOrderNo = data.strOrderNo;
+      
             //window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")?intval="+ data.strOrderNo +"';
-            window.location = '@Url.Action("DaynamicallyTextBoxCreateView")?intval=' + orderno + '';
+            window.location = '@Url.Action("DaynamicallyTextBoxCreateView")?intCustomer=' + intCustomer + ' &strOrderNo='+ strOrderNo +' ';
             //"url": "/SalesOrder/mShowMasterData?strUserName=" + strUserName + " &intStatusCol=" + rbtnStatus,
-            //window.location = '@Url.Action("DaynamicallyTextBoxCreateViewEdit")' + $(this).val();
-            //$('#txtOldbranchID').val(data.BranchID);
-            //$('#txtbranchName').val(data.BranchName);
-            //$("#txtCountry").val(data.Country);
-            //$('#txtTelephone').val(data.Phone);
-            //$('#txtlocation').val(data.Godown);
-            //$("#txtFax").val(data.Fax);
-            //$('#cboInactive').val(data.Status);
-            //$('#cbodefaultBrach').val(data.DefaultBranch);
-            //$('#txtComments').val(data.Comments);
-       
-            //var url = "http://localhost:12836/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateView";
-            //window.open(url);
-            //window.location.href('https://google.com');
-            //var url = "http://localhost:12836/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateView";
-            //window.location(url);
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/DaynamicallyTextBoxCreate/DaynamicallyTextBoxCreateViewEdit",
-            //    success: function (data) {
-            //        var url = "http://www.(url).com";
-            //        window.location(url);
-            //    },
-            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //        debugger;
-            //    }
-            //});
+         
         }
 
         function deleteBranch(selectdata) {

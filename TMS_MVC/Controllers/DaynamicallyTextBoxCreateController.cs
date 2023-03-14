@@ -13,15 +13,17 @@ namespace Jagoron.Web.Controllers
         RepTMS objrepository = new RepTMS();
         //
         // GET: /DaynamicallyTextBoxCreate/
-        public ActionResult DaynamicallyTextBoxCreateView(int intval)
+        public ActionResult DaynamicallyTextBoxCreateView(int intCustomer, string strOrderNO)
         {
-            ViewBag.custcode = intval;
+            ViewBag.custcode = intCustomer;
+            ViewBag.strOrderNO = strOrderNO;
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
 
-        public ActionResult DaynamicallyTextBoxCreateViewEdit(int intval)
+        public ActionResult DaynamicallyTextBoxCreateViewEdit(int intCustomer, string strOrderNO)
         {
-            ViewBag.custcode = intval;
+            ViewBag.custcode = intCustomer;
+            ViewBag.strOrderNO = strOrderNO;
             return View("~/Views/TMS/DaynamicallyTextBoxCreate.cshtml");
         }
         public ActionResult OrderListView( )
@@ -35,22 +37,22 @@ namespace Jagoron.Web.Controllers
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
-        public ActionResult getDataList(int Id, int intAddMode)
+        public ActionResult getDataList(int Id, int intAddMode, string strOrderNo)
         {
             List<CategoryViewModel> oogrp = new List<CategoryViewModel>();
             if (intAddMode == 0)
             {
-                oogrp = objrepository.mFillDressMesermen(Id,0);
+                oogrp = objrepository.mFillDressMesermen(Id, 0, strOrderNo);
             }
             else
             {
-                oogrp = objrepository.mFillDressMesermen(Id,1);
+                oogrp = objrepository.mFillDressMesermen(Id, 1, strOrderNo);
             }
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
 
-        public ActionResult getTextVal(int intid, string strOrderNo)
+        public ActionResult getTextVal(int intid, string strOrderNo, int intEditMode)
         {
             List<OrderDList> oogrp = new List<OrderDList>();
             oogrp = objrepository.mGetTextVal(intid, strOrderNo);

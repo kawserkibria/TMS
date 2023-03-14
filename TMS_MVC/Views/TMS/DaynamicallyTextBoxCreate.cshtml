@@ -78,6 +78,9 @@
                     <h5  class="modal-title  text-right" style="margin: 0 auto;" id="lblCustomerEditmode">@ViewBag.custcode</h5>
                 </div>
                 <div style="margin-left: 10px;">
+                    <label hidden id="orderNO" class="col-md-2 control-label">@ViewBag.strOrderNO</label>
+                </div>
+                <div style="margin-left: 10px;">
                     <label>Customer Code:</label><span id="reqCommenst" class="reqError"></span><br />
                 </div>
                 <div class="col-sm-12">
@@ -211,6 +214,12 @@
     var detailsList = [];
     var showgridList = [];
     $(document).ready(function () {
+
+
+ 
+
+
+
         GetCategoryList();
         showGridSeles();
         showDressQty();
@@ -799,7 +808,7 @@
     function createBlockNew(val) {
         txtid = 0;
         totaltext = 0;
-
+        var strorderNO = "";
         var intEditMode = 0;
 
         intEditMode = $('#lblCustomerEditmode').text();
@@ -808,8 +817,8 @@
                 //type: "GET",
                 //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
                 //contentType: "application/json; charset=utf-8",
-
-                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode,
+            
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode + " &strOrderNo=" + strorderNO,
                 type: "POST",
                 data: "",
                 contentType: "application/json;charset=utf-8",
@@ -861,9 +870,9 @@
         totaltext = 0;
 
         var intEditMode = 0;
-
         intEditMode = $('#lblCustomerEditmode').text();
-
+        var strorderNO = 0;
+        strorderNO = $('#orderNO').text();
 
         if (val != "") {
             $.ajax({
@@ -871,7 +880,7 @@
                 //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
                 //contentType: "application/json; charset=utf-8",
 
-                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode,
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode + " &strOrderNo=" + strorderNO,
                 type: "POST",
                 data: "",
                 contentType: "application/json;charset=utf-8",
@@ -921,8 +930,8 @@
            
         }
 
-        for (var i = 0; i < 500000000; i++) {
-            if(i==500000000)
+        for (var i = 0; i < 200000000; i++) {
+            if(i==200000000)
             {
                 return
             }
@@ -934,12 +943,17 @@
         inttxtid = "";
 
         var strEditMode = 1;
+        var strorderNO = 0;
 
-        //intEditMode = $('#lblCustomerEditmode').text();
+        
+        strorderNO = $('#orderNO').text();
+
+        //alert(strorderNO);
+        intEditMode = $('#lblCustomerEditmode').text();
 
         if (val != "") {
             $.ajax({
-                url: "/DaynamicallyTextBoxCreate/getTextVal?intid=" + val + " &strOrderNo='" + strEditMode,
+                url: "/DaynamicallyTextBoxCreate/getTextVal?intid=" + val + " &strOrderNo='" + strorderNO + "' &intEditMode=" + strEditMode,
                 type: "POST",
                 data: "",
                 contentType: "application/json;charset=utf-8",
