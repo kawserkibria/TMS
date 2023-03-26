@@ -205,6 +205,7 @@
     var empObj = "";
     var DressList = [];
     var megerment = [];
+    var megermentfinal = [];
     var Details = [];
     var dbltxtVal = "";
     var inttxtid = 0;
@@ -438,7 +439,8 @@
 
         var addStaus = "";
 
-
+        //megerment = [];
+        j = 0;
         for (var i = 0; i < totaltext; i++) {
             var j = i + 1;
             megerment.push({
@@ -447,8 +449,11 @@
                 dbltxtVal: allInputs[j].value,
                 inttxtid: i,
             });
+            megermentfinal = megerment;
 
         }
+
+        console.log('list chke',megerment)
 
         if (tempaddDressQty.length > 0) {
             //tempaddDressQtyfinal.push(tempaddDressQty);

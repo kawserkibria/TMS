@@ -135,14 +135,13 @@ namespace TMS.Repository
                         cmdInsert.CommandText = strSQL;
                         cmdInsert.ExecuteNonQuery();
 
-
+                        strstringNew = "";
 
                         strSQL = "SELECT * FROM DivCreates where CategoryId=" + OrderDList[i].intDressId + " ";
                         cmdInsert.CommandText = strSQL;
                         dr = cmdInsert.ExecuteReader();
                         while (dr.Read())
-                        {
-                            //string strCategoryId = "";
+                        {                    //string strCategoryId = "";
                             //if (dr["CategoryId"].ToString() != "")
                             //{
                             //    strCategoryId = Convert.ToDateTime(dr["CategoryId"]).ToString("dd/MM/yyyy");
@@ -151,6 +150,8 @@ namespace TMS.Repository
                             //{
                             //    strCategoryId = "";
                             //}
+                 
+        
                             strstringNew = strstringNew + dr["LabelTxt"].ToString() + "~";
 
                         }
