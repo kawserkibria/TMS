@@ -1001,14 +1001,14 @@ namespace TMS.Repository
                     {
                             strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
                             strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
-                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID AND C.IsDeleted = 0   ";
+                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID  ";
                             strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intDid + ") AND DC.ORDER_NO='" + strOrderNo + "' ";
                     }
                     else
                     {
                         strSQL = "SELECT DC.CategoryId, C.Name, DC.LabelTxt, DC.Total ";
                         strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN ";
-                        strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId AND C.IsDeleted = 0 ";
+                        strSQL = strSQL + "Categories AS C ON C.Id = DC.CategoryId ";
                         strSQL = strSQL + "WHERE (DC.CategoryId = " + intDid + ") AND (DC.IsDeleted = 0)";
                     }
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);

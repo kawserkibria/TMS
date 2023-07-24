@@ -1332,7 +1332,7 @@ body .container.body .right_col {
 
 .nav-md .container.body .right_col {
     padding: 10px 20px 0;
-    margin-left: 230px;
+    margin-left: 330px;
 }
 
 .nav_title {
@@ -1889,7 +1889,7 @@ a {
 }
 
     .toggle a {
-        padding: 15px 15px 0;
+        padding: 15px 200px 0;
         margin: 0;
         cursor: pointer;
     }

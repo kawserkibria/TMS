@@ -29,7 +29,7 @@
             <input id="totalDiv" onchange="createBlock(this.value)" class="form-control form-group" />
         </div>
     </div>*@
-<hr />
+
 
 
 <style>
@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-lg-7">
                 <div style="margin-left: 10px;">
-                    <h5  class="modal-title  text-right" style="margin: 0 auto;" id="lblCustomerEditmode">@ViewBag.custcode</h5>
+                    <h5 hidden class="modal-title  text-right" style="margin: 0 auto;" id="lblCustomerEditmode">@ViewBag.custcode</h5>
                 </div>
                 <div style="margin-left: 10px;">
                     <label hidden id="orderNO" class="col-md-2 control-label">@ViewBag.strOrderNO</label>
@@ -84,7 +84,7 @@
                     <label>Customer Code:</label><span id="reqCommenst" class="reqError"></span><br />
                 </div>
                 <div class="col-sm-12">
-                    <input class="form-control" value="1" name="brandName" id="txtCustomerCode" form="usrform" style="text-transform:capitalize">
+                    <input class="form-control" value="" name="brandName" id="txtCustomerCode" form="usrform" style="text-transform:capitalize">
                 </div>
 
                 <div class="container">
@@ -97,7 +97,7 @@
                         </div>
 
                     </div>
-                    <hr />
+               
 
                     <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
                         <div id="divsection">
@@ -838,7 +838,8 @@
                     for (i = 0; i < res.length; i++) {
                         htmlData +=
                             "<div class='col-sm-4 col-xs-4 col-md-4 col-lg-4'>"
-                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                        //+ "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                         + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'></legend>";
                         let lblTxt = [];
                         var txt = "";
 

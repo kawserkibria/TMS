@@ -124,6 +124,7 @@
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DaynamicallyTextBoxCreateController.cs" />
+    <Compile Include="Controllers\DirectorInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\jsTree3Controller.cs" />
     <Compile Include="Controllers\LogInController.cs" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <Content Include="build\css\custom.css" />
     <Content Include="build\css\custom.min.css" />
+    <Content Include="build\css\page.css" />
     <Content Include="build\images\back_disabled.png" />
     <Content Include="build\images\back_enabled.png" />
     <Content Include="build\images\back_enabled_hover.png" />
@@ -6889,6 +6891,7 @@
     </Content>
     <Content Include="Views\TMS\DressOrder.cshtml" />
     <Content Include="Views\TMS\OrderList.cshtml" />
+    <Content Include="Views\DirectorInformation\DirectorInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

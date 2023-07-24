@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gentelella Alela! | </title>
+    <title>Tailor & Farics! | </title>
 
 
     <link href="../Tms.Lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
     <link href="../Tms.Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-
+    <link href="~/build/css/page.css" rel="stylesheet" />
     @* Mayhedi *@
     <link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />
     @* Datable then update buget jquery *@
@@ -41,7 +41,7 @@
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
-                <div class="left_col scroll-view" >
+                <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0; background: #2587ed">
                         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
                     </div>
@@ -66,39 +66,29 @@
 
                             <ul class="nav side-menu">
                                 <li>
-                                    <a style="font-size:20px"><i class="fa fa-cogs"></i> মাস্টার <span class="fa fa-chevron-down"></span></a>
+                                    <a style="font-size:18px"><i class="fa fa-cogs"></i> মাস্টার <span class="fa fa-chevron-down"></span></a>
 
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a style="font-size:18px" href="@Url.Action("CreateCompany", "Company")" class="nav-link">সংস্থার নাম সেভ</a>
+                                            <a style="font-size: 14px" href="@Url.Action("CreateCompany", "Company")" class="nav-link"> পরিচালকের তথ্য </a>
+                                        </li>
+                                       
+                                        <li>
+                                            <a style="font-size: 14px" href="@Url.Action("CreateCompany", "Company")" class="nav-link">প্রতিস্ঠানের বিবরণ সেভ</a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px" href="@Url.Action("BranchEntry", "BranchEntry")" class="nav-link">ব্রাঞ্চ সেভ </a>
+                                            <a style="font-size: 14px" href="@Url.Action("BranchEntry", "BranchEntry")" class="nav-link">পোষাক ও মাপ যুক্ত করুন</a>
+                                        </li>
+                                        <li class="sub_menu">
+                                            <a style="font-size: 14px" href="@Url.Action("Groupconfigurationlist","Accountsgroup")" class="nav-link">সাব-অ্যাডমিন তৈরি করুন</a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px">  বেসিক সেটিং  <span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-
-                                                <li class="sub_menu">
-                                                    <a style="font-size:18px" href="@Url.Action("ButtonEntry", "Button")" class="nav-link">বাটন সেটিং </a>
-                                                </li>
-                                                <li class="sub_menu">
-                                                    <a style="font-size:18px" href="@Url.Action("Groupconfigurationlist","Accountsgroup")" class="nav-link">কলার সেটিং </a>
-                                                </li>
-                                                <li>
-                                                    <a style="font-size:18px" href="@Url.Action("LedgerConfigurationList", "Ledger")">গলার মডেল সেটিং </a>
-                                                </li>
-
-                                                <li>
-                                                    <a style="font-size:18px" href="@Url.Action("LedgerConfigurationList", "Ledger")">গলার মডেল সেটিং </a>
-                                                </li>
-
-                                            </ul>
+                                            <a style="font-size: 14px" href="@Url.Action("LedgerConfigurationList", "Ledger")">সাব-অ্যাডমিন প্রবেশাধিকার নিয়ন্ত্রণ </a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">মুজুরি সেভ </a>
+                                            <a style="font-size: 14px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">মাপ প্রিন্ট সেটিং</a>
                                         </li>
-                                        
+
 
                                     </ul>
                                 </li>
@@ -106,21 +96,19 @@
                                     <a style="font-size:19px"><i class="fa fa-cart-arrow-down"></i> অর্ডার <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a style="font-size:18px" href="@Url.Action("DaynamicallyTextBoxCreateView", "DaynamicallyTextBoxCreate", new { intCustomer = 0, strOrderNO="" })" class="nav-link"> অর্ডার দিন</a>
-                                        </li>
-
-                                 
-                                        <li>
-                                            <a style="font-size:18px" href="@Url.Action("OrderListView", "DaynamicallyTextBoxCreate")" class="nav-link">অর্ডার তালিকা</a>
+                                            <a style="font-size:14px" href="@Url.Action("DaynamicallyTextBoxCreateView", "DaynamicallyTextBoxCreate", new { intCustomer = 0, strOrderNO="" })" class="nav-link"> অর্ডার দিন</a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px"><i></i>অর্ডার কাজ সম্পুন্ন করুন </a>
+                                            <a style="font-size: 14px" href="@Url.Action("OrderListView", "DaynamicallyTextBoxCreate")" class="nav-link">অর্ডার লিস্ট</a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px"><i></i>ডেলিভারি তারিখ পরিবর্তন করুন </a>
+                                            <a style="font-size: 14px"><i></i>অর্ডার কাজ সম্পুন্ন করুন </a>
                                         </li>
                                         <li>
-                                            <a style="font-size:18px"><i></i>ডেলিভারি দিন </a>
+                                            <a style="font-size: 14px"><i></i>অর্ডার ডিলেট করুন</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 14px"><i></i>ডেলিভারি তারিখ পরিবর্তন করুন</a>
                                         </li>
                                     </ul>
                                 </li>
