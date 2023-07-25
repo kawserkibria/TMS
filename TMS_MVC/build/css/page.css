@@ -1,7 +1,17 @@
 ﻿.Personal_Info {
     background-color: rgba(245, 237, 237, 0.13);
-    border: 1px solid #dee2e6;
+    border: 10px solid #dee2e6;
     float: left;
     padding: 10px 0 18px;
     width: 100%;
+}
+.Info_Lbl{
+    background: #fff none repeat scroll 0 0;
+    border: 3px solid #f2f2f2;
+    font-size: 12px;
+    line-height: 20px;
+    list-style: outside none none;
+    margin: 9px 0 0;
+    padding-left: 15px;
+    color: #777;
 }
