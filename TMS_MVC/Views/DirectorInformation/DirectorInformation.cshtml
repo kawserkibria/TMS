@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<link href="~/build/css/page.css" rel="stylesheet" />
 
 <div class="row">
 
@@ -14,21 +14,38 @@
             <h6 style="color:#00ff90">পরিচালকের প্রোফাইল</h6>
             <div class=" col-12 Personal_Info">
                 <div class="row">
-                    <div class=" col-10 ">
-                        <div class="row  Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
+                    <div class=" col-3 ">
+                        <div class="Director"><label> পরিচালকের নাম </label></div>
+                        <div class="Director"><label> পরিচালকের নাম </label></div>
+                        <div class="Director"><label> পিতার নাম </label></div>
+                        <div class="Director"><label> মোবাইল </label></div>
+                        <div class="Director"><label> ইমেইল </label></div>
+                        <div class="Director"><label> ঠিকানা  </label></div>
+                    </div>
+                    <div >
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>: </label></div>
+                    </div>
+                    <div class=" col-5 ">
+                        <div class="row  Info_Lbl "><label> পরিচালকের প্রোফাইল</label></div>
                         <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
                         <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
                         <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
                         <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
                         <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
                     </div>
-                    <div  >
+                    <div>
                         <div>
                             <img style="height: 224px; width: 224px;" src="~/images/american-express.png" class="rounded-circle" />
                         </div>
-                            <div style="padding-left:20px"><button style="padding-top:5px;padding-left:20px">পরিবর্তন করতে ক্লিক করুন</button></div>
-                        </div>
-                  
+                        @*<div style="padding-left:20px"><button style="padding-top:5px;padding-left:20px">পরিবর্তন করতে ক্লিক করুন</button></div>*@
+                        <button title="Add Item" style="background-color: #7595b5;  margin: 2px; text-transform: capitalize; " id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData();"> <i class="fa fa-pencil-square-o"></i>&nbsp;পরিবর্তন করতে ক্লিক করুন</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -40,6 +57,8 @@
         font-weight: bold;
     }
 </style>
+
+
 
 <div class="table-responsive">
     <table id="datatable4" class="table-bordered display" style="width:100%"></table>
@@ -179,7 +198,7 @@
         var BranchName = "";
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
-            showGrid();
+            //showGrid();
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });

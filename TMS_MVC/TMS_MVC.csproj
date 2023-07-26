@@ -151,9 +151,12 @@
     <Compile Include="VoucherSW.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="build\css\animation.css" />
     <Content Include="build\css\custom.css" />
     <Content Include="build\css\custom.min.css" />
     <Content Include="build\css\page.css" />
+    <Content Include="build\css\style.css" />
+    <Content Include="build\css\textbox.css" />
     <Content Include="build\images\back_disabled.png" />
     <Content Include="build\images\back_enabled.png" />
     <Content Include="build\images\back_enabled_hover.png" />
