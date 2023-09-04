@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Customerview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/build/css/login.css" rel="stylesheet" />
+
+<div class="wrapper bg-white">
+    <div class="h2 text-center">নতুন কাস্টমার </div>
+    <div class="h2 text-center">যুক্ত করুন</div>
+    <div class="h5 font-weight-bold">কাস্টমার নং: @ViewBag.TotalStudents</div>
+    <form>
+        <div class="d-sm-flex align-items-sm-center justify-content-sm-between pt-1">
+            <div class="form-group">
+                <label class="text-muted mandatory">জেন্ডার নির্ধরণ করুন</label>
+                <select style=" width: 190%;" class="form-control" id="exampleFormControlSelect1">
+                    <option value="1">পুরুষ</option>
+                    <option value="2">মহিলা</option>
+                    <option value="3">বাচ্চা</option>
+                </select>
+            </div>
+            @*<div class="form-group">
+                <label class="text-muted mandatory">Email Address</label>
+                <input  type="email" required class="form-control">
+            </div>*@
+            <div class="form-group">
+                <label class="text-muted">কাস্টমারের নাম</label>
+                <input type="text" required class="form-control">
+            </div>
+        </div>
+        <div class="d-sm-flex align-items-sm-center justify-content-sm-between pt-1">
+            <div class="form-group">
+                @*<div>
+                    <label class="text-muted mandatory">Gender</label>
+                </div>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary form-check-label active">
+                        <input class="form-check-input" type="radio" checked> Male
+                    </label>
+
+                    <label class="btn btn-primary form-check-label">
+                        <input class="form-check-input" type="radio"> Female
+                    </label>
+                </div>*@
+                <div class="form-group">
+                    <label class="text-muted">মোবাইল নাম্বার </label>
+                    <input type="text" required class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-muted">ঠিকানা</label>
+                @*<label for="exampleFormControlTextarea1" class="form-label">ঠিকানা</label>*@
+                <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3"></textarea>
+                @*<input type="text" class="form-control">*@
+            </div>
+        </div>
+        @*<div class="d-sm-flex align-items-sm-center justify-content-sm-between pt-1">
+            <div class="form-group">
+                <label class="text-muted mandatory">Phone Number</label>
+                <input type="tel" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="text-muted">City</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>*@
+        @*<div class="form-group">
+            <label class="text-muted mandatory">Password</label>
+            <input type="password" required class="form-control">
+        </div>*@
+        <div class="d-flex align-items-center justify-content-sm-center button-section">
+            <div class="form-group">
+                <button class="btn btn-primary mx-4" onclick="saveOrUpdates();" type="submit">Submit</button>
+            </div>
+         
+            @*<button class="btn">Cancel</button>*@
+        </div>
+    </form>
+</div>
+
+<script>
+
+    function saveOrUpdates() {
+        //if (checkReqFields() == false) {
+        //    return;
+        //}
+        var btn = $('#btnsaveOrder').val();
+        if (btn == "সেভ করুন") {
+            swal({
+                title: "আপনি কি সেভ করতে চান?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                }
+                else {
+                    save();
+                    clearFromData();
+                    $('#txtbranchName').focus();
+                }
+
+            });
+
+
+        } else {
+
+
+            swal({
+                title: "আপনি কি আপডেট করতে চান?",
+                text: "",
+                icon: "warning",
+                buttons: [
+                    'Yes',
+                    'No'
+                ],
+                dangerMode: true,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                }
+                else {
+
+                    Update(mstrPrimaryFields);
+                    clearFromData();
+                    $('#btncen').click();
+
+                }
+
+            });
+        }
+
+    }
+</script>

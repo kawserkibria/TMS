@@ -70,9 +70,9 @@
 
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a style="font-size: 14px" href="@Url.Action("CreateCompany", "Company")" class="nav-link"> পরিচালকের তথ্য </a>
+                                            <a style="font-size: 14px" href="@Url.Action("DirectorInformation", "DirectorInformation")" class="nav-link"> পরিচালকের তথ্য </a>
                                         </li>
-                                       
+
                                         <li>
                                             <a style="font-size: 14px" href="@Url.Action("CreateCompany", "Company")" class="nav-link">প্রতিস্ঠানের বিবরণ সেভ</a>
                                         </li>
@@ -88,7 +88,17 @@
                                         <li>
                                             <a style="font-size: 14px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">মাপ প্রিন্ট সেটিং</a>
                                         </li>
-
+                                        <li>
+                                            <a style="font-size:18px"><i class="fa fa-user"></i> কাস্টমার <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li>
+                                                    <a style="font-size: 14px" href="@Url.Action("Customerview", "Customer")" class="nav-link">কাস্টমার যুক্ত করুন</a>
+                                                </li>
+                                                <li>
+                                                    <a style="font-size: 14px" href="@Url.Action("CreateCompany", "Company")" class="nav-link">কাস্টমার লিস্ট</a>
+                                                </li>
+                                            </ul>
+                                        </li>
 
                                     </ul>
                                 </li>
@@ -116,7 +126,6 @@
                                     <a style="font-size:19px"><i class="fa fa-desktop"></i> রিপোর্ট <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
 
-
                                         <li>
                                             <a style="font-size:18px"><i></i>অর্ডার রিপোর্ট </a>
                                         </li>
@@ -129,16 +138,12 @@
                                         <li>
                                             <a style="font-size:18px"><i></i>ডেলিভারি দিন </a>
                                         </li>
-
-
-
-
                                     </ul>
                                 </li>
-
-
+                       
+                          
                                 <li>
-                                    <a style="font-size:20px"><i class="fa fa-cogs"></i> টুলস <span class="fa fa-chevron-down"></span></a>
+                                    <a style="font-size:19px"><i class="fa fa-cogs"></i> টুলস <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
 
 
@@ -152,7 +157,6 @@
                                         <li>
                                             <a style="font-size:18px" href="@Url.Action("LedgerConfigurationList", "Ledger")">গলার মডেল সেটিং </a>
                                         </li>
-
 
                                         <li>
                                             <a style="font-size:18px" href="@Url.Action("StockGroupList", "StockGroup")" class="nav-link">কাস্টমার সেভ </a>
