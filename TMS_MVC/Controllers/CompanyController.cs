@@ -20,7 +20,7 @@ namespace TMS.Controllers
         RepTMS repjitorytms = new RepTMS();
         //
         // GET: /Company/
-         [Route("Index")]
+         //[Route("Index")]
         public ActionResult CreateCompany()
         {
           
