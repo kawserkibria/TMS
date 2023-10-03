@@ -88,31 +88,31 @@
                     <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
                     <div class="col-sm-6">
                         <div style="margin-left: 10px;">
-                            <label>Branch Name:</label><span id="reqBranchName" class="reqError"></span><br />
+                            <label>নাম:</label><span id="reqBranchName" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="brandName" id="txtbranchName" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Address1:</label><span id="reqAddress1" class="reqError"></span><br />
+                            <label>পিতা:</label><span id="reqAddress1" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="brandName" id="txtAddress1" form="usrform" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Address2:</label><span id="reqAddress2" class="reqError"></span><br />
+                            <label>জেন্ডার:</label><span id="reqAddress2" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="brandName" id="txtAddress2" form="usrform" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Country:</label><span id="reqCountry" class="reqError"></span><br />
+                            <label>পজিশন:</label><span id="reqCountry" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtCountry" form="usrform" value="Bangladesh" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtCountry" form="usrform" value="" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Telephone:</label><span id="reqTelephone" class="reqError"></span><br />
+                            <label>সিটি:</label><span id="reqTelephone" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="Telephone" id="txtTelephone" form="usrform" style="text-transform:capitalize">
@@ -121,42 +121,48 @@
                     <div class="col-sm-6">
 
                         <div style="margin-left: 10px;">
-                            <label>Fax:</label><span id="reqFax" class="reqError"></span><br />
+                            <label>পোস্ট কোড:</label><span id="reqFax" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="brandName" id="txtFax" form="usrform" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Location:</label><span id="reqlocation" class="reqError"></span><br />
+                            <label>মোবাইল:</label><span id="reqlocation" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="brandName" id="txtlocation" form="usrform" readonly="readonly" style="text-transform:capitalize">
                         </div>
 
 
-                        <div class="col-sm-12">
-                            <div style="margin-left: 10px;">
-                                <label>Default Branch:</label><span id="reqDefaultBranch" class="reqError"></span><br />
-                            </div>
-                            <select id="cbodefaultBrach" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
 
-                        </div>
-                        <div class="col-sm-12">
-                            <label id="Inactive">Inactive:</label>
-                            <select id="cboInactive" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-
-                        </div>
                         <div style="margin-left: 10px;">
-                            <label>Comments:</label><span id="reqCommenst" class="reqError"></span><br />
+                            <label>ইমেইল:</label><span id="reqDefaultBranch" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtComments" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                        </div>
+
+                        <div style="margin-left: 10px;">
+                            <label>ঠিকানা:</label><span id="reqDefaultBranch" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="addres" id="txtaddres" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                        </div>
+                 
+                        <div style="margin-left: 10px;">
+                            <label>ফেইসবুক:</label><span id="reqCommenst" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="nFacebook" id="txtFacebook" form="usrform" style="text-transform:capitalize">
+                        </div>
+                    </div>
+
+
+                    <div class="container form-group">
+                        <label class="control-label col-md-3">আপনার ছবি:</label>
+                        <div class="col-md-9" style="height:150px;">
+                            <img  width="120" height="120" id="productImage" />
+                            <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
                         </div>
                     </div>
 
@@ -202,6 +208,10 @@
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });
+
+            //document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
+
+            //$('#productImage').attr('src', '~/Images/defaultProduct.jpg');
         })
         function ValidationClear() {
             var name = $('#txtbranchName').val();
@@ -676,10 +686,11 @@
             showGrid();
         }
         function clearFromData() {
-
+          
             $('#btnsaveOrder').val('Save');
             selectdataId = 0;
-
+            $('#btnBrowsePic').val('')
+            document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
             $('#txtGroupName').val('')
             $("#cboUnder").prop("selectedIndex", '0').val();
             $("#cboNature").prop("selectedIndex", '0').val();
