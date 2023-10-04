@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseModelcs.cs" />
     <Compile Include="Models\BranchEntry.cs" />
     <Compile Include="Models\ButtonName.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\OrderList.cs" />
     <Compile Include="Models\OrderSave.cs" />
+    <Compile Include="Models\Porichalok.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Treenode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

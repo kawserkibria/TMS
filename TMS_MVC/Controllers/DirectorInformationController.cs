@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jagoron.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,12 @@ namespace Jagoron.Web.Controllers
         public ActionResult DirectorInformation()
         {
             return View();
+        }
+        public ActionResult mPorichalokSave(Porichalok obj)
+        {
+
+            //string oogrp = objrepository.mInsertButton(obj);
+            return new JsonResult() { Data = "", JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 	}
 }

@@ -312,36 +312,54 @@
             );
         }
         function save() {
-            //alert(toTitleCase($('#txtbranchName').val()));
+            alert("ok");
+            //var fd = new FormData();
+            //var files = $('input[type="file"]')[0].files;
+            //for (var i = 0; i < files.length; i++) {
+            //    fd.append("Picture", files[i]);
+            //}
+            //fd.append("Name", $('#txtEmpName').val());
+            //var empObj = {
+            //    BranchName: toTitleCase($('#txtbranchName').val()),
+            //    BranchAddress1: toTitleCase($('#txtAddress1').val()),
+            //    BranchAddress2: toTitleCase($('#txtAddress2').val()),
+            //    Country: toTitleCase($('#txtCountry').val()),
+            //    Phone: $('#txtTelephone').val(),
+            //    Fax: toTitleCase($('#txtFax').val()),
+            //    Comments: toTitleCase($('#txtComments').val()),
+            //    Godown: toTitleCase($('#txtlocation').val()),
+            //    Status: $('#cboInactive').val(),
+            //    DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
+            //    //Status: $('#cboInactive option:selected').text(),
+            //    //Status: $('#cboInactive option:selected').text(),
+            //    //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
+            //};
+
+
+
+
+
             var fd = new FormData();
             var files = $('input[type="file"]')[0].files;
             for (var i = 0; i < files.length; i++) {
                 fd.append("Picture", files[i]);
             }
-            fd.append("Name", $('#txtEmpName').val());
-            var empObj = {
-                BranchName: toTitleCase($('#txtbranchName').val()),
-                BranchAddress1: toTitleCase($('#txtAddress1').val()),
-                BranchAddress2: toTitleCase($('#txtAddress2').val()),
-                Country: toTitleCase($('#txtCountry').val()),
-                Phone: $('#txtTelephone').val(),
-                Fax: toTitleCase($('#txtFax').val()),
-                Comments: toTitleCase($('#txtComments').val()),
-                Godown: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-                //Status: $('#cboInactive option:selected').text(),
-                //Status: $('#cboInactive option:selected').text(),
-                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-            };
+            fd.append("strPorichalokName", $('#txtbranchName').val());
+            fd.append("strPosition", $('#txtButtonName').val());
+            fd.append("strPorichalokFathersName", $('#txtButtonName').val());
+            fd.append("strPorichalokMobile", $('#txtButtonName').val());
+            fd.append("strPorichalokEmail", $('#txtButtonName').val());
+            fd.append("strPorichalokAddress", $('#txtButtonName').val());
 
+            console.log(fd);
+    
             $.ajax({
-
-                url: "/BranchConfig/SaveBranchInfo",
+                url: "/DirectorInformation/mPorichalokSave",
+                processData: false,
+                contentType: false,
                 type: "POST",
-                data: JSON.stringify(empObj),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
+                datatype: "json",
+                data: fd,
                 success: function (result) {
 
                     if (result == "save") {

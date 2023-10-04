@@ -20,6 +20,7 @@ namespace Jagoron.Web.Controllers
         }
         public ActionResult mButtonSave(ButtonName obj)
         {
+
             string oogrp = objrepository.mInsertButton(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }

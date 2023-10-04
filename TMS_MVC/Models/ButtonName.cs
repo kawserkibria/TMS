@@ -13,8 +13,9 @@ namespace Jagoron.Web.Models
         public string strUser { get; set; }
         public string Data { get; set; }
         public byte[] strIamge { get; set; }
-        public int inStatus { get; set; }
         public HttpPostedFileBase Picture { get; set; }
+        public int inStatus { get; set; }
+    
         public bool IsSelected { get; set; }
     }
 }
