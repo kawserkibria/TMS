@@ -88,75 +88,94 @@
                     <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
                     <div class="col-sm-6">
                         <div style="margin-left: 10px;">
-                            <label>নাম:</label><span id="reqBranchName" class="reqError"></span><br />
+                            <label>নাম:</label><span id="lblporichalokname" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtbranchName" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
+                            <input class="form-control" name="brandName" id="txtporichalokname" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>পিতা:</label><span id="reqAddress1" class="reqError"></span><br />
+                            <label>পিতা:</label><span id="lblporichalokfather" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtAddress1" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtporichalokfather" form="usrform" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>জেন্ডার:</label><span id="reqAddress2" class="reqError"></span><br />
+                            <label>জেন্ডার:</label><span id="lblporichalokGendar" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtAddress2" form="usrform" style="text-transform:capitalize">
+                            <select class="form-control" id="txtporichalokGendar"  name="StudentGender">
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>পজিশন:</label><span id="reqCountry" class="reqError"></span><br />
+                            <label>পজিশন:</label><span id="lblporichalokposition" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtCountry" form="usrform" value="" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtporichalokposition" form="usrform" value="" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>সিটি:</label><span id="reqTelephone" class="reqError"></span><br />
+                            <label>সিটি:</label><span id="lblporichalokCity" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="Telephone" id="txtTelephone" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="Telephone" id="txtporichalokCity" form="usrform" style="text-transform:capitalize">
                         </div>
                     </div>
                     <div class="col-sm-6">
 
                         <div style="margin-left: 10px;">
-                            <label>পোস্ট কোড:</label><span id="reqFax" class="reqError"></span><br />
+                            <label>পোস্ট কোড:</label><span id="lblpostcode" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtFax" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtpostcode" form="usrform" style="text-transform:capitalize">
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>মোবাইল:</label><span id="reqlocation" class="reqError"></span><br />
+                            <label>মোবাইল:</label><span id="lblmobile" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtlocation" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtmobile" form="usrform"  style="text-transform:capitalize">
                         </div>
 
 
 
                         <div style="margin-left: 10px;">
-                            <label>ইমেইল:</label><span id="reqDefaultBranch" class="reqError"></span><br />
+                            <label>ইমেইল:</label><span id="lblemail" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform"  style="text-transform:capitalize">
                         </div>
 
                         <div style="margin-left: 10px;">
-                            <label>ঠিকানা:</label><span id="reqDefaultBranch" class="reqError"></span><br />
+                            <label>ঠিকানা:</label><span id="lbladdress" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="addres" id="txtaddres" form="usrform" readonly="readonly" style="text-transform:capitalize">
+                            <input class="form-control" name="addres" id="txtaddress" form="usrform" style="text-transform:capitalize">
                         </div>
                  
                         <div style="margin-left: 10px;">
-                            <label>ফেইসবুক:</label><span id="reqCommenst" class="reqError"></span><br />
+                            <label>ফেইসবুক:</label><span id="lblfacebook" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="nFacebook" id="txtFacebook" form="usrform" style="text-transform:capitalize">
                         </div>
                     </div>
+                    <div class="col-md-6">
 
+                        <fieldset class="border p-2">
+                            <legend class="w-auto">Period Selection</legend>
+
+                            <div class="row" style="margin-left:4px">
+                                <label class="control-label col-md-3">From: </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="date" id="fromDateMD">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                    </div>
 
                     <div class="container form-group">
                         <label class="control-label col-md-3">আপনার ছবি:</label>
@@ -199,20 +218,34 @@
 
         var selectdataId = 0;
         var mstrPrimaryFields = 0;
-
+        var fdate;
+        var today;
         var BranchID = "";
         var BranchName = "";
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
-            //showGrid();
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });
 
-            //document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
+            var date = new Date();
 
-            //$('#productImage').attr('src', '~/Images/defaultProduct.jpg');
+            var day = date.getDate();
+
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            fdate = year + "-" + month + "-" + "01";
+            today = year + "-" + month + "-" + day;
+            console.log('kib', fdate)
+            documentFunc();
         })
+        
+        function documentFunc() {
+            document.getElementById('fromDateMD').value = fdate;
+        }
         function ValidationClear() {
             var name = $('#txtbranchName').val();
             if (name.trim() != "") {
@@ -293,15 +326,16 @@
             }
 
         }
-        function checkVariable(variable) {
+        //function checkVariable(variable) {
 
-            if (variable == null) {
-                return "1";
-            }
-            else {
-                return "2";
-            }
-        }
+        //    if (variable == null) {
+        //        return "1";
+        //    }
+        //    else {
+        //        return "2";
+        //    }
+        //}
+        var fdate;
 
         function toTitleCase(str) {
             return str.replace(
@@ -312,45 +346,23 @@
             );
         }
         function save() {
-            alert("ok");
-            //var fd = new FormData();
-            //var files = $('input[type="file"]')[0].files;
-            //for (var i = 0; i < files.length; i++) {
-            //    fd.append("Picture", files[i]);
-            //}
-            //fd.append("Name", $('#txtEmpName').val());
-            //var empObj = {
-            //    BranchName: toTitleCase($('#txtbranchName').val()),
-            //    BranchAddress1: toTitleCase($('#txtAddress1').val()),
-            //    BranchAddress2: toTitleCase($('#txtAddress2').val()),
-            //    Country: toTitleCase($('#txtCountry').val()),
-            //    Phone: $('#txtTelephone').val(),
-            //    Fax: toTitleCase($('#txtFax').val()),
-            //    Comments: toTitleCase($('#txtComments').val()),
-            //    Godown: toTitleCase($('#txtlocation').val()),
-            //    Status: $('#cboInactive').val(),
-            //    DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-            //    //Status: $('#cboInactive option:selected').text(),
-            //    //Status: $('#cboInactive option:selected').text(),
-            //    //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-            //};
-
-
-
-
-
             var fd = new FormData();
             var files = $('input[type="file"]')[0].files;
             for (var i = 0; i < files.length; i++) {
                 fd.append("Picture", files[i]);
             }
-            fd.append("strPorichalokName", $('#txtbranchName').val());
-            fd.append("strPosition", $('#txtButtonName').val());
-            fd.append("strPorichalokFathersName", $('#txtButtonName').val());
-            fd.append("strPorichalokMobile", $('#txtButtonName').val());
-            fd.append("strPorichalokEmail", $('#txtButtonName').val());
-            fd.append("strPorichalokAddress", $('#txtButtonName').val());
-
+            //fdate = document.getElementById('fromDateMD').value;
+            fd.append("strPorichalokName", $('#txtporichalokname').val());
+            fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            fd.append("strPosition", $('#txtporichalokposition').val());
+            fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            fd.append("strPorichalokMobile", $('#txtmobile').val());
+            fd.append("strPorichalokEmail", $('#txtemail').val());
+            fd.append("strPorichalokAddress", $('#txtaddress').val());
+            fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
             console.log(fd);
     
             $.ajax({
@@ -691,10 +703,10 @@
         function checkReqFields() {
             var returnValue;
 
-            var name = document.getElementById("txtbranchName").value;
+            var name = document.getElementById("txtporichalokname").value;
             returnValue = true;
             if (name.trim() == "") {
-                document.getElementById("reqBranchName").innerHTML = " * Name is required.";
+                document.getElementById("txtporichalokname").innerHTML = " * Name is required.";
                 returnValue = false;
             }
             return returnValue;
@@ -714,7 +726,7 @@
             $("#cboNature").prop("selectedIndex", '0').val();
             $("#cbocashflow").prop("selectedIndex", '0').val();
 
-            document.getElementById("reqBranchName").innerHTML = "";
+            //document.getElementById("reqBranchName").innerHTML = "";
             $('#txtOldbranchID').val('');
             $('#txtbranchName').val('');
             $("#txtAddress1").val('');

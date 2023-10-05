@@ -47,7 +47,6 @@ namespace Jagoron.Web.Controllers
             oogrp = objrepository.mFillShowGridBrand("0003");
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
-
         public ActionResult DeleteButton(ButtonName obj)
         {
             var oogrp = objrepository.DeleteButton(obj);

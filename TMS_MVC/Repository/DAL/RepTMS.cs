@@ -15,6 +15,245 @@ namespace TMS.Repository
     {
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
+
+        #region "Porichalok Info"
+        public string mInsertPorichalok(Porichalok obj)
+        {
+
+            SqlDataReader dr;
+            string strSQL = "";
+
+            int intPorichalokID = 01;
+
+
+
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+
+
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+                strSQL = "SELECT (case when  MAX(PORICHALOK_ID) is null then 0 else MAX(PORICHALOK_ID) end) +1 as PORICHALOK_ID FROM PORICHALOK_INFO ";
+                cmd1.CommandText = strSQL;
+                cmd1.ExecuteNonQuery();
+
+                dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    intPorichalokID = Convert.ToInt32(dr["PORICHALOK_ID"].ToString());
+                }
+                dr.Close();
+
+                cmd1.CommandText = "SP_INSERT_PORICHALOK_INFO";
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = Convert.ToString(intPorichalokID);
+                cmd1.Parameters.Add("@PORICHALOK_NAME", SqlDbType.VarChar).Value = obj.strPorichalokName;
+                cmd1.Parameters.Add("@PORICHALOK_FATHER_NAME", SqlDbType.VarChar).Value = obj.strPorichalokFathersName;
+                cmd1.Parameters.Add("@PORICHALOK_SEX", SqlDbType.VarChar).Value = obj.strPorichalokGendar;
+                cmd1.Parameters.Add("@PORICHALOK_POSITION", SqlDbType.VarChar).Value = obj.strPosition;
+                cmd1.Parameters.Add("@PORICHALOK_CITY", SqlDbType.VarChar).Value = obj.strPorichalokCity;
+                cmd1.Parameters.Add("@PORICHALOK_POST_CODE", SqlDbType.VarChar).Value = obj.strPorichalokPostalCode;
+                cmd1.Parameters.Add("@PORICHALOK_MOBILE", SqlDbType.VarChar).Value = obj.strPorichalokMobile;
+                cmd1.Parameters.Add("@PORICHALOK_EMAIL", SqlDbType.VarChar).Value = obj.strPorichalokEmail;
+                cmd1.Parameters.Add("@PORICHALOK_ADDRESS", SqlDbType.VarChar).Value = obj.strPorichalokAddress;
+                cmd1.Parameters.Add("@PORICHALOK_DATE_OF_BARTH", SqlDbType.Date).Value = obj.strPorichalokDateOfBorth;
+                cmd1.Parameters.Add("@INSERT_BY", SqlDbType.VarChar).Value = "User";
+                cmd1.ExecuteNonQuery();
+
+                cmd2.CommandText = "SP_PORICHALOK_INFO_IMAGE";
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = Convert.ToString(intPorichalokID);
+                cmd2.Parameters.Add("@img", SqlDbType.Image).Value = byts;
+                cmd2.ExecuteNonQuery();
+
+
+                trans.Commit();
+                return "save";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+        }
+
+        public string mUpdatePorichalok(ButtonName obj)
+        {
+
+
+
+
+            var bytss = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream msss = new MemoryStream();
+                pic.CopyTo(msss);
+                bytss = msss.ToArray();
+                msss.Dispose();
+            }
+
+            string strSQL = "";
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+
+                if (bytss.Length > 0)
+                {
+                    strSQL = "DELETE FROM  BUTTON_ICON WHERE BUTTON_ID=" + obj.intBUTTON_ID + " ";
+                    cmd1.CommandText = strSQL;
+                    cmd1.ExecuteNonQuery();
+                }
+
+
+                cmd1.CommandText = "UPDATE_BUTTON_NAME";
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@ButtonID", SqlDbType.Int).Value = obj.intBUTTON_ID;
+                cmd1.Parameters.Add("@ButtonName", SqlDbType.VarChar).Value = obj.strBUTTON_NAME;
+                cmd1.Parameters.Add("@status", SqlDbType.SmallInt).Value = obj.inStatus;
+                cmd1.ExecuteNonQuery();
+                if (bytss.Length > 0)
+                {
+                    cmd2.CommandText = "INSERT_BUTTON_ICON";
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    cmd2.Parameters.Add("@ButtonID", SqlDbType.Int).Value = obj.intBUTTON_ID;
+                    cmd2.Parameters.Add("@img", SqlDbType.Image).Value = bytss;
+                    cmd2.ExecuteNonQuery();
+                }
+
+                trans.Commit();
+                return "OK";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+
+        }
+
+        public List<ButtonName> mFillShowGridPorichalok(string strDeComID)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+
+
+            List<ButtonName> ooCategory = new List<ButtonName>();
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "SELECT BUTTON_NAME_INFO.BUTTON_ID,BUTTON_NAME_INFO.BUTTON_NAME,BUTTON_NAME_INFO.BUTTON_STATUS,BUTTON_ICON.BUTTON_IMAGE from BUTTON_NAME_INFO,BUTTON_ICON  WHERE BUTTON_NAME_INFO.BUTTON_ID=BUTTON_ICON.BUTTON_ID";
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        ButtonName oCat = new ButtonName();
+
+                        oCat.intBUTTON_ID = Convert.ToInt32(dr["BUTTON_ID"].ToString());
+                        oCat.strBUTTON_NAME = dr["BUTTON_NAME"].ToString();
+                        oCat.inStatus = Convert.ToInt32(dr["BUTTON_STATUS"].ToString());
+                        if (dr["BUTTON_IMAGE"] != null)
+                        {
+                            oCat.Data = Convert.ToBase64String((byte[])dr["BUTTON_IMAGE"]);
+                        }
+                        ooCategory.Add(oCat);
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+                    return ooCategory;
+                }
+                catch (Exception ex)
+                {
+                    ButtonName oCat = new ButtonName();
+                    oCat.strBUTTON_NAME = "";
+                    ooCategory.Add(oCat);
+                    return ooCategory;
+                }
+            }
+
+        }
+
+        public string DeletePorichalok(ButtonName obj)
+        {
+            string strsubFroup = "", strSQL = "";
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                try
+                {
+                    gcnMain.Open();
+
+                    SqlCommand cmdInsert = new SqlCommand();
+                    SqlTransaction myTrans;
+                    SqlDataReader dr;
+                    myTrans = gcnMain.BeginTransaction();
+                    cmdInsert.Connection = gcnMain;
+                    cmdInsert.Transaction = myTrans;
+                    strSQL = "DELETE FROM  BUTTON_ICON WHERE BUTTON_ID=" + obj.intBUTTON_ID + " ";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                    cmdInsert.Transaction.Commit();
+
+
+                    gcnMain.Dispose();
+                    return "OK";
+
+                }
+                catch (Exception ex)
+                {
+                    return "ex";
+                }
+            }
+
+        }
+        #endregion
         #region "Order"
 
         public List<OrderDList> mGetTextVal(int intid, string strorderNo)
