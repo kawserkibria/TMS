@@ -12,17 +12,17 @@
 
         <div class="row">
             <h6 style="color:#00ff90">পরিচালকের প্রোফাইল</h6>
-            <div class=" col-12 Personal_Info">
+            <div class=" col-12 col-sm-12 Personal_Info">
                 <div class="row">
                     <div class=" col-3 ">
                         <div class="Director"><label> পরিচালকের নাম </label></div>
-                        <div class="Director"><label> পরিচালকের নাম </label></div>
+                        <div class="Director"><label> পজিশন </label></div>
                         <div class="Director"><label> পিতার নাম </label></div>
                         <div class="Director"><label> মোবাইল </label></div>
                         <div class="Director"><label> ইমেইল </label></div>
                         <div class="Director"><label> ঠিকানা  </label></div>
                     </div>
-                    <div >
+                    <div>
                         <div class="Director_Label"><label>:</label></div>
                         <div class="Director_Label"><label>:</label></div>
                         <div class="Director_Label"><label>:</label></div>
@@ -31,19 +31,21 @@
                         <div class="Director_Label"><label>: </label></div>
                     </div>
                     <div class=" col-5 ">
-                        <div class="row  Info_Lbl "><label> পরিচালকের প্রোফাইল</label></div>
-                        <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
-                        <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
-                        <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
-                        <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
-                        <div class="row Info_Lbl"><label> পরিচালকের প্রোফাইল</label></div>
+                        <div class="row  Info_Lbl "><label id="pname"></label></div>
+                        <div class="row Info_Lbl"><label id="pposition"> </label></div>
+                        <div class="row Info_Lbl"><label id="pfatherName"></label></div>
+                        <div class="row Info_Lbl"><label id="pMobile"></label></div>
+                        <div class="row Info_Lbl"><label id="pEmail"></label></div>
+                        <div class="row Info_Lbl"><label id="pAddress"></label></div>
                     </div>
                     <div>
                         <div>
-                            <img style="height: 224px; width: 224px;" src="~/images/american-express.png" class="rounded-circle" />
+                            <img style="height: 224px; width: 224px;" id="pid" src="~/images/american-express.png" class="rounded-circle" />
                         </div>
                         @*<div style="padding-left:20px"><button style="padding-top:5px;padding-left:20px">পরিবর্তন করতে ক্লিক করুন</button></div>*@
-                        <button title="Add Item" style="background-color: #7595b5;  margin: 2px; text-transform: capitalize; " id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData();"> <i class="fa fa-pencil-square-o"></i>&nbsp;পরিবর্তন করতে ক্লিক করুন</button>
+                        <button title="Add Item" style="background-color: #7595b5;  margin: 2px; text-transform: capitalize; "
+                          id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData(); showdata();">
+                         <i class="fa fa-pencil-square-o"></i>&nbsp;পরিবর্তন করতে ক্লিক করুন</button>
                     </div>
 
                 </div>
@@ -103,7 +105,7 @@
                             <label>জেন্ডার:</label><span id="lblporichalokGendar" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <select class="form-control" id="txtporichalokGendar"  name="StudentGender">
+                            <select class="form-control" id="txtporichalokGendar" name="StudentGender">
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
                             </select>
@@ -133,7 +135,7 @@
                             <label>মোবাইল:</label><span id="lblmobile" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtmobile" form="usrform"  style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtmobile" form="usrform" style="text-transform:capitalize">
                         </div>
 
 
@@ -142,45 +144,36 @@
                             <label>ইমেইল:</label><span id="lblemail" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform"  style="text-transform:capitalize">
+                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform" style="text-transform:capitalize">
                         </div>
-
                         <div style="margin-left: 10px;">
                             <label>ঠিকানা:</label><span id="lbladdress" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="addres" id="txtaddress" form="usrform" style="text-transform:capitalize">
                         </div>
-                 
                         <div style="margin-left: 10px;">
                             <label>ফেইসবুক:</label><span id="lblfacebook" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
                             <input class="form-control" name="nFacebook" id="txtFacebook" form="usrform" style="text-transform:capitalize">
                         </div>
-                    </div>
-                    <div class="col-md-6">
-
-                        <fieldset class="border p-2">
-                            <legend class="w-auto">Period Selection</legend>
-
-                            <div class="row" style="margin-left:4px">
-                                <label class="control-label col-md-3">From: </label>
-                                <div class="col-md-9">
-                                    <div class="input-group">
-                                        <input type="date" id="fromDateMD">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
+                        <div style="margin-left: 10px;">
+                            <label>জন্ম তারিখ:</label><span id="lblfacebook" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" type="date" name="nFacebook" id="fromDateMD" form="usrform" style="text-transform:capitalize">
+                        </div>
 
                     </div>
+
+              
+
 
                     <div class="container form-group">
                         <label class="control-label col-md-3">আপনার ছবি:</label>
                         <div class="col-md-9" style="height:150px;">
-                            <img  width="120" height="120" id="productImage" />
+                            <img width="120" height="120" id="productImage" />
                             <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
                         </div>
                     </div>
@@ -217,7 +210,7 @@
         };
 
         var selectdataId = 0;
-        var mstrPrimaryFields = 0;
+        var mstrPrimaryFields = "1";
         var fdate;
         var today;
         var BranchID = "";
@@ -241,8 +234,10 @@
             today = year + "-" + month + "-" + day;
             console.log('kib', fdate)
             documentFunc();
+
+            Edit();
         })
-        
+
         function documentFunc() {
             document.getElementById('fromDateMD').value = fdate;
         }
@@ -316,7 +311,7 @@
                     }
                     else {
 
-                        Update(mstrPrimaryFields);
+                        PorichalokUpdate(mstrPrimaryFields);
                         clearFromData();
                         $('#btncen').click();
 
@@ -364,7 +359,7 @@
             fd.append("strPorichalokFacebook", $('#txtFacebook').val());
             fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
             console.log(fd);
-    
+
             $.ajax({
                 url: "/DirectorInformation/mPorichalokSave",
                 processData: false,
@@ -404,45 +399,44 @@
             });
 
         }
-        function Update(id) {
-            //alert($('#cboInactive').val())
-            var empObj = {
-                BranchID: toTitleCase($('#txtOldbranchID').val()),
-                BranchName: toTitleCase($('#txtbranchName').val()),
-                BranchAddress1: toTitleCase($("#txtAddress1").val()),
-                BranchAddress2: toTitleCase($('#txtAddress2').val()),
-                Country: toTitleCase($("#txtCountry").val()),
-                Phone: toTitleCase($('#txtTelephone').val()),
-                Fax: toTitleCase($("#txtFax").val()),
-                Comments: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                Godown: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-                Comments: toTitleCase($('#txtComments').val())
-
-                //Status: $('#cboInactive option:selected').text(),
-                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-                //DefaultBranch: "NO",
-
-            };
+        function PorichalokUpdate(id) {
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("strPorichalokID", id );
+            fd.append("strPorichalokName", $('#txtporichalokname').val());
+            fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            fd.append("strPosition", $('#txtporichalokposition').val());
+            fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            fd.append("strPorichalokMobile", $('#txtmobile').val());
+            fd.append("strPorichalokEmail", $('#txtemail').val());
+            fd.append("strPorichalokAddress", $('#txtaddress').val());
+            fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
+            console.log(fd);
 
             $.ajax({
-                url: "/BranchConfig/mUpdateBranchInfo",
+                url: "/DirectorInformation/mPorichalokUpdate",
+                processData: false,
+                contentType: false,
                 type: "POST",
-                data: JSON.stringify(empObj),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
+                datatype: "json",
+                data: fd,
                 success: function (result) {
 
-                    if (result == "Update") {
-                        //console.log('Update')
+                    if (result == "save") {
+                        //console.log('save')
 
                         var toastMixin = Swal.mixin({
                             toast: true,
                             icon: 'success',
                             title: 'General Title',
                             animation: false,
+                            //position: 'top-right',
                             position: 'center',
                             showConfirmButton: false,
                             timer: 2000,
@@ -450,207 +444,117 @@
                         });
                         toastMixin.fire({
                             animation: true,
-                            title: 'Update Successfully',
-
+                            title: 'Save Successfully',
                         });
-
                         showGrid();
                         clearFromData();
 
 
                     } else {
-                        swal("Warning!", result, '');
-                        clearFromData();
+                        swal("Warning!", result);
+                        //clearFromData();
                     };
                 }
             });
-
         }
-        function showGrid() {
+        function Edit() {
 
-
-            table = $('#datatable4').DataTable({
-                "bDestroy": true,
-                "select": true,
-                //"gridlines": true,
-                "ajax": {
-                    "url": "/BranchConfig/mFillShowGrid",
-                    "type": "POST",
-                    "datatype": "json",
-
-                    "dataSrc": function (response) {
-
-                        detailsList = response;
-                        response.draw = response.draw;
-                        response.recordsTotal = response.recordsTotal;
-                        response.recordsFiltered = response.recordsFiltered;
-                        //console.log('request.responseText', response);
-
-                        return response;
+            var empObj = {
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
+            };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    console.log('data', data.strPorichalokGendar)
+                    if (data.Data != "") {
+                  
+                        $('#pname').text(data.strPorichalokName);
+                        $('#pposition').text(data.strPosition);
+                        $('#pfatherName').text(data.strPorichalokFathersName);
+                        $('#pMobile').text(data.strPorichalokMobile);
+                        $('#pEmail').text(data.strPorichalokEmail);
+                        $('#pAddress').text(data.strPorichalokAddress);
+                        var picString= data.Data;
+                        var image = new Image();
+                        var src = "data:image/jpeg;base64," + picString;
+                        document.getElementById('pid').src = src;
+                    }
+                    else {
+                        var logo = document.getElementById('sologo');
+                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
                     }
 
-                },
-
-                //"order": [[1, 'Asc']],
-                "columns": [
-
-
-                      {
-                          title: 'SL',
-                          render: function (
-                              data,
-                              type,
-                              row,
-                              meta
-                          ) {
-                              return '<span>' + (meta.row + 1) + '</span>';
-                          },
-                      },
-
-                        {
-                            title: 'Branch ID',
-                            data: 'BranchID',
-                            name: 'Branch ID',
-                            visible: false,
-                        },
-                         {
-                             title: 'Branch ID',
-                             data: 'BranchName',
-                             name: 'Branch ID',
-                         },
-                          {
-                              title: 'Address1',
-                              data: 'BranchAddress1',
-                              name: 'Address1',
-                          },
-                           {
-                               title: 'Address2',
-                               data: 'BranchAddress2',
-                               name: 'Address2',
-                           },
-                            {
-                                title: 'Country',
-                                data: 'Country',
-                                name: 'Country',
-                                "visible": false,
-
-                            },
-                            {
-                                title: 'Godown',
-                                data: 'Godown',
-                                name: 'Godown',
-                                "visible": true,
-
-                            },
-                                {
-                                    title: 'Phone',
-                                    data: 'Phone',
-                                    name: 'Phone',
-                                    "visible": false,
-                                },
-                                 {
-                                     title: 'Fax',
-                                     data: 'Fax',
-                                     name: 'Fax',
-                                     "visible": false,
-                                 },
-                                  {
-                                      title: 'Comments',
-                                      data: 'Comments',
-                                      name: 'Comments',
-                                      "visible": false,
-                                  },
-                                   {
-                                       title: 'Inactive',
-                                       data: 'Status',
-                                       name: 'Inactive',
-                                       "visible": false,
-                                   },
-                                    {
-                                        title: 'Default',
-                                        data: 'DefaultBranch',
-                                        name: 'Default',
-                                        "visible": false,
-                                    },
-                                   {
-                                       title: 'Inactive',
-                                       data: 'Statusstring',
-                                       name: 'Inactive',
-                                   },
-                                 {
-                                     title: 'Edit',
-
-                                     render: function (data, type, row) {
-                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
-                                     }
-                                 },
-                                  {
-                                      title: 'Delete',
-                                      render: function (data, type, row) {
-                                          return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
-                                      }
-                                  },
-
-
-                ],
-
-                "responsive": true,
-                "rowCallback": function (row, data) {
-                    var rowdata = data;
-
-                    $(row).find(".sales-sloat-ak").click(function () {
-                        selectdata = data;
-                        //console.log('hello edit dddeeeee', selectdata);
-                        //saveorupdatebtntype =1;
-                        edit(selectdata);
-
-                    });
-                    $(row).find(".delete-sloat-ak").click(function () {
-                        selectdata = data;
-                        deleteBranch(selectdata);
-
-                    });
-                    $(row).find(".print-sloat-ak").click(function () {
-                        selectdata = data;
-                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
-
-                    });
-
                 }
-
             });
 
         }
-        function edit(data) {
+        function showdata() {
 
-            ////alert(data.DefaultBranch)
+
+            var empObj = {
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
+            };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                  
+                    if (data.Data != "") {
+                        $('#txtporichalokname').val(data.strPorichalokName);
+                        $('#txtporichalokfather').val(data.strPorichalokFathersName);
+                        if (data.strPorichalokGendar == "1") {
+                            $('#txtporichalokGendar').val('1');
+                        }
+                        else {
+                            $('#txtporichalokGendar').val('2');
+                        }
+                        $('#txtporichalokposition').val(data.strPosition);
+                        $('#txtaddress').val(data.strPorichalokAddress);
+                        $('#txtporichalokCity').val(data.strPorichalokFathersName);
+                        $('#txtpostcode').val(data.strPorichalokFathersName);
+                        $('#txtmobile').val(data.strPorichalokMobile);
+                        $('#txtFacebook').val(data.strPorichalokFathersName);
+                        $('#txtemail').val(data.strPorichalokFathersName);
+                        strSelectdate = data.strPorichalokDateOfBorth;
+                        setInputDateEdit();
+                        var picString = data.Data;
+                        var image = new Image();
+                        var src = "data:image/jpeg;base64," + picString;
+                        document.getElementById('productImage').src = src;
+
+                       
+                    }
+                    else {
+                        var logo = document.getElementById('sologo');
+                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
+                    }
+
+                }
+            });
+
             $('#btnsaveOrder').val('Update');
 
-            $('#txtOldbranchID').val(data.BranchID);
-            $('#txtbranchName').val(data.BranchName);
-            $("#txtAddress1").val(data.BranchAddress1);
-            $('#txtAddress2').val(data.BranchAddress2);
-            $("#txtCountry").val(data.Country);
-            $('#txtTelephone').val(data.Phone);
-            $('#txtlocation').val(data.Godown);
-            $("#txtFax").val(data.Fax);
-            $('#cboInactive').val(data.Status);
-            $('#cbodefaultBrach').val(data.DefaultBranch);
-            ////$('#txtlocation').val(data.Comments);
-            //$("#cbodefaultBrach").val(data.);
-
-            //if (data.Status == "NO") {
-            //    $("#cboInactive").val("0");
-            //}
-            //else {
-            //    $("#cboInactive").val("1");
-            //}
-
-            $('#txtComments').val(data.Comments);
-
-
-
+            $('#txtporichalokname').val($('#pname').val());
         }
+
+        var strSelectdate = "";
+        function setInputDateEdit() {
+
+            var now = new Date(strSelectdate);
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (day) + "-" + (month);
+            $('#fromDateMD').val(today);
+        };
 
         function deleteBranch(selectdata) {
 
@@ -716,7 +620,7 @@
             showGrid();
         }
         function clearFromData() {
-          
+
             $('#btnsaveOrder').val('Save');
             selectdataId = 0;
             $('#btnBrowsePic').val('')
@@ -742,4 +646,5 @@
         }
 
     </script>
+
 }

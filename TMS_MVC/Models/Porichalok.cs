@@ -8,6 +8,7 @@ namespace Jagoron.Web.Models
     public class Porichalok : BaseModelcs
     {
         public string  strPorichalokName { get; set; }
+        public string strPorichalokID { get; set; }
         public string strPosition { get; set; }
         public string strPorichalokFathersName { get; set; }
         public string strPorichalokGendar { get; set; }
@@ -18,6 +19,8 @@ namespace Jagoron.Web.Models
         public string strPorichalokCity { get; set; }
         public string strPorichalokPostalCode { get; set; }
         public string strPorichalokDateOfBorth { get; set; }
+        public DateTime strdatetiem{ get; set; }
+        public string Data { get; set; }
         public byte[] strIamge { get; set; }
         public HttpPostedFileBase Picture { get; set; }
     }

@@ -25,27 +25,28 @@ namespace Jagoron.Web.Controllers
             string oogrp = objrepository.mInsertPorichalok(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
-        public ActionResult mButtonUpdate(ButtonName obj)
+        public ActionResult mPorichalokUpdate(Porichalok obj)
         {
-            var byts = new byte[0];
-            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
-            {
+            //var byts = new byte[0];
+            //if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            //{
 
-                var pic = obj.Picture.InputStream;
+            //    var pic = obj.Picture.InputStream;
 
-                MemoryStream ms = new MemoryStream();
-                pic.CopyTo(ms);
-                byts = ms.ToArray();
-                ms.Dispose();
-            }
+            //    MemoryStream ms = new MemoryStream();
+            //    pic.CopyTo(ms);
+            //    byts = ms.ToArray();
+            //    ms.Dispose();
+            //}
 
-            string oogrp = objrepository.mUpdateButton(obj);
+            string oogrp = objrepository.mUpdatePorichalok(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
-        public ActionResult mFillShowGrid()
+
+        public ActionResult mFillEdit(Porichalok obj)
         {
-            List<ButtonName> oogrp = new List<ButtonName>();
-            oogrp = objrepository.mFillShowGridBrand("0003");
+            Porichalok oogrp = new Porichalok();
+            oogrp = objrepository.mFillShowGridPorichalok("0003");
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
         public ActionResult DeleteButton(ButtonName obj)
