@@ -27,18 +27,7 @@ namespace Jagoron.Web.Controllers
         }
         public ActionResult mPorichalokUpdate(Porichalok obj)
         {
-            //var byts = new byte[0];
-            //if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
-            //{
-
-            //    var pic = obj.Picture.InputStream;
-
-            //    MemoryStream ms = new MemoryStream();
-            //    pic.CopyTo(ms);
-            //    byts = ms.ToArray();
-            //    ms.Dispose();
-            //}
-
+   
             string oogrp = objrepository.mUpdatePorichalok(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }

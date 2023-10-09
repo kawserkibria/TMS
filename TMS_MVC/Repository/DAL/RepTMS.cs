@@ -531,14 +531,26 @@ namespace TMS.Repository
 
         }
         #endregion
-        #region "Companay Entry"
-        public string mInsertEmployeeImage(string strDeComID, string strCompanyName, string strMobileNumber, int intStatus, byte[] vImage)
+        #region "Prothistan Entry"
+        public string mInsertProthistan( ProthistanModel obj)
         {
 
             SqlDataReader dr;
             string strSQL = "";
 
-            int intComID = 01;
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+
+            int intPROTHISTAN_ID = 01;
 
 
             SqlConnection con = new SqlConnection(connectionString);
@@ -552,31 +564,42 @@ namespace TMS.Repository
             try
             {
 
-
-                strSQL = "SELECT (case when  MAX(COMPANY_ID) is null then 0 else MAX(COMPANY_ID) end) +1 as COMPANY_ID FROM COMPANY_NAME ";
+                strSQL = "SELECT (case when  MAX(PROTHISTAN_ID) is null then 0 else MAX(PROTHISTAN_ID) end) +1 as PROTHISTAN_ID FROM COMPANY_NAME ";
                 cmd1.CommandText = strSQL;
                 cmd1.ExecuteNonQuery();
 
                 dr = cmd1.ExecuteReader();
                 if (dr.Read())
                 {
-                    intComID = Convert.ToInt32(dr["COMPANY_ID"].ToString());
+                    intPROTHISTAN_ID = Convert.ToInt32(dr["PROTHISTAN_ID"].ToString());
                 }
                 dr.Close();
-              
-                cmd1.CommandText = "INSERT_COMPANY_NAME";
+
+                cmd1.CommandText = "SP_INSERT_PROTHISTAN_INFO";
                 cmd1.CommandType = CommandType.StoredProcedure;
-                cmd1.Parameters.Add("@CompanyID", SqlDbType.Int).Value = intComID;
-                cmd1.Parameters.Add("@CompanyName", SqlDbType.VarChar).Value = strCompanyName;
-                cmd1.Parameters.Add("@MobileNumber", SqlDbType.VarChar).Value = strMobileNumber;
-                cmd1.Parameters.Add("@status", SqlDbType.SmallInt).Value = intStatus;
+                cmd1.Parameters.Add("@PROTHISTAN_ID", SqlDbType.Int).Value = intPROTHISTAN_ID;
+                cmd1.Parameters.Add("@PROTHISTAN_NAME", SqlDbType.VarChar).Value = obj.strPROTHISTAN_NAME;
+                cmd1.Parameters.Add("@PROTHISTAN_DAILOG", SqlDbType.VarChar).Value = obj.strPROTHISTAN_DAILOG;
+                cmd1.Parameters.Add("@PROTHISTAN_JOURNY_START_YEAR", SqlDbType.Int).Value = obj.intPROTHISTAN_JOURNY_START_YEAR;
+                cmd1.Parameters.Add("@PROTHISTAN_STAF", SqlDbType.Int).Value = obj.intPROTHISTAN_STAF;
+                cmd1.Parameters.Add("@PROTHISTAN_ADDRESS", SqlDbType.VarChar).Value = obj.strPROTHISTAN_ADDRESS;
+                cmd1.Parameters.Add("@PROTHISTAN_CITY", SqlDbType.VarChar).Value = obj.strPROTHISTAN_CITY;
+                cmd1.Parameters.Add("@PROTHISTAN_POST_CODE", SqlDbType.SmallInt).Value = obj.strPROTHISTAN_POST_CODE;
+                cmd1.Parameters.Add("@PROTHISTAN_MOBILE", SqlDbType.SmallInt).Value = obj.strPROTHISTAN_MOBILE;
+                cmd1.Parameters.Add("@PROTHISTAN_EMAIL", SqlDbType.SmallInt).Value = obj.strPROTHISTAN_EMAIL;
+                cmd1.Parameters.Add("@PROTHISTAN_FACEBOOK", SqlDbType.SmallInt).Value = obj.strPROTHISTAN_FACEBOOK;
+                cmd1.Parameters.Add("@PROTHISTAN_WEB_SIDE", SqlDbType.SmallInt).Value = obj.strPROTHISTAN_WEB_SIDE;
+                cmd1.Parameters.Add("@INSERT_BY", SqlDbType.SmallInt).Value = "user";
                 cmd1.ExecuteNonQuery();
 
-                cmd2.CommandText = "INSERT_COMPANY_ICON";
-                cmd2.CommandType = CommandType.StoredProcedure;
-                cmd2.Parameters.Add("@CompanyID", SqlDbType.Int).Value = intComID;
-                cmd2.Parameters.Add("@img", SqlDbType.Image).Value = vImage;
-                cmd2.ExecuteNonQuery();
+                if (byts.Length > 0)
+                {
+                    cmd2.CommandText = "SP_PROTHISTAN_INFO_LOGO";
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    cmd2.Parameters.Add("@PROTHISTAN_ID", SqlDbType.VarChar).Value = intPROTHISTAN_ID;
+                    cmd2.Parameters.Add("@img", SqlDbType.Image).Value = byts;
+                    cmd2.ExecuteNonQuery();
+                }
           
                 trans.Commit();
                 return "OK";
@@ -591,12 +614,7 @@ namespace TMS.Repository
 
         public string mUpdateEmployeeImage(string strDeComID, string strCompanyName, string strMobileNumber, int intStatus, byte[] vImage, int intID)
         {
-
-
-
-     
             string strSQL = "";
-
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd1, cmd2;
             con.Open();
@@ -607,17 +625,12 @@ namespace TMS.Repository
             cmd2.Transaction = trans;
             try
             {
-
-
-           
                 if (vImage.Length > 0)
                 {
                     strSQL = "DELETE FROM  COMPANY_ICON WHERE COMPANY_ID=" + intID + " ";
                     cmd1.CommandText = strSQL;
                     cmd1.ExecuteNonQuery();
                 }
-
-
                 cmd1.CommandText = "UPDATE_COMPANY_NAME";
                 cmd1.CommandType = CommandType.StoredProcedure;
                 cmd1.Parameters.Add("@CompanyID", SqlDbType.Int).Value = intID;
@@ -646,100 +659,100 @@ namespace TMS.Repository
            
         }
 
-        public List<CompanyEntry> mFillShowGrid(string strDeComID)
-        {
-            string strSQL = null;
-            SqlDataReader dr;
+        //public List<ProthistanModel > mFillShowGrid(string strDeComID)
+        //{
+        //    string strSQL = null;
+        //    SqlDataReader dr;
 
 
-            List<CompanyEntry> ooCategory = new List<CompanyEntry>();
-            using (SqlConnection gcnMain = new SqlConnection(connectionString))
-            {
-                if (gcnMain.State == ConnectionState.Open)
-                {
-                    gcnMain.Close();
-                }
-                try
-                {
-                    gcnMain.Open();
-                    strSQL = "SELECT * from COMPANY_NAME,COMPANY_ICON  WHERE COMPANY_NAME.COMPANY_ID=COMPANY_ICON.COMPANY_ID";
-                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
-                    dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        CompanyEntry oCat = new CompanyEntry();
+        //    List<ProthistanModel> ooCategory = new List<ProthistanModel>();
+        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
+        //    {
+        //        if (gcnMain.State == ConnectionState.Open)
+        //        {
+        //            gcnMain.Close();
+        //        }
+        //        try
+        //        {
+        //            gcnMain.Open();
+        //            strSQL = "SELECT * from COMPANY_NAME,COMPANY_ICON  WHERE COMPANY_NAME.COMPANY_ID=COMPANY_ICON.COMPANY_ID";
+        //            SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+        //            dr = cmd.ExecuteReader();
+        //            while (dr.Read())
+        //            {
+        //                ProthistanModel oCat = new ProthistanModel();
                      
-                            oCat.CompanayID = Convert.ToInt32(dr["COMPANY_ID"].ToString());
-                            oCat.CompanayName = dr["COMPANY_NAME"].ToString();
-                            oCat.MobileNumber = dr["MOBILE_NUMBER"].ToString();
-                            oCat.inStatus = Convert.ToInt32(dr["COMPANY_STATUS"].ToString());
-                            if (dr["COMPANY_IMAGE"] != null)
-                            {
-                                oCat.Data = Convert.ToBase64String((byte[])dr["COMPANY_IMAGE"]);
-                            }
-                            ooCategory.Add(oCat);
-                    }
+        //                    //oCat.CompanayID = Convert.ToInt32(dr["COMPANY_ID"].ToString());
+        //                    //oCat.CompanayName = dr["COMPANY_NAME"].ToString();
+        //                    //oCat.MobileNumber = dr["MOBILE_NUMBER"].ToString();
+        //                    oCat.inStatus = Convert.ToInt32(dr["COMPANY_STATUS"].ToString());
+        //                    if (dr["COMPANY_IMAGE"] != null)
+        //                    {
+        //                        oCat.Data = Convert.ToBase64String((byte[])dr["COMPANY_IMAGE"]);
+        //                    }
+        //                    ooCategory.Add(oCat);
+        //            }
 
-                    dr.Close();
-                    gcnMain.Close();
-                    gcnMain.Dispose();
-                    return ooCategory;
-                }
-                catch (Exception ex)
-                {
-                    CompanyEntry oCat = new CompanyEntry();
-                    oCat.CompanayName = "";
-                    ooCategory.Add(oCat);
-                    return ooCategory;
-                }
-            }
+        //            dr.Close();
+        //            gcnMain.Close();
+        //            gcnMain.Dispose();
+        //            return ooCategory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ProthistanModel oCat = new ProthistanModel();
+        //            //oCat.CompanayName = "";
+        //            ooCategory.Add(oCat);
+        //            return ooCategory;
+        //        }
+        //    }
 
-        }
+        //}
 
-        public List<CompanyEntry> GetImages()
-        {
-            string strSQL;
-            SqlDataReader drGetGroup;
-            List<CompanyEntry> oogrp = new List<CompanyEntry>();
-            using (SqlConnection gcnMain = new SqlConnection(connectionString))
-            {
-                if (gcnMain.State == ConnectionState.Open)
-                {
-                    gcnMain.Close();
-                }
-                try
-                {
-                    gcnMain.Open();
-                    strSQL = "SELECT * FROM COMPANY_NAME";
-                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
-                    drGetGroup = cmd.ExecuteReader();
-                    while (drGetGroup.Read())
-                    {
+        //public List<ProthistanModel> GetImages()
+        //{
+        //    string strSQL;
+        //    SqlDataReader drGetGroup;
+        //    List<ProthistanModel> oogrp = new List<ProthistanModel>();
+        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
+        //    {
+        //        if (gcnMain.State == ConnectionState.Open)
+        //        {
+        //            gcnMain.Close();
+        //        }
+        //        try
+        //        {
+        //            gcnMain.Open();
+        //            strSQL = "SELECT * FROM COMPANY_NAME";
+        //            SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+        //            drGetGroup = cmd.ExecuteReader();
+        //            while (drGetGroup.Read())
+        //            {
 
-                        CompanyEntry ogrp = new CompanyEntry();
-                        ogrp.Id = Convert.ToInt32(drGetGroup["SERIAL_NO"].ToString());
-                        ogrp.CompanayName = drGetGroup["COMPANY_NAME"].ToString();
-                        ogrp.strIamge = (byte[])drGetGroup["COMPANY_IMAGE"];
+        //                ProthistanModel ogrp = new ProthistanModel();
+        //                ogrp.Id = Convert.ToInt32(drGetGroup["SERIAL_NO"].ToString());
+        //                ogrp.CompanayName = drGetGroup["COMPANY_NAME"].ToString();
+        //                ogrp.strIamge = (byte[])drGetGroup["COMPANY_IMAGE"];
 
-                        oogrp.Add(ogrp);
-                    }
-                    drGetGroup.Close();
-                    gcnMain.Dispose();
-                    return oogrp;
+        //                oogrp.Add(ogrp);
+        //            }
+        //            drGetGroup.Close();
+        //            gcnMain.Dispose();
+        //            return oogrp;
 
-                }
-                catch (Exception ex)
-                {
-                    CompanyEntry ogrp = new CompanyEntry();
-                    //ogrp.strBranchName = ex.ToString();
-                    oogrp.Add(ogrp);
-                    return oogrp;
-                }
-            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ProthistanModel ogrp = new ProthistanModel();
+        //            //ogrp.strBranchName = ex.ToString();
+        //            oogrp.Add(ogrp);
+        //            return oogrp;
+        //        }
+        //    }
 
-        }
+        //}
 
-        public string DeleteCompany(CompanyEntry obj)
+        public string DeleteCompany(ProthistanModel obj)
         {
            string strsubFroup = "",strSQL="";
                 using (SqlConnection gcnMain = new SqlConnection(connectionString))
@@ -759,7 +772,7 @@ namespace TMS.Repository
                     myTrans = gcnMain.BeginTransaction();
                     cmdInsert.Connection = gcnMain;
                     cmdInsert.Transaction = myTrans;
-                    strSQL = "DELETE FROM  COMPANY_NAME WHERE SERIAL_NO=" + obj.Id + " ";
+                    strSQL = "DELETE FROM  COMPANY_NAME WHERE SERIAL_NO=" + obj.strPROTHISTAN_POST_CODE + " ";
                     cmdInsert.CommandText = strSQL;
                     cmdInsert.ExecuteNonQuery();
 

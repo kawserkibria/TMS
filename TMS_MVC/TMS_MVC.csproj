@@ -138,7 +138,7 @@
     <Compile Include="Models\BranchEntry.cs" />
     <Compile Include="Models\ButtonName.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\CompanyEntry.cs" />
+    <Compile Include="Models\ProthistanModel.cs" />
     <Compile Include="Models\DressSetup.cs" />
     <Compile Include="Models\jsTree3Node.cs" />
     <Compile Include="Models\LogIn.cs" />

@@ -21,7 +21,7 @@ namespace Jagoron.Web.Controllers.Accounts
             return View("~/Views/TMS/BranchConfigList.cshtml");
         }
 
-        public ActionResult mEMPSave(CompanyEntry objEmployee)
+        public ActionResult mEMPSave(ProthistanModel objEmployee)
         {
             var byts = new byte[0];
             if ((objEmployee.Picture != null) && (objEmployee.Picture.ContentLength > 0))

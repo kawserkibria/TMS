@@ -1,40 +1,78 @@
 ﻿@{
-    ViewBag.Title = "AccGroup";
+    ViewBag.Title = "DirectorInformationdddddd";
     ViewBag.Header = "Student Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link href="~/build/css/page.css" rel="stylesheet" />
+
+<div class="row">
+
+    <div class="col-12">
+
+        <div class="row">
+            <h6 style="color:#00ff90">পরিচালকের প্রোফাইল</h6>
+            <div class=" col-12 col-sm-12 Personal_Info">
+                <div class="row">
+                    <div class=" col-3 ">
+                        <div class="Director"><label> পরিচালকের নাম </label></div>
+                        <div class="Director"><label> পজিশন </label></div>
+                        <div class="Director"><label> পিতার নাম </label></div>
+                        <div class="Director"><label> মোবাইল </label></div>
+                        <div class="Director"><label> ইমেইল </label></div>
+                        <div class="Director"><label> ঠিকানা  </label></div>
+                    </div>
+                    <div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>:</label></div>
+                        <div class="Director_Label"><label>: </label></div>
+                    </div>
+                    <div class=" col-5 ">
+                        <div class="row  Info_Lbl "><label id="pname"></label></div>
+                        <div class="row Info_Lbl"><label id="pposition"> </label></div>
+                        <div class="row Info_Lbl"><label id="pfatherName"></label></div>
+                        <div class="row Info_Lbl"><label id="pMobile"></label></div>
+                        <div class="row Info_Lbl"><label id="pEmail"></label></div>
+                        <div class="row Info_Lbl"><label id="pAddress"></label></div>
+                    </div>
+                    <div>
+                        <div>
+                            <img style="height: 224px; width: 224px;" id="pid" src="~/images/american-express.png" class="rounded-circle" />
+                        </div>
+                        @*<div style="padding-left:20px"><button style="padding-top:5px;padding-left:20px">পরিবর্তন করতে ক্লিক করুন</button></div>*@
+                        <button title="Add Item" style="background-color: #7595b5;  margin: 2px; text-transform: capitalize; "
+                                id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#BranchConfig" onclick="clearFromData(); showdata();">
+                            <i class="fa fa-pencil-square-o"></i>&nbsp;পরিবর্তন করতে ক্লিক করুন
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <style type="text/css">
     .reqError {
         color: #ff0000; /*Red Color*/
         font-weight: bold;
     }
 </style>
-@* ***************Header *@
-<div class="container-fluid">
-    <div class="panel panel-danger">
-        <h4 class="panel-heading" style="text-align: center; color: white; text-decoration: underline; background-color: #146fee">আপনার প্রতিষ্ঠানের তথ্য</h4>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="btn-group">
-                <button title="Add Item" style="margin: 2px; text-transform: capitalize;" id="btnadd" class="btn btn-success " data-toggle="modal" data-target="#CompanyConfig" onclick="clearFromData();"> <i class="fa fa-plus-circle"></i>&nbsp;অ্যাড নিউ</button>
-                @*<button title="Refresh" style="margin: 2px; text-transform: capitalize;" class="btn btn-success" id="btnrefresh" onclick="refreshformdata();"> <i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
-            </div>
 
-        </div>
-    </div><br />
-</div>
-@* ***************End Header *@
+
 
 <div class="table-responsive">
     <table id="datatable4" class="table-bordered display" style="width:100%"></table>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="CompanyConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="BranchConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="left: 0%" role="document">
         <div class="modal-content">
 
             <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
-                <h5 style="text-align: center; text-decoration: underline;">Branch Configuration</h5>
+                <h5 style="text-align: center; text-decoration: underline;">পরিচালকের প্রোফাইল</h5>
 
 
                 <button type="button" id="btnCancel"
@@ -46,75 +84,112 @@
 
             </div>
             <div class="modal-body">
+
+                @*@Html.Partial("SalesOrderNew", Model.Count == 0 ? new Jagoron.Web.Models.SalesOrder() : Model.FirstOrDefault())*@
                 <div class="row">
 
                     <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div style="margin-left: 10px;">
-                                <label>কোম্পানীর নাম:</label><span id="reqBranchName" class="reqError"></span><br />
-                            </div>
-
-                            <div class="col-sm-12">
-                                <input class="form-control" name="brandName" id="txtCompanyName" form="usrform" style="text-transform:capitalize">
-                            </div>
-                            <div style="margin-left: 10px;">
-                                <label>মোবাইল নাম্বার:</label><span id="reqBranchName" class="reqError"></span><br />
-                            </div>
-                            <div class="col-sm-12">
-                                <input class="form-control" name="brandName" id="txtMobile" form="usrform" style="text-transform:capitalize">
-                            </div>
-                            <div class="col-sm-12">
-                                <label id="Inactive">একটিভ:</label>
-                                <select id="cboInactive" class="form-control">
-                                    <option value="0">হা</option>
-                                    <option value="1">না</option>
-                                </select>
-                            </div>
-
+                    <div class="col-sm-6">
+                        <div style="margin-left: 10px;">
+                            <label>নাম:</label><span id="lblporichalokname" class="reqError"></span><br />
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtporichalokname" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>পিতা:</label><span id="lblporichalokfather" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtporichalokfather" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>জেন্ডার:</label><span id="lblporichalokGendar" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="txtporichalokGendar" name="StudentGender">
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>পজিশন:</label><span id="lblporichalokposition" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtporichalokposition" form="usrform" value="" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>সিটি:</label><span id="lblporichalokCity" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="Telephone" id="txtporichalokCity" form="usrform" style="text-transform:capitalize">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div style="margin-left: 10px;">
+                            <label>পোস্ট কোড:</label><span id="lblpostcode" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtpostcode" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>মোবাইল:</label><span id="lblmobile" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtmobile" form="usrform" style="text-transform:capitalize">
+                        </div>
 
 
-                            <label id="Inactive">Company Icon</label>
-                            <div class="col-sm-12">
 
-                                @*<img src="@ViewBag.Base64String" width=" 120" height="120" id="productImage" />*@
-                                <img src="~/images/defaultProduct.jpg" width="120" height="120" id="productImage" />
-                                <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
-
-
-                            </div>
-                            @*<div class="form-group">
-                                <label class="control-label col-md-3">Picture</label>
-                                <div class="col-md-12" style="height:150px;">
-                                    <img src="~/images/defaultProduct.jpg" width="120" height="120" id="productImage" />
-                                    <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
-                                </div>
-                            </div>*@
-
-                            @*@if (ViewBag.Base64String != null)
-                        {
-                            <hr />
-                            <img alt="" src="@ViewBag.Base64String" style="height:100px;width:100px;" />
-                        }*@
+                        <div style="margin-left: 10px;">
+                            <label>ইমেইল:</label><span id="lblemail" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="emailaddress" id="txtemail" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>ঠিকানা:</label><span id="lbladdress" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="addres" id="txtaddress" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>ফেইসবুক:</label><span id="lblfacebook" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="nFacebook" id="txtFacebook" form="usrform" style="text-transform:capitalize">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label>জন্ম তারিখ:</label><span id="lblfacebook" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" type="date" name="nFacebook" id="fromDateMD" form="usrform" style="text-transform:capitalize">
                         </div>
 
                     </div>
 
 
+
+
+                    <div class="container form-group">
+                        <label class="control-label col-md-3">আপনার ছবি:</label>
+                        <div class="col-md-9" style="height:150px;">
+                            <img width="120" height="120" id="productImage" />
+                            <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
+                        </div>
+                    </div>
+
                 </div>
 
+                <div class="modal-footer border-0">
+                    <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="Save"></></span>
+                    <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
+                </div>
             </div>
-            <div class="modal-footer border-0" style="text-align:center">
-                <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন"></></span>
-                <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="বাতিল করুন" onclick="clearFromData();"></></span>
-            </div>
+
         </div>
     </div>
 </div>
-
-
 @section scripts{
     <script>
 
@@ -136,18 +211,38 @@
         };
 
         var selectdataId = 0;
-        var mstrPrimaryFields = 0;
-
+        var mstrPrimaryFields = "1";
+        var fdate;
+        var today;
         var BranchID = "";
         var BranchName = "";
         $(document).ready(function () {
-            $('#btnsaveOrder').val('সেভ করুন');
-            showGrid();
+            $('#btnsaveOrder').val('Save');
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });
-       
+
+            var date = new Date();
+
+            var day = date.getDate();
+
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            fdate = year + "-" + month + "-" + "01";
+            today = year + "-" + month + "-" + day;
+            console.log('kib', fdate)
+            documentFunc();
+         
+            Edit();
+            document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
         })
+
+        function documentFunc() {
+            document.getElementById('fromDateMD').value = fdate;
+        }
         function ValidationClear() {
             var name = $('#txtbranchName').val();
             if (name.trim() != "") {
@@ -174,11 +269,11 @@
             $('#btnsaveOrder').val('Save');
         });
         function saveOrUpdates() {
-            //if (checkReqFields() == false) {
-            //    return;
-            //}
+            if (checkReqFields() == false) {
+                return;
+            }
             var btn = $('#btnsaveOrder').val();
-            if (btn == "সেভ করুন") {
+            if (btn == "Save") {
                 swal({
                     title: "Do You Want to Save?",
                     text: "",
@@ -218,7 +313,7 @@
                     }
                     else {
 
-                        Update(mstrPrimaryFields);
+                        PorichalokUpdate(mstrPrimaryFields);
                         clearFromData();
                         $('#btncen').click();
 
@@ -228,15 +323,16 @@
             }
 
         }
-        function checkVariable(variable) {
+        //function checkVariable(variable) {
 
-            if (variable == null) {
-                return "1";
-            }
-            else {
-                return "2";
-            }
-        }
+        //    if (variable == null) {
+        //        return "1";
+        //    }
+        //    else {
+        //        return "2";
+        //    }
+        //}
+        var fdate;
 
         function toTitleCase(str) {
             return str.replace(
@@ -247,19 +343,27 @@
             );
         }
         function save() {
-
             var fd = new FormData();
             var files = $('input[type="file"]')[0].files;
             for (var i = 0; i < files.length; i++) {
                 fd.append("Picture", files[i]);
             }
-            fd.append("CompanayName", $('#txtCompanyName').val());
-            fd.append("inStatus", $('#cboInactive option:selected').val());
-            fd.append("MobileNumber", $('#txtMobile').val());
+            //fdate = document.getElementById('fromDateMD').value;
+            fd.append("strPorichalokName", $('#txtporichalokname').val());
+            fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            fd.append("strPosition", $('#txtporichalokposition').val());
+            fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            fd.append("strPorichalokMobile", $('#txtmobile').val());
+            fd.append("strPorichalokEmail", $('#txtemail').val());
+            fd.append("strPorichalokAddress", $('#txtaddress').val());
+            fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
             console.log(fd);
-            $.ajax({
 
-                url: "/Company/mCompanaySave",
+            $.ajax({
+                url: "/DirectorInformation/mPorichalokSave",
                 processData: false,
                 contentType: false,
                 type: "POST",
@@ -267,7 +371,7 @@
                 data: fd,
                 success: function (result) {
 
-                    if (result == "OK") {
+                    if (result == "save") {
                         //console.log('save')
 
                         var toastMixin = Swal.mixin({
@@ -297,20 +401,28 @@
             });
 
         }
-        function Update() {
+        function PorichalokUpdate(id) {
             var fd = new FormData();
             var files = $('input[type="file"]')[0].files;
             for (var i = 0; i < files.length; i++) {
                 fd.append("Picture", files[i]);
             }
-            fd.append("CompanayName", $('#txtCompanyName').val());
-            fd.append("inStatus", $('#cboInactive option:selected').val());
-            fd.append("MobileNumber", $('#txtMobile').val());
-            fd.append("Id", $('#txtOldbranchID').val());
+            fd.append("strPorichalokID", id);
+            fd.append("strPorichalokName", $('#txtporichalokname').val());
+            fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            fd.append("strPosition", $('#txtporichalokposition').val());
+            fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            fd.append("strPorichalokMobile", $('#txtmobile').val());
+            fd.append("strPorichalokEmail", $('#txtemail').val());
+            fd.append("strPorichalokAddress", $('#txtaddress').val());
+            fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
             console.log(fd);
-            $.ajax({
 
-                url: "/Company/mCompanayUpdate",
+            $.ajax({
+                url: "/DirectorInformation/mPorichalokUpdate",
                 processData: false,
                 contentType: false,
                 type: "POST",
@@ -318,7 +430,7 @@
                 data: fd,
                 success: function (result) {
 
-                    if (result == "OK") {
+                    if (result == "save") {
                         //console.log('save')
 
                         var toastMixin = Swal.mixin({
@@ -346,163 +458,111 @@
                     };
                 }
             });
-
         }
-        function showGrid() {
+        function Edit() {
 
-            detailsList = [];
-            table = $('#datatable4').DataTable({
-                "bDestroy": true,
-                "select": true,
-                //"gridlines": true,
-                "ajax": {
-                    "url": "/Company/mFillShowGrid",
-                    "type": "POST",
-                    "datatype": "json",
+            var empObj = {
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
+            };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    console.log('data', data.strPorichalokGendar)
+                    if (data.Data != "") {
 
-                    "dataSrc": function (response) {
-
-                        detailsList = response;
-                        response.draw = response.draw;
-                        response.recordsTotal = response.recordsTotal;
-                        response.recordsFiltered = response.recordsFiltered;
-                        //console.log('request.responseText', response);
-
-                        return response;
+                        $('#pname').text(data.strPorichalokName);
+                        $('#pposition').text(data.strPosition);
+                        $('#pfatherName').text(data.strPorichalokFathersName);
+                        $('#pMobile').text(data.strPorichalokMobile);
+                        $('#pEmail').text(data.strPorichalokEmail);
+                        $('#pAddress').text(data.strPorichalokAddress);
+                        var picString = data.Data;
+                        var image = new Image();
+                        var src = "data:image/jpeg;base64," + picString;
+                        document.getElementById('pid').src = src;
+                    }
+                    else {
+                        var logo = document.getElementById('sologo');
+                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
                     }
 
-                },
-
-                //"order": [[1, 'Asc']],
-                "columns": [
-
-
-                      {
-                          title: 'SL',
-                          render: function (
-                              data,
-                              type,
-                              row,
-                              meta
-                          ) {
-                              return '<span>' + (meta.row + 1) + '</span>';
-                          },
-                      },
-
-                        {
-                            title: 'Company ID',
-                            data: 'CompanayID',
-                            name: 'Branch ID',
-                            visible: false,
-                        },
-                         {
-                             title: 'কোম্পানীর নাম',
-                             data: 'CompanayName',
-                             name: 'Branch ID',
-                         },
-                               {
-                                   title: 'মোবাইল নাম্বার',
-                                   data: 'MobileNumber',
-                                   name: 'Branch ID',
-                               },
-
-                            {
-                                title: 'একটিভ',
-                                data: 'inStatus',
-                                name: 'Branch ID',
-                            },
-                             {
-                                 "data": "inStatus", "autowidth": true,
-                                 "render": function (inStatus) {
-                                     if (inStatus == 1) {
-                                         return "In Active";
-                                     }
-                                     else {
-                                         return "Active";
-                                     }
-
-                                 }
-                             },
-
-                              {
-                                  'data': 'Data',
-                                  'sortable': false,
-                                  'searchable': false,
-                                  'render': function (Data) {
-                                      if (!Data) {
-                                          return 'N/A';
-                                      } else {
-                                          var img = 'data:image/png;base64,' + Data;
-                                          return '<img src="' + img + '" height="50px" width="50px" />';
-                                      }
-                                  }
-                              },
-
-                                 {
-                                     title: 'Edit',
-
-                                     render: function (data, type, row) {
-                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#CompanyConfig">   <i class="fa fa-pencil"></i></button>';
-                                     }
-                                 },
-                                  {
-                                      title: 'Delete',
-                                      render: function (data, type, row) {
-                                          return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
-                                      }
-                                  },
-
-
-                ],
-
-                "responsive": true,
-                "rowCallback": function (row, data) {
-                    var rowdata = data;
-
-                    $(row).find(".sales-sloat-ak").click(function () {
-                        selectdata = data;
-                        //console.log('hello edit dddeeeee', selectdata);
-                        //saveorupdatebtntype =1;
-                        edit(selectdata);
-
-                    });
-                    $(row).find(".delete-sloat-ak").click(function () {
-                        selectdata = data;
-                        deleteCompany(selectdata);
-
-                    });
-                    $(row).find(".print-sloat-ak").click(function () {
-                        selectdata = data;
-                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
-
-                    });
-
                 }
-
             });
 
         }
-        function edit(data) {
-            $('#btnsaveOrder').val('আপডেট করুন ');
-            $('#txtOldbranchID').val(data.CompanayID);
-            $('#txtCompanyName').val(data.CompanayName);
-            $("#txtMobile").val(data.MobileNumber);
-            $('#cboInactive').val(data.inStatus).trigger('change');
-            var img = 'data:image/png;base64,' + data.Data;
+        function showdata() {
 
-            $('#productImage').attr('src', img);
+
             var empObj = {
-                Id: (data.CompanayID)
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
             };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
 
-   
-    
+                    if (data.Data != "") {
+                        $('#txtporichalokname').val(data.strPorichalokName);
+                        $('#txtporichalokfather').val(data.strPorichalokFathersName);
+                        if (data.strPorichalokGendar == "1") {
+                            $('#txtporichalokGendar').val('1');
+                        }
+                        else {
+                            $('#txtporichalokGendar').val('2');
+                        }
+                        $('#txtporichalokposition').val(data.strPosition);
+                        $('#txtaddress').val(data.strPorichalokAddress);
+                        $('#txtporichalokCity').val(data.strPorichalokFathersName);
+                        $('#txtpostcode').val(data.strPorichalokFathersName);
+                        $('#txtmobile').val(data.strPorichalokMobile);
+                        $('#txtFacebook').val(data.strPorichalokFathersName);
+                        $('#txtemail').val(data.strPorichalokFathersName);
+                        strSelectdate = data.strPorichalokDateOfBorth;
+                        setInputDateEdit();
+                        var picString = data.Data;
+                        var image = new Image();
+                        var src = "data:image/jpeg;base64," + picString;
+                        document.getElementById('productImage').src = src;
+
+
+                    }
+                    else {
+                        var logo = document.getElementById('sologo');
+                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
+                    }
+
+                }
+            });
+
+            $('#btnsaveOrder').val('Update');
+
+            $('#txtporichalokname').val($('#pname').val());
         }
 
-        function deleteCompany(selectdata) {
+        var strSelectdate = "";
+        function setInputDateEdit() {
+
+            var now = new Date(strSelectdate);
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (day) + "-" + (month);
+            $('#fromDateMD').val(today);
+        };
+
+        function deleteBranch(selectdata) {
 
             var empObj = {
-                Id: (selectdata.Id),
+                BranchID: (selectdata.BranchID),
+                BranchName: (selectdata.BranchName),
             };
             //console.log('hello ', empObj);
             swal({
@@ -520,7 +580,7 @@
                 }
                 else {
                     $.ajax({
-                        url: "/Company/DeleteCompany",
+                        url: "/BranchConfig/DeleteBranchInfo",
                         type: "POST",
                         data: JSON.stringify(empObj),
                         contentType: "application/json;charset=utf-8",
@@ -549,10 +609,10 @@
         function checkReqFields() {
             var returnValue;
 
-            var name = document.getElementById("txtbranchName").value;
+            var name = document.getElementById("txtporichalokname").value;
             returnValue = true;
             if (name.trim() == "") {
-                document.getElementById("reqBranchName").innerHTML = " * Name is required.";
+                document.getElementById("txtporichalokname").innerHTML = " * Name is required.";
                 returnValue = false;
             }
             return returnValue;
@@ -563,28 +623,30 @@
         }
         function clearFromData() {
 
-            $('#btnsaveOrder').val('সেভ করুন');
+            $('#btnsaveOrder').val('Save');
+            selectdataId = 0;
+            $('#btnBrowsePic').val('')
+            document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
+            $('#txtGroupName').val('')
+            $("#cboUnder").prop("selectedIndex", '0').val();
+            $("#cboNature").prop("selectedIndex", '0').val();
+            $("#cbocashflow").prop("selectedIndex", '0').val();
+
+            //document.getElementById("reqBranchName").innerHTML = "";
             $('#txtOldbranchID').val('');
-            $('#txtCompanyName').val('');
-            $("#txtMobile").val('');
-            $('#cboInactive').val("Active").trigger('change');
-            $('#productImage').attr('src', '');
-            //$('#productImage').length();
-            //$("#productImage").replaceWith($("#productImage").val('').clone(true));
+            $('#txtbranchName').val('');
+            $("#txtAddress1").val('');
+            $('#txtAddress2').val('');
+            $("#txtCountry").val('Bangladesh');
+            $('#txtTelephone').val('');
+            $("#txtFax").val('');
+            $('#txtlocation').val('');
+            $("#cbodefaultBrach").prop("selectedIndex", '0').val();
+            $("#cboInactive").prop("selectedIndex", '0').val();
+            $('#txtComments').val('');
 
         }
 
     </script>
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
