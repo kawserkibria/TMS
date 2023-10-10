@@ -131,6 +131,7 @@
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\TreeController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -6901,6 +6902,7 @@
     <Content Include="Views\DirectorInformation\DirectorInformation.cshtml" />
     <Content Include="Views\Customer\Customerview.cshtml" />
     <Content Include="Views\DressEntry\DressEntry.cshtml" />
+    <Content Include="Views\UserInfo\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

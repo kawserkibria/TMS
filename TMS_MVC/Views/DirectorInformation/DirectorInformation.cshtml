@@ -508,43 +508,43 @@
                 dataType: "json",
                 success: function (data) {
                   
-                    if (data.Data != "") {
-                        //console.log("kibria",Date);
-                        //$('#txtporichalokname').val(data.strPorichalokName);
-                        //$('#txtporichalokfather').val(data.strPorichalokFathersName);
-                        //if (data.strPorichalokGendar == "1") {
-                        //    $('#txtporichalokGendar').val('1');
-                        //}
-                        //else {
-                        //    $('#txtporichalokGendar').val('2');
-                        //}
-                        //$('#txtporichalokposition').val(data.strPosition);
-                        //$('#txtaddress').val(data.strPorichalokAddress);
-                        //$('#txtporichalokCity').val(data.strPorichalokFathersName);
-                        //$('#txtpostcode').val(data.strPorichalokFathersName);
-                        //$('#txtmobile').val(data.strPorichalokMobile);
-                        //$('#txtFacebook').val(data.strPorichalokFathersName);
-                        //$('#txtemail').val(data.strPorichalokFathersName);
-                        //strSelectdate = data.strPorichalokDateOfBorth;
-                        //if (strSelectdate != "") {
-                        //    setInputDateEdit();
-                        //    var picString = data.Data;
-                        //    var image = new Image();
-                        //    var src = "data:image/jpeg;base64," + picString;
-                        //    document.getElementById('productImage').src = src;
-                        //}
+                    if (data.strPorichalokName != null) {
+                        console.log("kibria",Date);
+                        $('#txtporichalokname').val(data.strPorichalokName);
+                        $('#txtporichalokfather').val(data.strPorichalokFathersName);
+                        if (data.strPorichalokGendar == "1") {
+                            $('#txtporichalokGendar').val('1');
+                        }
+                        else {
+                            $('#txtporichalokGendar').val('2');
+                        }
+                        $('#txtporichalokposition').val(data.strPosition);
+                        $('#txtaddress').val(data.strPorichalokAddress);
+                        $('#txtporichalokCity').val(data.strPorichalokFathersName);
+                        $('#txtpostcode').val(data.strPorichalokFathersName);
+                        $('#txtmobile').val(data.strPorichalokMobile);
+                        $('#txtFacebook').val(data.strPorichalokFathersName);
+                        $('#txtemail').val(data.strPorichalokFathersName);
+                        strSelectdate = data.strPorichalokDateOfBorth;
+                        if (strSelectdate != "") {
+                            setInputDateEdit();
+                            var picString = data.Data;
+                            var image = new Image();
+                            var src = "data:image/jpeg;base64," + picString;
+                            document.getElementById('productImage').src = src;
+                        }
 
-                       
+                        $('#btnsaveOrder').val('Update');
                     }
                     else {
-                        var logo = document.getElementById('sologo');
-                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
+                        //var logo = document.getElementById('sologo');
+                        //logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
                     }
 
                 }
             });
 
-            $('#btnsaveOrder').val('Update');
+          
 
             $('#txtporichalokname').val($('#pname').val());
         }

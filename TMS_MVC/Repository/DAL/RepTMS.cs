@@ -194,7 +194,7 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    strSQL = "SELECT TOP(1) M.PORICHALOK_NAME,M.PORICHALOK_FATHER_NAME,(CASE WHEN  M.PORICHALOK_SEX=1 THEN 'Male'ELSE 'Female' END) AS GENDER, ";
+                    strSQL = "SELECT TOP(1) M.PORICHALOK_NAME,M.PORICHALOK_ID,M.PORICHALOK_FATHER_NAME,(CASE WHEN  M.PORICHALOK_SEX=1 THEN 'Male'ELSE 'Female' END) AS GENDER, ";
                     strSQL = strSQL + "M.PORICHALOK_POSITION,M.PORICHALOK_CITY,M.PORICHALOK_POST_CODE,M.PORICHALOK_MOBILE,M.PORICHALOK_EMAIL,M.PORICHALOK_ADDRESS,M.PORICHALOK_DATE_OF_BARTH,I.PORICHALOK_IMAGE,M.INSERT_DATE ";
                     strSQL = strSQL + "FROM PORICHALOK_INFO M ,PORICHALOK_INFO_IMAGE I WHERE M.PORICHALOK_ID=I.PORICHALOK_ID ";
 
@@ -203,7 +203,7 @@ namespace TMS.Repository
                     if (dr.Read())
                     {
 
-
+                        oCat.strPorichalokID = dr["PORICHALOK_ID"].ToString();
                         oCat.strPorichalokName = dr["PORICHALOK_NAME"].ToString();
                         oCat.strPosition = dr["PORICHALOK_POSITION"].ToString();
                         oCat.strPorichalokFathersName = dr["PORICHALOK_FATHER_NAME"].ToString();
