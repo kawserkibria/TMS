@@ -57,12 +57,23 @@
                     <div class="col-md-12">
                         <div class="row">
                      
-                          
+                            <div style="margin-left: 10px;">
+                                <label>ব্যবহারকারীর নাম:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtUserName" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <label>পাসওয়ার্ড:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtPassword" form="usrform" style="text-transform:capitalize">
+                            </div>
                                 <div style="margin-left: 10px;">
                                     <label>মোবাইল নাম্বার 3:</label><span id="reqBranchName" class="reqError"></span><br />
                                 </div>
                                 <div class="col-sm-12">
-                                    <input class="form-control" name="brandName" id="txtMobile3" form="usrform" style="text-transform:capitalize">
+                                    <input class="form-control" name="brandName" id="txtmobile" form="usrform" style="text-transform:capitalize">
                                 </div>
                                 <div style="margin-left: 10px;">
                                     <label>ইমেইল এড্রেস:</label><span id="reqBranchName" class="reqError"></span><br />
@@ -76,6 +87,19 @@
                                 <div class="col-sm-12">
                                     <input class="form-control" name="brandName" id="txtFACEBOOK_ID" form="usrform" style="text-transform:capitalize">
                                 </div>
+
+                            <div style="margin-left: 10px;">
+                                <label>লাইসেন্স শুরু তারিখ :</label><span id="lblfacebook" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" type="date" name="nFacebook" id="fromDateMD" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <label>লাইসেন্স বাতিল তারিখ :</label><span id="lblfacebook" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" type="date" name="nFacebook" id="ToDateMD" form="usrform" style="text-transform:capitalize">
+                            </div>
 
                                 <div class="col-sm-12">
                                     <label id="Inactive">একটিভ:</label>
@@ -103,6 +127,13 @@
 
 @section scripts{
     <script>
+
+        var fdate;
+        var tdate;
+        function documentFunc() {
+            document.getElementById('fromDateMD').value = fdate;
+            document.getElementById('ToDateMD').value = tdate;
+        }
 
         function showimagepreview(input) {
             if (input.files && input.files[0]) {
@@ -132,7 +163,19 @@
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });
+            var date = new Date();
 
+            var day = date.getDate();
+
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear()+1;
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            fdate = year + "-" + month + "-" + "01";
+            tdate = year + "-" + month + "-" + day;
+            console.log('kib', tdate)
+            documentFunc();
         })
         function ValidationClear() {
             var name = $('#txtbranchName').val();
