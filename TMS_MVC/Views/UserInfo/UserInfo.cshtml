@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -56,7 +55,7 @@
                     <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
                     <div class="col-md-12">
                         <div class="row">
-                     
+
                             <div style="margin-left: 10px;">
                                 <label>ব্যবহারকারীর নাম:</label><span id="reqBranchName" class="reqError"></span><br />
                             </div>
@@ -69,24 +68,24 @@
                             <div class="col-sm-12">
                                 <input class="form-control" name="brandName" id="txtPassword" form="usrform" style="text-transform:capitalize">
                             </div>
-                                <div style="margin-left: 10px;">
-                                    <label>মোবাইল নাম্বার 3:</label><span id="reqBranchName" class="reqError"></span><br />
-                                </div>
-                                <div class="col-sm-12">
-                                    <input class="form-control" name="brandName" id="txtmobile" form="usrform" style="text-transform:capitalize">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <label>ইমেইল এড্রেস:</label><span id="reqBranchName" class="reqError"></span><br />
-                                </div>
-                                <div class="col-sm-12">
-                                    <input class="form-control" name="brandName" id="txtEmailAddress" form="usrform" style="text-transform:capitalize">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <label>ফেইচবুক  আইডি :</label><span id="reqBranchName" class="reqError"></span><br />
-                                </div>
-                                <div class="col-sm-12">
-                                    <input class="form-control" name="brandName" id="txtFACEBOOK_ID" form="usrform" style="text-transform:capitalize">
-                                </div>
+                            <div style="margin-left: 10px;">
+                                <label>মোবাইল নাম্বার 3:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtmobile" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <label>ইমেইল এড্রেস:</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtEmailAddress" form="usrform" style="text-transform:capitalize">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <label>ফেইচবুক  আইডি :</label><span id="reqBranchName" class="reqError"></span><br />
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="form-control" name="brandName" id="txtFACEBOOK_ID" form="usrform" style="text-transform:capitalize">
+                            </div>
 
                             <div style="margin-left: 10px;">
                                 <label>লাইসেন্স শুরু তারিখ :</label><span id="lblfacebook" class="reqError"></span><br />
@@ -101,16 +100,16 @@
                                 <input class="form-control" type="date" name="nFacebook" id="ToDateMD" form="usrform" style="text-transform:capitalize">
                             </div>
 
-                                <div class="col-sm-12">
-                                    <label id="Inactive">একটিভ:</label>
-                                    <select id="cboInactive" class="form-control">
-                                        <option value="0">হা</option>
-                                        <option value="1">না</option>
-                                    </select>
-                                </div>
-                              
-                        
-                          
+                            <div class="col-sm-12">
+                                <label id="Inactive">একটিভ:</label>
+                                <select id="cboInactive" class="form-control">
+                                    <option value="0">হা</option>
+                                    <option value="1">না</option>
+                                </select>
+                            </div>
+
+
+
                         </div>
                         <div class="modal-footer border-0" style="text-align:center">
                             <span><input type="button" class="btn btn-primary" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন"></></span>
@@ -119,7 +118,7 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </div>
 </div>
@@ -163,20 +162,24 @@
             $("#BranchConfig").on('shown.bs.modal', function () {
                 $(this).find('#txtbranchName').focus();
             });
+            getDate();
+            documentFunc();
+        })
+        function getDate() {
             var date = new Date();
 
             var day = date.getDate();
 
             var month = date.getMonth() + 1;
-            var year = date.getFullYear()+1;
+            var year = date.getFullYear() + 1;
 
             if (month < 10) month = "0" + month;
             if (day < 10) day = "0" + day;
             fdate = year + "-" + month + "-" + "01";
             tdate = year + "-" + month + "-" + day;
             console.log('kib', tdate)
-            documentFunc();
-        })
+        }
+
         function ValidationClear() {
             var name = $('#txtbranchName').val();
             if (name.trim() != "") {
@@ -278,19 +281,19 @@
         function save() {
 
             var empObj = {
-                strBranchName: $("#txtBranchName").val(),
-                strBranch_Address: $("#txtAddress").val(),
-                strMOBILE_NUMBER1: $("#txtMobile1").val(),
-                strMOBILE_NUMBER2: $("#txtMobile2").val(),
-                strMOBILE_NUMBER3: $("#txtMobile3").val(),
-                strEmail: $("#txtEmailAddress").val(),
-                strfacebookID: $("#txtFACEBOOK_ID").val(),
-                intBranchStatus: $('#cboInactive option:selected').val(),
+                strUSER_NAME: $("#txtUserName").val(),
+                strUSER_PASSWORD: $("#txtPassword").val(),
+                strMOBILE_NUMBER: $("#txtmobile").val(),
+                strEMAIL_ADDRES: $("#txtEmailAddress").val(),
+                strFACEBOOK_ID: $("#txtFACEBOOK_ID").val(),
+                strLICENCE_START_DATE: $("#fromDateMD").val(),
+                strLICENCE_END_DATE: $("#ToDateMD").val(),
+                strUSER_STATUS: $('#cboInactive option:selected').val(),
             };
             console.log(empObj);
             $.ajax({
 
-                url: "/BranchEntry/mBranchSave",
+                url: "/UserInfo/SaveUserInfo",
                 type: "POST",
                 data: JSON.stringify(empObj),
                 contentType: "application/json;charset=utf-8",
@@ -330,20 +333,20 @@
         }
         function Update() {
             var empObj = {
-                intBranchID: $("#txtOldbranchID").val(),
-                strBranchName: $("#txtBranchName").val(),
-                strBranch_Address: $("#txtAddress").val(),
-                strMOBILE_NUMBER1: $("#txtMobile1").val(),
-                strMOBILE_NUMBER2: $("#txtMobile2").val(),
-                strMOBILE_NUMBER3: $("#txtMobile3").val(),
-                strEmail: $("#txtEmailAddress").val(),
-                strfacebookID: $("#txtFACEBOOK_ID").val(),
-                intBranchStatus: $('#cboInactive option:selected').val(),
+                intOldUSER_ID: $("#txtOldbranchID").val(),
+                strUSER_NAME: $("#txtUserName").val(),
+                strUSER_PASSWORD: $("#txtPassword").val(),
+                strMOBILE_NUMBER: $("#txtmobile").val(),
+                strEMAIL_ADDRES: $("#txtEmailAddress").val(),
+                strFACEBOOK_ID: $("#txtFACEBOOK_ID").val(),
+                strLICENCE_START_DATE: $("#fromDateMD").val(),
+                strLICENCE_END_DATE: $("#ToDateMD").val(),
+                strUSER_STATUS: $('#cboInactive option:selected').val(),
             };
             console.log(empObj);
             $.ajax({
 
-                url: "/BranchEntry/mUpdateBranchInfo",
+                url: "/UserInfo/UpdateUserInfo",
                 type: "POST",
                 data: JSON.stringify(empObj),
                 contentType: "application/json;charset=utf-8",
@@ -389,7 +392,7 @@
                 "select": true,
                 //"gridlines": true,
                 "ajax": {
-                    "url": "/BranchEntry/mFillShowBranchName",
+                    "url": "/UserInfo/mFillShowGrid",
                     "type": "POST",
                     "datatype": "json",
 
@@ -420,56 +423,56 @@
                       },
 
                         {
-                            title: 'Company ID',
-                            data: 'intCompanayID',
+                            title: 'ব্যবহারকারী Status',
+                            data: 'intUSER_STATUS',
                             name: 'Branch ID',
                             visible: false,
                         },
                         {
-                            title: 'Branch ID',
-                            data: 'intBranchID',
+                            title: 'ব্যবহারকারী আইডি',
+                            data: 'intUSER_ID',
                             name: 'Branch ID',
                             visible: false,
                         },
                         {
-                            title: 'ব্রাঞ্চের নাম',
-                            data: 'strBranchName',
+                            title: 'ব্যবহারকারীর নাম',
+                            data: 'strUSER_NAME',
                             name: 'Branch ID',
                         },
                         {
-                            title: 'এড্রেস',
-                            data: 'strBranch_Address',
+                            title: 'পাসওয়ার্ড',
+                            data: 'strUSER_PASSWORD',
                             name: 'Branch ID',
                         },
                         {
-                            title: 'মোবাইল নাম্বার 1',
-                            data: 'strMOBILE_NUMBER1',
+                            title: 'মোবাইল নাম্বার ',
+                            data: 'strMOBILE_NUMBER',
                             name: 'Branch ID',
                         },
                         {
-                            title: 'মোবাইল নাম্বার 2',
-                            data: 'strMOBILE_NUMBER2',
-                            name: 'Branch ID',
-                        },
-                        {
-                            title: 'মোবাইল নাম্বার 3',
-                            data: 'strMOBILE_NUMBER3',
-                            name: 'Branch ID',
-                        },
-                        {
-                            title: 'ইমেইল এড্রেস:',
-                            data: 'strEmail',
+                            title: 'ইমেইল এড্রেস',
+                            data: 'strEMAIL_ADDRES',
                             name: 'Branch ID',
                         },
                         {
                             title: 'ফেইচবুক  আইডি',
-                            data: 'strfacebookID',
+                            data: 'strFACEBOOK_ID',
+                            name: 'Branch ID',
+                        },
+                        {
+                            title: 'স্ট্রাট তারিখ:',
+                            data: 'strLICENCE_START_DATE',
+                            name: 'Branch ID',
+                        },
+                        {
+                            title: 'শেষ তারিখ',
+                            data: 'strLICENCE_END_DATE',
                             name: 'Branch ID',
                         },
 
                         {
                             title: 'একটিভ:',
-                            data: 'intBranchStatus',
+                            data: 'strUSER_STATUS',
                             name: 'Branch ID',
                         },
                         {
@@ -490,7 +493,7 @@
                                      title: 'Edit',
 
                                      render: function (data, type, row) {
-                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#CompanyConfig">   <i class="fa fa-pencil"></i></button>';
+                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#UserConfig">   <i class="fa fa-pencil"></i></button>';
                                      }
                                  },
                                   {
@@ -531,16 +534,17 @@
 
         }
         function edit(data) {
+
             $('#btnsaveOrder').val('আপডেট করুন ');
-            $('#txtOldbranchID').val(data.intBranchID);
-            $('#txtBranchName').val(data.strBranchName);
-            $("#txtAddress").val(data.strBranch_Address);
-            $("#txtMobile1").val(data.strMOBILE_NUMBER1);
-            $("#txtMobile2").val(data.strMOBILE_NUMBER2);
-            $("#txtMobile3").val(data.strMOBILE_NUMBER3);
-            $("#txtEmailAddress").val(data.strEmail);
-            $("#txtFACEBOOK_ID").val(data.strfacebookID);
-            $('#cboInactive').val(data.intBranchStatus).trigger('change');
+            $('#txtOldbranchID').val(data.intUSER_ID);
+            $('#txtUserName').val(data.strUSER_NAME);
+            $("#txtPassword").val(data.strUSER_PASSWORD);
+            $("#txtmobile").val(data.strMOBILE_NUMBER);
+            $("#txtEmailAddress").val(data.strEMAIL_ADDRES);
+            $("#txtFACEBOOK_ID").val(data.strFACEBOOK_ID);
+            $("#fromDateMD").val(data.strLICENCE_START_DATE);
+            $("#ToDateMD").val(data.strLICENCE_END_DATE);
+            $('#cboInactive').val(data.intUSER_STATUS).trigger('change');
 
         }
 
@@ -610,13 +614,13 @@
 
             $('#btnsaveOrder').val('সেভ করুন');
             $('#txtOldbranchID').val('');
-            $('#txtBranchName').val('');
-            $("#txtAddress").val('');
-            $("#txtMobile1").val('');
-            $("#txtMobile2").val('');
-            $("#txtMobile3").val('');
+            $('#txtUserName').val('');
+            $("#txtPassword").val('');
+            $("#txtmobile").val('');
             $("#txtEmailAddress").val('');
             $("#txtFACEBOOK_ID").val('');
+            getDate();
+            documentFunc();
             $('#cboInactive').val('').trigger('change');
 
 

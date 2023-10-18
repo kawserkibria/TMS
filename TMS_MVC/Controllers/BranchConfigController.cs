@@ -26,17 +26,12 @@ namespace Jagoron.Web.Controllers.Accounts
             var byts = new byte[0];
             if ((objEmployee.Picture != null) && (objEmployee.Picture.ContentLength > 0))
             {
-
                 var pic = objEmployee.Picture.InputStream;
-
                 MemoryStream ms = new MemoryStream();
                 pic.CopyTo(ms);
                 byts = ms.ToArray();
                 ms.Dispose();
             }
-
-
-
 
             //string oogrp = _leaveAppService.mInsertEmployeeImage("0001", "", byts);
             return new JsonResult() { Data = "", JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };

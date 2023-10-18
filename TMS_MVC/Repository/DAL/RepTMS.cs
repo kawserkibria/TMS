@@ -15,7 +15,184 @@ namespace TMS.Repository
     {
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
+        #region "User Entry"
+        public string InsertUserInfo(UserInfo obj)
+        {
+            string strSQL = "";
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
 
+                gcnMain.Open();
+
+                int intUSER_ID = 0;
+
+                SqlDataReader dr;
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+                strSQL = "SELECT (case when  MAX(USER_ID) is null then 0 else MAX(USER_ID) end) +1 as USER_ID FROM USER_INFO ";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+                dr = cmdInsert.ExecuteReader();
+                if (dr.Read())
+                {
+                    intUSER_ID = Convert.ToInt32(dr["USER_ID"].ToString());
+                }
+                dr.Close();
+
+
+                strSQL = "INSERT INTO USER_INFO";
+                strSQL = strSQL + "(USER_ID, USER_NAME, USER_PASSWORD,MOBILE_NUMBER, EMAIL_ADDRES, FACEBOOK_ID, LICENCE_START_DATE, LICENCE_END_DATE, USER_STATUS)";
+                strSQL = strSQL + "VALUES(";
+                strSQL = strSQL + "" + intUSER_ID + ",'" + obj.strUSER_NAME + "','" + obj.strUSER_PASSWORD + "',";
+                strSQL = strSQL + "'" + obj.strMOBILE_NUMBER + "','" + obj.strEMAIL_ADDRES + "','" + obj.strFACEBOOK_ID + "' ";
+                strSQL = strSQL + ",'" + obj.strLICENCE_START_DATE + "','" + obj.strLICENCE_END_DATE + "' ";
+                strSQL = strSQL + ",'" + obj.strUSER_STATUS + "' ";
+                strSQL = strSQL + ")";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+
+
+        }
+        public string UpdateUserInfo(UserInfo obj)
+        {
+            string strSQL = "";
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+                int intBranchID = 0;
+
+                SqlDataReader dr;
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+                strSQL = "UPDATE USER_INFO SET USER_NAME = '" + obj.strUSER_NAME + "',USER_PASSWORD = '" + obj.strUSER_PASSWORD + "' ,MOBILE_NUMBER = '" + obj.strMOBILE_NUMBER + "' ,EMAIL_ADDRES = '" + obj.strEMAIL_ADDRES + "',  ";
+                strSQL = strSQL + "FACEBOOK_ID = '" + obj.strFACEBOOK_ID + "',LICENCE_START_DATE = '" + obj.strLICENCE_START_DATE + "', ";
+                strSQL = strSQL + " LICENCE_END_DATE = '" + obj.strLICENCE_END_DATE + "',USER_STATUS = " + obj.intUSER_STATUS + "  ";
+                strSQL = strSQL + "WHERE USER_ID = " + obj.intOldUSER_ID + "  ";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+        }
+        public List<UserInfo> UserInfoList(UserInfo obj)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+
+
+            List<UserInfo> ooCategory = new List<UserInfo>();
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "SELECT * from USER_INFO";
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        UserInfo oCat = new UserInfo();
+                        oCat.intUSER_ID = Convert.ToInt32(dr["USER_ID"].ToString());
+                        oCat.strUSER_NAME = dr["USER_NAME"].ToString();
+                        oCat.strUSER_PASSWORD = dr["USER_PASSWORD"].ToString();
+                        oCat.strMOBILE_NUMBER = dr["MOBILE_NUMBER"].ToString();
+                        oCat.strEMAIL_ADDRES = dr["EMAIL_ADDRES"].ToString();
+                        oCat.strFACEBOOK_ID = dr["FACEBOOK_ID"].ToString();
+                        oCat.strLICENCE_START_DATE = dr["LICENCE_START_DATE"].ToString();
+                        oCat.strLICENCE_END_DATE = dr["LICENCE_END_DATE"].ToString();
+                        oCat.intUSER_STATUS = Convert.ToInt32(dr["USER_STATUS"]);
+                        if ( Convert.ToInt32(dr["USER_STATUS"])==1)
+                        {
+                            oCat.strUSER_STATUS = "NO";
+                        }
+                        else
+                        {
+                            oCat.strUSER_STATUS = "Yes";
+                        }
+                        ooCategory.Add(oCat);
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+                    return ooCategory;
+                }
+                catch (Exception ex)
+                {
+                    return ooCategory;
+                }
+            }
+
+        }
+        //public string DeleteBranch(BranchEntry obj)
+        //{
+        //    string strsubFroup = "", strSQL = "";
+        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
+        //    {
+        //        if (gcnMain.State == ConnectionState.Open)
+        //        {
+        //            gcnMain.Close();
+        //        }
+
+        //        try
+        //        {
+        //            gcnMain.Open();
+
+        //            SqlCommand cmdInsert = new SqlCommand();
+        //            SqlTransaction myTrans;
+        //            SqlDataReader dr;
+        //            myTrans = gcnMain.BeginTransaction();
+        //            cmdInsert.Connection = gcnMain;
+        //            cmdInsert.Transaction = myTrans;
+        //            strSQL = "DELETE FROM  BRANCH_NAME WHERE BRANCH_ID = " + obj.intBranchID + " AND COMPANY_ID= " + obj.intCompanayID + " ";
+        //            cmdInsert.CommandText = strSQL;
+        //            cmdInsert.ExecuteNonQuery();
+        //            cmdInsert.Transaction.Commit();
+
+
+        //            gcnMain.Dispose();
+        //            return "OK";
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return "ex";
+        //        }
+        //    }
+
+        //}
+        #endregion
         #region "Porichalok Info"
         public string mInsertPorichalok(Porichalok obj)
         {

@@ -149,6 +149,7 @@
     <Compile Include="Models\Porichalok.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Treenode.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DAL\RepTMS.cs" />
     <Compile Include="Voucher.cs" />
