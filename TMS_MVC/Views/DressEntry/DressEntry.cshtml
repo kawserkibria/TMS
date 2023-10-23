@@ -31,12 +31,12 @@
     <table id="datatable4" class="table-bordered display" style="width:100%"></table>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="BranchConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
+<div class="modal fade bd-example-modal-sm" id="BranchConfig" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm" style="left: 0%" role="document">
         <div class="modal-content">
 
             <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
-                <h5 style="text-align: center; text-decoration: underline;">Branch Configuration</h5>
+                <h5 style="text-align: center; text-decoration: underline;">পোষাক যুক্ত করুন</h5>
 
 
                 <button type="button" id="btnCancel"
@@ -53,79 +53,43 @@
                 <div class="row">
 
                     <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
+                     
                         <div style="margin-left: 10px;">
-                            <label>Branch Name:</label><span id="reqBranchName" class="reqError"></span><br />
+                            <label>পোষাকের নাম:</label><span id="reqAddress1" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtbranchName" form="usrform" style="text-transform:capitalize" onkeyup="ChangeLocation(); ValidationClear();">
+                            <input class="form-control" name="brandName" id="txtDressName" form="usrform" style="text-transform:capitalize">
                         </div>
-                        <div style="margin-left: 10px;">
-                            <label>Address1:</label><span id="reqAddress1" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtAddress1" form="usrform" style="text-transform:capitalize">
-                        </div>
-                        <div style="margin-left: 10px;">
-                            <label>Address2:</label><span id="reqAddress2" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtAddress2" form="usrform" style="text-transform:capitalize">
-                        </div>
-                        <div style="margin-left: 10px;">
-                            <label>Country:</label><span id="reqCountry" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtCountry" form="usrform" value="Bangladesh" style="text-transform:capitalize">
-                        </div>
-                        <div style="margin-left: 10px;">
-                            <label>Telephone:</label><span id="reqTelephone" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="Telephone" id="txtTelephone" form="usrform" style="text-transform:capitalize">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-
-                        <div style="margin-left: 10px;">
-                            <label>Fax:</label><span id="reqFax" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtFax" form="usrform" style="text-transform:capitalize">
-                        </div>
-                        <div style="margin-left: 10px;">
-                            <label>Location:</label><span id="reqlocation" class="reqError"></span><br />
-                        </div>
-                        <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtlocation" form="usrform" readonly="readonly" style="text-transform:capitalize">
-                        </div>
-
-
+                        
                         <div class="col-sm-12">
                             <div style="margin-left: 10px;">
-                                <label>Default Branch:</label><span id="reqDefaultBranch" class="reqError"></span><br />
+                                <label>কার পোষাক:</label><span id="reqDefaultBranch" class="reqError"></span><br />
                             </div>
-                            <select id="cbodefaultBrach" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-
-                        </div>
-                        <div class="col-sm-12">
-                            <label id="Inactive">Inactive:</label>
-                            <select id="cboInactive" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                            <select id="cbodeDressFor" class="form-control">
+                                <option value="0">পুরুষ</option>
+                                <option value="1">মহিলা</option>
+                                <option value="2">বাচ্চা</option>
                             </select>
 
                         </div>
                         <div style="margin-left: 10px;">
-                            <label>Comments:</label><span id="reqCommenst" class="reqError"></span><br />
+                            <label>সিরিয়াল:</label><span id="reqSerial" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtComments" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtSerial" form="usrform" style="text-transform:capitalize">
                         </div>
+
+                        <div class="container form-group">
+                            <label class="control-label col-md-8">পোষাকের ছবি:</label>
+                            <div class="col-md-12" style="height:150px;">
+                                <img width="120" height="120" id="productImage" />
+                                <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
+                            </div>
+                        </div>
+                       
                     </div>
+              
 
                 </div>
 
@@ -171,11 +135,11 @@
             });
         })
         function ValidationClear() {
-            var name = $('#txtbranchName').val();
-            if (name.trim() != "") {
-                document.getElementById("reqBranchName").innerHTML = "";
+            //var name = $('#txtbranchName').val();
+            //if (name.trim() != "") {
+            //    document.getElementById("reqBranchName").innerHTML = "";
 
-            }
+            //}
 
         }
         function ChangeLocation() {
@@ -196,9 +160,9 @@
             $('#btnsaveOrder').val('Save');
         });
         function saveOrUpdates() {
-            if (checkReqFields() == false) {
-                return;
-            }
+            //if (checkReqFields() == false) {
+            //    return;
+            //}
             var btn = $('#btnsaveOrder').val();
             if (btn == "Save") {
                 swal({
@@ -216,7 +180,7 @@
                     else {
                         save();
                         clearFromData();
-                        $('#txtbranchName').focus();
+                        //$('#txtbranchName').focus();
                     }
 
                 });
@@ -268,37 +232,38 @@
               }
             );
         }
+      
+
         function save() {
-            //alert(toTitleCase($('#txtbranchName').val()));
             var fd = new FormData();
             var files = $('input[type="file"]')[0].files;
             for (var i = 0; i < files.length; i++) {
                 fd.append("Picture", files[i]);
             }
-            fd.append("Name", $('#txtEmpName').val());
-            var empObj = {
-                BranchName: toTitleCase($('#txtbranchName').val()),
-                BranchAddress1: toTitleCase($('#txtAddress1').val()),
-                BranchAddress2: toTitleCase($('#txtAddress2').val()),
-                Country: toTitleCase($('#txtCountry').val()),
-                Phone: $('#txtTelephone').val(),
-                Fax: toTitleCase($('#txtFax').val()),
-                Comments: toTitleCase($('#txtComments').val()),
-                Godown: toTitleCase($('#txtlocation').val()),
-                Status: $('#cboInactive').val(),
-                DefaultBranch: toTitleCase($('#cbodefaultBrach').val()),
-                //Status: $('#cboInactive option:selected').text(),
-                //Status: $('#cboInactive option:selected').text(),
-                //DefaultBranch: $('#cbodefaultBrach option:selected').text(),
-            };
+                fd.append("strDressName", $('#txtDressName').val());
+                fd.append("intDressFor", $('#cbodeDressFor option:selected').val());
+                fd.append("intPOSITION", $('#txtSerial').val());
+
+            //fd.append("strPorichalokName", $('#txtporichalokname').val());
+            //fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            //fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            //fd.append("strPosition", $('#txtporichalokposition').val());
+            //fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            //fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            //fd.append("strPorichalokMobile", $('#txtmobile').val());
+            //fd.append("strPorichalokEmail", $('#txtemail').val());
+            //fd.append("strPorichalokAddress", $('#txtaddress').val());
+            //fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            //fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
+            //console.log(fd);
 
             $.ajax({
-
-                url: "/BranchConfig/SaveBranchInfo",
+                url: "/DressEntry/DressSave",
+                processData: false,
+                contentType: false,
                 type: "POST",
-                data: JSON.stringify(empObj),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
+                datatype: "json",
+                data: fd,
                 success: function (result) {
 
                     if (result == "save") {
@@ -401,7 +366,7 @@
                 "select": true,
                 //"gridlines": true,
                 "ajax": {
-                    "url": "/BranchConfig/mFillShowGrid",
+                    "url": "/DressEntry/mFillShowGrid",
                     "type": "POST",
                     "datatype": "json",
 
@@ -411,7 +376,7 @@
                         response.draw = response.draw;
                         response.recordsTotal = response.recordsTotal;
                         response.recordsFiltered = response.recordsFiltered;
-                        //console.log('request.responseText', response);
+                        console.log('request.responseText', response);
 
                         return response;
                     }
@@ -433,54 +398,81 @@
                               return '<span>' + (meta.row + 1) + '</span>';
                           },
                       },
+                      //{
+                      //    title: 'স্ট্যাটাস',
+                      //    "data": "inStatus", "autowidth": true,
+                      //    "render": function (inStatus) {
+                      //        if (inStatus == 1) {
+                      //            return "না";
+                      //        }
+                      //        else {
+                      //            return "হা";
+                      //        }
 
-                        {
-                            title: 'ইডিট করুন',
-                            data: 'BranchID',
-                            name: 'Branch ID',
-                            visible: false,
-                        },
-                         {
-                             title: 'ইডিট করুন',
-                             data: 'BranchName',
-                             name: 'Branch ID',
-                         },
-                          {
-                              title: 'পোষাকের নাম',
-                              data: 'BranchAddress1',
-                              name: 'Address1',
-                          },
-                           {
-                               title: 'ছবি',
-                               data: 'BranchAddress2',
-                               name: 'Address2',
-                           },
-                            {
-                                title: 'মাপ যুক্ত করুন',
-                                data: 'Country',
-                                name: 'Country',
-                                "visible": false,
+                      //    }
+                      //},
 
-                            },
-                            {
-                                title: 'স্টাইল যুক্ত করুন',
-                                data: 'Godown',
-                                name: 'Godown',
-                                "visible": true,
+                              {
+                                  title: 'ছবি',
+                                  'data': 'Data',
+                                  'sortable': false,
+                                  'searchable': false,
+                                  'render': function (strImage) {
+                                      if (!strImage) {
+                                          return 'N/A';
+                                      } else {
+                                          var img = 'data:image/png;base64,' + strImage;
+                                          return '<img src="' + img + '" height="50px" width="50px" />';
+                                      }
+                                  }
+                              },
+                        //{
+                        //    title: 'ইডিট করুন',
+                        //    data: 'BranchID',
+                        //    name: 'Branch ID',
+                        //    visible: false,
+                        //},
+                        // {
+                        //     title: 'ইডিট করুন',
+                        //     data: 'BranchName',
+                        //     name: 'Branch ID',
+                        // },
+                        //  {
+                        //      title: 'পোষাকের নাম',
+                        //      data: 'BranchAddress1',
+                        //      name: 'Address1',
+                        //  },
+                        //   {
+                        //       title: 'ছবি',
+                        //       data: 'BranchAddress2',
+                        //       name: 'Address2',
+                        //   },
+                        //    {
+                        //        title: 'মাপ যুক্ত করুন',
+                        //        data: 'Country',
+                        //        name: 'Country',
+                        //        "visible": false,
 
-                            },
-                                {
-                                    title: 'সিরিয়াল',
-                                    data: 'Phone',
-                                    name: 'Phone',
-                                    "visible": false,
-                                },
-                                 {
-                                     title: 'ডিলিট করুন',
-                                     data: 'Fax',
-                                     name: 'Fax',
-                                     "visible": false,
-                                 },
+                        //    },
+                        //    {
+                        //        title: 'স্টাইল যুক্ত করুন',
+                        //        data: 'Godown',
+                        //        name: 'Godown',
+                        //        "visible": true,
+
+                        //    },
+                        //        {
+                        //            title: 'সিরিয়াল',
+                        //            data: 'Phone',
+                        //            name: 'Phone',
+                        //            "visible": false,
+                        //        },
+                        //         {
+                        //             title: 'ডিলিট করুন',
+                        //             data: 'Fax',
+                        //             name: 'Fax',
+                        //             "visible": false,
+                        //         },
                                  
                                  {
                                      title: 'Edit',
@@ -623,26 +615,11 @@
         function clearFromData() {
 
             $('#btnsaveOrder').val('Save');
-            selectdataId = 0;
-
-            $('#txtGroupName').val('')
-            $("#cboUnder").prop("selectedIndex", '0').val();
-            $("#cboNature").prop("selectedIndex", '0').val();
-            $("#cbocashflow").prop("selectedIndex", '0').val();
-
-            document.getElementById("reqBranchName").innerHTML = "";
-            $('#txtOldbranchID').val('');
-            $('#txtbranchName').val('');
-            $("#txtAddress1").val('');
-            $('#txtAddress2').val('');
-            $("#txtCountry").val('Bangladesh');
-            $('#txtTelephone').val('');
-            $("#txtFax").val('');
-            $('#txtlocation').val('');
-            $("#cbodefaultBrach").prop("selectedIndex", '0').val();
-            $("#cboInactive").prop("selectedIndex", '0').val();
-            $('#txtComments').val('');
-
+            $('#txtDressName').val('');
+            $('#btnBrowsePic').val('')
+            document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
+            $('#txtSerial').val('');
+            $("#cbodeDressFor").prop("selectedIndex", '0').val();
         }
 
     </script>

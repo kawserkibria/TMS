@@ -13,6 +13,253 @@ namespace TMS.Repository
 {
     public class RepTMS
     {
+        #region "Porichalok Info"
+        public string InsertDress(DressSetup obj)
+        {
+
+            SqlDataReader dr;
+            string strSQL = "";
+
+            int intDressID = 01;
+
+
+
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+
+
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+                strSQL = "SELECT (case when  MAX(DRESS_ID) is null then 0 else MAX(DRESS_ID) end) +1 as DRESS_ID FROM DRESS_INFO ";
+                cmd1.CommandText = strSQL;
+                cmd1.ExecuteNonQuery();
+
+                dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    intDressID = Convert.ToInt32(dr["DRESS_ID"].ToString());
+                }
+                dr.Close();
+
+                cmd1.CommandText = "SP_INSERT_DRESS_INFO";
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@DRESS_ID", SqlDbType.VarChar).Value = Convert.ToString(intDressID);
+                cmd1.Parameters.Add("@DRESS_NAME", SqlDbType.VarChar).Value = obj.strDressName;
+                cmd1.Parameters.Add("@DRESS_FOR", SqlDbType.Int).Value = obj.intDressFor;
+                cmd1.Parameters.Add("@DRESS_SERIAL", SqlDbType.Int).Value = obj.intPOSITION;
+                cmd1.Parameters.Add("@INSERT_BY", SqlDbType.VarChar).Value = "User";
+                cmd1.ExecuteNonQuery();
+
+                cmd2.CommandText = "SP_INSERT_DRESS_INFO_IMAGE";
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.Add("@DRESS_ID", SqlDbType.VarChar).Value = Convert.ToString(intDressID);
+                cmd2.Parameters.Add("@DRESS_IMAGE", SqlDbType.Image).Value = byts;
+                cmd2.ExecuteNonQuery();
+
+
+                trans.Commit();
+                return "save";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+        }
+
+        public string UpdateDress(DressSetup obj)
+        {
+
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+            string strSQL = "";
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+
+                //if (byts.Length > 0)
+                //{
+                //    strSQL = "DELETE FROM  PORICHALOK_INFO_IMAGE WHERE PORICHALOK_ID=" + obj.strPorichalokID + " ";
+                //    cmd1.CommandText = strSQL;
+                //    cmd1.ExecuteNonQuery();
+                //}
+
+
+
+
+                //cmd1.CommandText = "SP_UPDATE_PORICHALOK_INFO";
+                //cmd1.CommandType = CommandType.StoredProcedure;
+                //cmd1.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = Convert.ToString(obj.strPorichalokID);
+                //cmd1.Parameters.Add("@PORICHALOK_NAME", SqlDbType.VarChar).Value = obj.strPorichalokName;
+                //cmd1.Parameters.Add("@PORICHALOK_FATHER_NAME", SqlDbType.VarChar).Value = obj.strPorichalokFathersName;
+                //cmd1.Parameters.Add("@PORICHALOK_SEX", SqlDbType.VarChar).Value = obj.strPorichalokGendar;
+                //cmd1.Parameters.Add("@PORICHALOK_POSITION", SqlDbType.VarChar).Value = obj.strPosition;
+                //cmd1.Parameters.Add("@PORICHALOK_CITY", SqlDbType.VarChar).Value = obj.strPorichalokCity;
+                //cmd1.Parameters.Add("@PORICHALOK_POST_CODE", SqlDbType.VarChar).Value = obj.strPorichalokPostalCode;
+                //cmd1.Parameters.Add("@PORICHALOK_MOBILE", SqlDbType.VarChar).Value = obj.strPorichalokMobile;
+                //cmd1.Parameters.Add("@PORICHALOK_EMAIL", SqlDbType.VarChar).Value = obj.strPorichalokEmail;
+                //cmd1.Parameters.Add("@PORICHALOK_ADDRESS", SqlDbType.VarChar).Value = obj.strPorichalokAddress;
+                //cmd1.Parameters.Add("@PORICHALOK_DATE_OF_BARTH", SqlDbType.Date).Value = obj.strPorichalokDateOfBorth;
+                //cmd1.Parameters.Add("@UPDATE_BY", SqlDbType.VarChar).Value = "User";
+                //cmd1.ExecuteNonQuery();
+
+
+
+
+
+                //if (byts.Length > 0)
+                //{
+                //    cmd2.CommandText = "SP_PORICHALOK_INFO_IMAGE";
+                //    cmd2.CommandType = CommandType.StoredProcedure;
+                //    cmd2.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = obj.strPorichalokID;
+                //    cmd2.Parameters.Add("@img", SqlDbType.Image).Value = byts;
+                //    cmd2.ExecuteNonQuery();
+                //}
+
+                trans.Commit();
+                return "OK";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+
+        }
+
+        public List<DressSetup> DressList(string strDeComID)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+            List<DressSetup> ooDressList = new List<DressSetup>();
+
+ 
+
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "select * from DRESS_INFO, DRESS_INFO_IMAGE WHERE DRESS_INFO.DRESS_ID =DRESS_INFO_IMAGE.DRESS_ID";
+
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+
+                        DressSetup oCat = new DressSetup();
+                        oCat.intDressid = Convert.ToInt32( dr["DRESS_ID"].ToString());
+                        oCat.strDressName = dr["DRESS_NAME"].ToString();
+                        oCat.intDressFor =   Convert.ToInt32(dr["DRESS_FOR"].ToString());
+                        oCat.intPOSITION = Convert.ToInt32(dr["DRESS_SERIAL"].ToString());
+
+                        if (dr["DRESS_IMAGE"] != null)
+                        {
+                            oCat.strImage = Convert.ToBase64String((byte[])dr["DRESS_IMAGE"]);
+                        }
+
+                        ooDressList.Add(oCat);
+
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+                   
+                }
+                catch (Exception ex)
+                {
+
+                }
+                 return ooDressList;
+            }
+
+        }
+
+        //public string DeletePorichalok(ButtonName obj)
+        //{
+        //    string strsubFroup = "", strSQL = "";
+        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
+        //    {
+        //        if (gcnMain.State == ConnectionState.Open)
+        //        {
+        //            gcnMain.Close();
+        //        }
+
+        //        try
+        //        {
+        //            gcnMain.Open();
+
+        //            SqlCommand cmdInsert = new SqlCommand();
+        //            SqlTransaction myTrans;
+        //            SqlDataReader dr;
+        //            myTrans = gcnMain.BeginTransaction();
+        //            cmdInsert.Connection = gcnMain;
+        //            cmdInsert.Transaction = myTrans;
+        //            strSQL = "DELETE FROM  BUTTON_ICON WHERE BUTTON_ID=" + obj.intBUTTON_ID + " ";
+        //            cmdInsert.CommandText = strSQL;
+        //            cmdInsert.ExecuteNonQuery();
+
+        //            cmdInsert.Transaction.Commit();
+
+
+        //            gcnMain.Dispose();
+        //            return "OK";
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return "ex";
+        //        }
+        //    }
+
+        //}
+        #endregion
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
         #region "User Entry"
@@ -1415,7 +1662,7 @@ namespace TMS.Repository
                 {
                     DressSetup oCat = new DressSetup();
                     oCat.strDressName = "";
-                    oCat.strMESURMENT_NAME = "";
+                    //oCat.strMESURMENT_NAME = "";
                     oCat.intPOSITION = 0;
                     ooCategory.Add(oCat);
                     return ooCategory;
