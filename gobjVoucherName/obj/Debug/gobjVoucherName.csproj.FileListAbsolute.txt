@@ -2979,6 +2979,5 @@ C:\Users\MASRUR\Desktop\TMS\TMS\gobjVoucherName\obj\Debug\gobjVoucherName.dll
 C:\Users\MASRUR\Desktop\TMS\TMS\gobjVoucherName\obj\Debug\gobjVoucherName.pdb
 H:\Work\ERP\Git Project\TMS\gobjVoucherName\bin\Debug\gobjVoucherName.dll
 H:\Work\ERP\Git Project\TMS\gobjVoucherName\bin\Debug\gobjVoucherName.pdb
-H:\Work\ERP\Git Project\TMS\gobjVoucherName\obj\Debug\gobjVoucherName.csprojResolveAssemblyReference.cache
 H:\Work\ERP\Git Project\TMS\gobjVoucherName\obj\Debug\gobjVoucherName.dll
 H:\Work\ERP\Git Project\TMS\gobjVoucherName\obj\Debug\gobjVoucherName.pdb

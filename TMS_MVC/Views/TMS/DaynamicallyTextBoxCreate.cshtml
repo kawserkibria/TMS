@@ -234,7 +234,7 @@
                     ddlUnder.html('');
                     ddlUnder.append($('<option value="Select">Select</option>'));
                     $.each(data, function (id, option) {
-                        ddlUnder.append($('<option value="' + option.Id + '">' + option.Name + '</option>'));
+                        ddlUnder.append($('<option value="' + option.intDressid + '">' + option.strDressName + '</option>'));
                     });
                     //$('#ddlUnder').val(selectdata.strCostCenter);
 
@@ -838,7 +838,7 @@
                     for (i = 0; i < res.length; i++) {
                         htmlData +=
                             "<div class='col-sm-4 col-xs-4 col-md-4 col-lg-4'>"
-                        //+ "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
                          + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'></legend>";
                         let lblTxt = [];
                         var txt = "";

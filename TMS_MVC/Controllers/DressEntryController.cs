@@ -36,6 +36,23 @@ namespace Jagoron.Web.Controllers
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
+        public ActionResult DressMesurmentInsert(DressSetup obj)
+        {
 
+            string oogrp = objrepository.InsertDressMesurment(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        public ActionResult DressMesurmentUpdate(DressSetup obj)
+        {
+
+            string oogrp = objrepository.UpdateDressMesurment(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        public ActionResult DressMesurmentList(DressSetup obj)
+        {
+            List<DressMesrmentList> oogrp = new List<DressMesrmentList>();
+            oogrp = objrepository.DressMesurmentList(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
 	}
 }

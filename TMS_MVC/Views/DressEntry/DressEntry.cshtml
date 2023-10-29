@@ -150,7 +150,7 @@
                         <table id="datatableMesurmrent" class="table-bordered display" style="width:100%"></table>
                     </div>
                     <div class="modal-footer border-0">
-                        <span><input type="button" class="btn btn-primary" id="btnsaveOrderM" onclick="saveOrUpdates();" value="Save"></></span>
+                        <span><input type="button" class="btn btn-primary" id="btnsaveOrderM" onclick="saveOrUpdatesM();" value="Save"></></span>
                         <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
                     </div>
                 </div>
@@ -182,6 +182,7 @@
         var BranchID = "";
         var BranchName = "";
         var tempDataList = [];
+        var DressMesurmentList = [];
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
             showGrid();
@@ -463,6 +464,12 @@
 
                       //    }
                       //},
+                       {
+                           title: 'ID',
+                           data: 'intDressid',
+                           name: 'strDressName',
+
+                       },
                         {
                             title: 'পোষাকের নাম',
                             data: 'strDressName',
@@ -656,14 +663,38 @@
             $("#cbodeDressFor").prop("selectedIndex", '0').val();
         }
 
-        function MesurmentAddUpdate(data) {
+        function MesurmentAddUpdate(selectdata) {
 
-            //alert("ok")
-            $('#btnsaveOrderM').val('Update');
+            var empObj = {
+                strDressName: (selectdata.strDressName),
+                intDressid: (selectdata.intDressid),
+            };
 
-            $('#txtDressNameM').val(data.strDressName);
+            $.ajax({
+                "url": "/DressEntry/DressMesurmentList",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(empObj),
+                success: function (data) {
+
+                    tempDataList = data;
+                    showMesurmentGrid();
+            
+                },
+                error: function (ex) {
+                    console.log('lkolko', "55555")
+                }
+
+            });
+
+            if (tempDataList.length > 0) {
+                $('#btnsaveOrderM').val('Save');
+            }
+            else {
+                $('#btnsaveOrderM').val('Update');
+            }
+            $('#txtDressNameM').val(selectdata.strDressName);
         }
-
         function addMesuerment() {
 
             var editTextDr = $('#Debitid').val();
@@ -692,8 +723,9 @@
             } else {
 
                 tempDataList.push({
+                    intDressid: $('#txtDressNameM').val(),
                     strDressName: $('#txtDressNameM').val(),
-                    strMesurmentNametype: $('#txtMesurmentType').val(),
+                    strDressHead: $('#txtMesurmentType').val(),
                     strMesurmentNameSubtype: $('#txtMesurmentTypeSub').val(),
                 });
                 showMesurmentGrid();
@@ -706,12 +738,7 @@
 
         }
         function showMesurmentGrid() {
-
-
-
             console.log("Add List data", tempDataList);
-
-
             this.detailsList = this.tempDataList;
             $('#datatableMesurmrent').DataTable({
                 data: this.tempDataList,
@@ -767,6 +794,12 @@
 
                       //    }
                       //},
+                           {
+                               title: 'ID',
+                               data: 'intDressid',
+                               name: 'intDressid',
+
+                           },
                         {
                             title: 'পোষাকের নাম',
                             data: 'strDressName',
@@ -778,8 +811,8 @@
 
                          {
                              title: 'মাপের নাম',
-                             data: 'strMesurmentNametype',
-                             name: 'Branch ID',
+                             data: 'strDressHead',
+                             name: 'strDressHead',
                          },
                           {
                               title: 'মাপের ধরণের নাম',
@@ -842,7 +875,7 @@
             console.log('str', strString)
             for (i = 0; i < tempDataList.length; i++) {
                 alert(strString.toUpperCase());
-                if (tempDataList[i].strMesurmentNametype.toUpperCase() == strString.toUpperCase()) {
+                if (tempDataList[i].strDressHead.toUpperCase() == strString.toUpperCase()) {
 
                     swal({
                         text: "This item Exsit!(item name '" + strString + "')",
@@ -868,6 +901,148 @@
             }
             console.log('kaka', tempDataList)
             showMesurmentGrid();
+
+        }
+        function saveOrUpdatesM() {
+            //if (checkReqFields() == false) {
+            //    return;
+            //}
+            var btn = $('#btnsaveOrderM').val();
+            if (btn == "Save") {
+                swal({
+                    title: "Do You Want to Save?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                    }
+                    else {
+                        saveMesurment();
+                        clearFromData();
+                        //$('#txtbranchName').focus();
+                    }
+
+                });
+
+
+            } else {
+
+
+                swal({
+                    title: "Do You Want to Update?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+
+                    }
+                    else {
+
+                        UpdateMesurment(mstrPrimaryFields);
+                        clearFromData();
+                        $('#btncen').click();
+
+                    }
+
+                });
+            }
+
+        }
+        function saveMesurment() {
+
+            var empObj = {
+                DressSubList: this.tempDataList,
+            };
+
+            $.ajax({
+                url: "/DressEntry/DressMesurmentInsert",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function UpdateMesurment(id) {
+            var empObj = {
+                DressSubList: this.tempDataList,
+            };
+
+            $.ajax({
+                url: "/DressEntry/DressMesurmentUpdate",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
 
         }
     </script>

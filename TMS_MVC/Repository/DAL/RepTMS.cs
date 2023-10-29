@@ -221,6 +221,115 @@ namespace TMS.Repository
 
         }
 
+        public string InsertDressMesurment(DressSetup obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+                int intBranchID = 0;
+
+                SqlDataReader dr;
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+                for (i = 0; i < obj.DressSubList.Count ; i++)
+                {
+
+                    int intDressid = 0;
+
+                    SqlDataReader drGetGroup;
+                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.DressSubList[i].strDressName + "' ";
+                    cmdInsert.CommandText = strSQL;
+                    drGetGroup = cmdInsert.ExecuteReader();
+                    drGetGroup.Read();
+                    {
+                        intDressid = Convert.ToInt32(drGetGroup["DRESS_ID"].ToString());
+                    }
+                    drGetGroup.Close();
+
+
+                    strSQL = "INSERT INTO DivCreates";
+                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "" + intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                }
+
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        }
+        public string UpdateDressMesurment(DressSetup obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+            
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+
+                strSQL = "DELETE FROM DivCreates WHERE DRESS_ID = " + obj.DressSubList[0].intDressid + " ";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+
+  
+                for (i = 0; i < obj.DressSubList.Count ; i++)
+                {
+
+                
+                    strSQL = "INSERT INTO DivCreates";
+                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "" + obj.DressSubList[0].intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                }
+
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        } 
+        
         //public string DeletePorichalok(ButtonName obj)
         //{
         //    string strsubFroup = "", strSQL = "";
@@ -1582,9 +1691,6 @@ namespace TMS.Repository
             }
 
         }
-
-
-
         public string DeleteButton(ButtonName obj)
         {
             string strsubFroup = "", strSQL = "";
@@ -1640,7 +1746,7 @@ namespace TMS.Repository
                 try
                 {
                     gcnMain.Open();
-                    strSQL = "SELECT * FROM Categories ";
+                    strSQL = "SELECT * FROM DRESS_INFO ";
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -1648,8 +1754,8 @@ namespace TMS.Repository
                         DressSetup oCat = new DressSetup();
 
                         //oCat.strDressName = dr["DRESS_NAME"].ToString();
-                        oCat.Name = dr["Name"].ToString();
-                        oCat.Id = Convert.ToInt32(dr["Id"]);
+                        oCat.strDressName = dr["DRESS_NAME"].ToString();
+                        oCat.intDressid = Convert.ToInt32(dr["DRESS_ID"]);
                         ooCategory.Add(oCat);
                     }
 
@@ -1688,7 +1794,11 @@ namespace TMS.Repository
                     gcnMain.Open();
 
 
-                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intDid + ") AND  DC.ORDER_NO='" + strOrderNo + "'  ";
+                    strSQL = "SELECT COUNT(DISTINCT ORDER_NO) ORDER_NO  from ORDER_DRESS_CATEGORY_INFO DC    WHERE (DC.DRESS_ID = " + intDid + ") ";
+                    if (strOrderNo != "")
+                    {
+                        strSQL = strSQL + " AND  DC.ORDER_NO='" + strOrderNo + "'  ";
+                    }
                     SqlCommand cmdd = new SqlCommand(strSQL, gcnMain);
                     dr = cmdd.ExecuteReader();
                     if (dr.Read())
@@ -1698,10 +1808,15 @@ namespace TMS.Repository
                     dr.Close();
                     if (intDressid > 0)
                     {
-                            strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
-                            strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
-                            strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID  ";
-                            strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intDid + ") AND DC.ORDER_NO='" + strOrderNo + "' ";
+                            //strSQL = "SELECT DC.DRESS_ID, C.Name, DC.LABEL_TEXT, 1 as Total ";
+                            //strSQL = strSQL + "FROM ORDER_DRESS_CATEGORY_INFO AS DC INNER JOIN  ";
+                            //strSQL = strSQL + "Categories AS C ON C.Id = DC.DRESS_ID  ";
+                            //strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intDid + ") AND DC.ORDER_NO='" + strOrderNo + "' ";
+
+                        strSQL = "SELECT DC.DRESS_ID, DC.Labelhead, DC.LabelTxt, DC.Total ";
+                        strSQL = strSQL + "FROM DivCreates AS DC INNER JOIN  ";
+                        strSQL = strSQL + "DRESS_INFO AS C ON C.DRESS_ID= DC.DRESS_ID  ";
+                        strSQL = strSQL + "WHERE (DC.DRESS_ID = " + intDid + ")  ";
                     }
                     else
                     {
@@ -1725,8 +1840,8 @@ namespace TMS.Repository
                         else
                         {
                             oCat.CategoryId = Convert.ToInt32(dr["DRESS_ID"]);
-                            oCat.Name = dr["Name"].ToString();
-                            oCat.LabelTxt = dr["LABEL_TEXT"].ToString();
+                            oCat.Name = dr["Labelhead"].ToString();
+                            oCat.LabelTxt = dr["LabelTxt"].ToString();
                             oCat.Total = Convert.ToInt32(dr["Total"]);
                         }
                         ooCategory.Add(oCat);
@@ -1747,6 +1862,56 @@ namespace TMS.Repository
                     ooCategory.Add(oCat);
                     return ooCategory;
                 }
+            }
+
+        }
+
+        public List<DressMesrmentList> DressMesurmentList(DressSetup obj)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+            List<DressMesrmentList> ooDressList = new List<DressMesrmentList>();
+
+
+
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "SELECT DC.DRESS_ID,C.DRESS_NAME, DC.Labelhead, DC.LabelTxt, DC.Total ";
+                    strSQL=strSQL +" FROM DivCreates AS DC INNER JOIN ";
+                    strSQL=strSQL +" DRESS_INFO AS C ON C.DRESS_ID= DC.DRESS_ID  ";
+                    strSQL = strSQL + " WHERE (DC.DRESS_ID = " + obj.intDressid + ")  ";
+
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+
+                        DressMesrmentList oCat = new DressMesrmentList();
+                        oCat.intDressid = Convert.ToInt32(dr["DRESS_ID"].ToString());
+                        oCat.strDressName = dr["DRESS_NAME"].ToString();
+                        oCat.strDressHead = dr["Labelhead"].ToString();
+                        oCat.strMesurmentNameSubtype = dr["LabelTxt"].ToString(); 
+                        ooDressList.Add(oCat);
+
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return ooDressList;
             }
 
         }

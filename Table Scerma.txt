@@ -260,5 +260,17 @@ as
 INSERT INTO  DRESS_INFO_IMAGE(DRESS_ID ,DRESS_IMAGE) 
 VALUES (@DRESS_ID,@DRESS_IMAGE) 
 
------------------------------------------------------------
+-----------------------DivCreates------------------------------------
+
+CREATE TABLE DivCreates(
+    SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	DRESS_ID VARCHAR(10) NOT NULL CONSTRAINT  FK_DRESS_INFO_SUB REFERENCES DRESS_INFO(DRESS_ID) ON UPDATE CASCADE,
+	Labelhead nvarchar(25) NULL,
+	LabelTxt nvarchar(max) NULL,
+	Total int NULL,
+	IsDeleted bit NOT NULL,
+	AddDate datetime NULL,
+	UpdateDate datetime NULL
+) 
+
 
