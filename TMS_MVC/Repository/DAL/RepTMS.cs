@@ -13,6 +13,10 @@ namespace TMS.Repository
 {
     public class RepTMS
     {
+       
+  
+
+        string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
         #region "Porichalok Info"
         public string InsertDress(DressSetup obj)
         {
@@ -174,7 +178,7 @@ namespace TMS.Repository
             SqlDataReader dr;
             List<DressSetup> ooDressList = new List<DressSetup>();
 
- 
+
 
             using (SqlConnection gcnMain = new SqlConnection(connectionString))
             {
@@ -193,9 +197,9 @@ namespace TMS.Repository
                     {
 
                         DressSetup oCat = new DressSetup();
-                        oCat.intDressid = Convert.ToInt32( dr["DRESS_ID"].ToString());
+                        oCat.intDressid = Convert.ToInt32(dr["DRESS_ID"].ToString());
                         oCat.strDressName = dr["DRESS_NAME"].ToString();
-                        oCat.intDressFor =   Convert.ToInt32(dr["DRESS_FOR"].ToString());
+                        oCat.intDressFor = Convert.ToInt32(dr["DRESS_FOR"].ToString());
                         oCat.intPOSITION = Convert.ToInt32(dr["DRESS_SERIAL"].ToString());
 
                         if (dr["DRESS_IMAGE"] != null)
@@ -210,167 +214,19 @@ namespace TMS.Repository
                     dr.Close();
                     gcnMain.Close();
                     gcnMain.Dispose();
-                   
+
                 }
                 catch (Exception ex)
                 {
 
                 }
-                 return ooDressList;
+                return ooDressList;
             }
 
         }
-
-        public string InsertDressMesurment(DressSetup obj)
-        {
-            string strSQL = "";
-            int i = 0;
-            using (SqlConnection gcnMain = new SqlConnection(connectionString))
-            {
-                if (gcnMain.State == ConnectionState.Open)
-                {
-                    gcnMain.Close();
-                }
-
-                gcnMain.Open();
-
-                int intBranchID = 0;
-
-                SqlDataReader dr;
-                SqlCommand cmdInsert = new SqlCommand();
-                SqlTransaction myTrans;
-                myTrans = gcnMain.BeginTransaction();
-                cmdInsert.Connection = gcnMain;
-                cmdInsert.Transaction = myTrans;
-
-                for (i = 0; i < obj.DressSubList.Count ; i++)
-                {
-
-                    int intDressid = 0;
-
-                    SqlDataReader drGetGroup;
-                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.DressSubList[i].strDressName + "' ";
-                    cmdInsert.CommandText = strSQL;
-                    drGetGroup = cmdInsert.ExecuteReader();
-                    drGetGroup.Read();
-                    {
-                        intDressid = Convert.ToInt32(drGetGroup["DRESS_ID"].ToString());
-                    }
-                    drGetGroup.Close();
-
-
-                    strSQL = "INSERT INTO DivCreates";
-                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
-                    strSQL = strSQL + "VALUES(";
-                    strSQL = strSQL + "" + intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
-                    strSQL = strSQL + ")";
-                    cmdInsert.CommandText = strSQL;
-                    cmdInsert.ExecuteNonQuery();
-
-                }
-
-
-
-                cmdInsert.Transaction.Commit();
-                gcnMain.Close();
-                return "OK";
-
-            }
-
-
-        }
-        public string UpdateDressMesurment(DressSetup obj)
-        {
-            string strSQL = "";
-            int i = 0;
-            using (SqlConnection gcnMain = new SqlConnection(connectionString))
-            {
-                if (gcnMain.State == ConnectionState.Open)
-                {
-                    gcnMain.Close();
-                }
-
-                gcnMain.Open();
-
-            
-                SqlCommand cmdInsert = new SqlCommand();
-                SqlTransaction myTrans;
-                myTrans = gcnMain.BeginTransaction();
-                cmdInsert.Connection = gcnMain;
-                cmdInsert.Transaction = myTrans;
-
-
-                strSQL = "DELETE FROM DivCreates WHERE DRESS_ID = " + obj.DressSubList[0].intDressid + " ";
-                cmdInsert.CommandText = strSQL;
-                cmdInsert.ExecuteNonQuery();
 
   
-                for (i = 0; i < obj.DressSubList.Count ; i++)
-                {
-
-                
-                    strSQL = "INSERT INTO DivCreates";
-                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
-                    strSQL = strSQL + "VALUES(";
-                    strSQL = strSQL + "" + obj.DressSubList[0].intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
-                    strSQL = strSQL + ")";
-                    cmdInsert.CommandText = strSQL;
-                    cmdInsert.ExecuteNonQuery();
-
-                }
-
-
-
-                cmdInsert.Transaction.Commit();
-                gcnMain.Close();
-                return "OK";
-
-            }
-
-
-        } 
-        
-        //public string DeletePorichalok(ButtonName obj)
-        //{
-        //    string strsubFroup = "", strSQL = "";
-        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
-        //    {
-        //        if (gcnMain.State == ConnectionState.Open)
-        //        {
-        //            gcnMain.Close();
-        //        }
-
-        //        try
-        //        {
-        //            gcnMain.Open();
-
-        //            SqlCommand cmdInsert = new SqlCommand();
-        //            SqlTransaction myTrans;
-        //            SqlDataReader dr;
-        //            myTrans = gcnMain.BeginTransaction();
-        //            cmdInsert.Connection = gcnMain;
-        //            cmdInsert.Transaction = myTrans;
-        //            strSQL = "DELETE FROM  BUTTON_ICON WHERE BUTTON_ID=" + obj.intBUTTON_ID + " ";
-        //            cmdInsert.CommandText = strSQL;
-        //            cmdInsert.ExecuteNonQuery();
-
-        //            cmdInsert.Transaction.Commit();
-
-
-        //            gcnMain.Dispose();
-        //            return "OK";
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return "ex";
-        //        }
-        //    }
-
-        //}
         #endregion
-
-        string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
         #region "User Entry"
         public string InsertUserInfo(UserInfo obj)
         {
@@ -1730,6 +1586,115 @@ namespace TMS.Repository
 
         }
         #endregion
+        #region "Dress Mesurment"
+        public string InsertDressMesurment(DressSetup obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+                int intBranchID = 0;
+
+                SqlDataReader dr;
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+                for (i = 0; i < obj.DressSubList.Count; i++)
+                {
+
+                    int intDressid = 0;
+
+                    SqlDataReader drGetGroup;
+                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.DressSubList[i].strDressName + "' ";
+                    cmdInsert.CommandText = strSQL;
+                    drGetGroup = cmdInsert.ExecuteReader();
+                    drGetGroup.Read();
+                    {
+                        intDressid = Convert.ToInt32(drGetGroup["DRESS_ID"].ToString());
+                    }
+                    drGetGroup.Close();
+
+
+                    strSQL = "INSERT INTO DivCreates";
+                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "" + intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                }
+
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        }
+        public string UpdateDressMesurment(DressSetup obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+
+                strSQL = "DELETE FROM DivCreates WHERE DRESS_ID = " + obj.DressSubList[0].intDressid + " ";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+
+
+                for (i = 0; i < obj.DressSubList.Count; i++)
+                {
+
+
+                    strSQL = "INSERT INTO DivCreates";
+                    strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "" + obj.DressSubList[0].intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                }
+
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        }
         public List<DressSetup> mFillMeserment(string strDeComID)
         {
             string strSQL = null;
@@ -1915,5 +1880,165 @@ namespace TMS.Repository
             }
 
         }
+        #endregion
+        #region "Dress Style"
+
+        public string InsertDressStyle(DressStyleList obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+                int intBranchID = 0;
+
+                SqlDataReader dr;
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+    
+                    int intDressid = 0, intStyleId=0;
+
+                    SqlDataReader drGetGroup;
+                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.strDressName + "' ";
+                    cmdInsert.CommandText = strSQL;
+                    drGetGroup = cmdInsert.ExecuteReader();
+                    drGetGroup.Read();
+                    {
+                        intDressid = Convert.ToInt32(drGetGroup["DRESS_ID"].ToString());
+                    }
+                    drGetGroup.Close();
+
+
+                    strSQL = "SELECT (case when  MAX(STYLE_ID) is null then 0 else MAX(STYLE_ID) end) +1 as STYLE_ID FROM DRESS_STYLE ";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+                    dr = cmdInsert.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        intStyleId = Convert.ToInt32(dr["STYLE_ID"].ToString());
+                    }
+                    dr.Close();
+
+
+                    strSQL = "INSERT INTO DRESS_STYLE";
+                    strSQL = strSQL + "(DRESS_ID,STYLE_ID,DRESS_STYLE)";
+                    strSQL = strSQL + "VALUES(";
+                    strSQL = strSQL + "'" + intDressid + "','" + intStyleId + "','" + obj.strStyleName + "'," + i + " ";
+                    strSQL = strSQL + ")";
+                    cmdInsert.CommandText = strSQL;
+                    cmdInsert.ExecuteNonQuery();
+
+          
+
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        }
+        public string UpdateDressStyle(DressStyleList obj)
+        {
+            string strSQL = "";
+            int i = 0;
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+
+                gcnMain.Open();
+
+
+                SqlCommand cmdInsert = new SqlCommand();
+                SqlTransaction myTrans;
+                myTrans = gcnMain.BeginTransaction();
+                cmdInsert.Connection = gcnMain;
+                cmdInsert.Transaction = myTrans;
+
+
+                strSQL = "DELETE FROM DivCreates WHERE DRESS_ID = " + obj.intDressid + " ";
+                cmdInsert.CommandText = strSQL;
+                cmdInsert.ExecuteNonQuery();
+
+
+             
+
+
+                    //strSQL = "INSERT INTO DivCreates";
+                    //strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
+                    //strSQL = strSQL + "VALUES(";
+                    //strSQL = strSQL + "" + obj.DressSubList[0].intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    //strSQL = strSQL + ")";
+                    //cmdInsert.CommandText = strSQL;
+                    //cmdInsert.ExecuteNonQuery();
+
+  
+
+
+                cmdInsert.Transaction.Commit();
+                gcnMain.Close();
+                return "OK";
+
+            }
+
+
+        }
+
+
+        //public string DeletePorichalok(ButtonName obj)
+        //{
+        //    string strsubFroup = "", strSQL = "";
+        //    using (SqlConnection gcnMain = new SqlConnection(connectionString))
+        //    {
+        //        if (gcnMain.State == ConnectionState.Open)
+        //        {
+        //            gcnMain.Close();
+        //        }
+
+        //        try
+        //        {
+        //            gcnMain.Open();
+
+        //            SqlCommand cmdInsert = new SqlCommand();
+        //            SqlTransaction myTrans;
+        //            SqlDataReader dr;
+        //            myTrans = gcnMain.BeginTransaction();
+        //            cmdInsert.Connection = gcnMain;
+        //            cmdInsert.Transaction = myTrans;
+        //            strSQL = "DELETE FROM  BUTTON_ICON WHERE BUTTON_ID=" + obj.intBUTTON_ID + " ";
+        //            cmdInsert.CommandText = strSQL;
+        //            cmdInsert.ExecuteNonQuery();
+
+        //            cmdInsert.Transaction.Commit();
+
+
+        //            gcnMain.Dispose();
+        //            return "OK";
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return "ex";
+        //        }
+        //    }
+
+        //}
+        #endregion
     }
 }

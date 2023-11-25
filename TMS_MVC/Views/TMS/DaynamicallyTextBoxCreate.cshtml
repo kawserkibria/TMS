@@ -118,11 +118,22 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
             <br />
             <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="saveOrUpdates();" value="সেভ করুন" />
         </div>
+
+
+        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+            <div id="divstyle">
+            </div>
+        </div>
+
+      
+
+
+
+
 
         <div style="margin-left: 10px;">
             <label>বিস্তারিত বিবরণ:</label><span id="reqAddress1" class="reqError"></span><br />
@@ -131,12 +142,9 @@
 
             <input class="form-control" multiple name="brandName" id="txtDetailsComments" form="usrform" style="text-transform:capitalize">
         </div>
-
-
         <div style="margin-left: 10px;">
             <label>খরচ যুক্ত করুন :</label><span id="reqAddress1" class="reqError"></span><br />
         </div>
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
@@ -166,8 +174,6 @@
             </div>
 
         </div>
-
-
         <div class="row">
 
             <div class="col-lg-5">
@@ -177,9 +183,6 @@
                 <input type="button" class="btn btn-primary pull-right" id="btnsaveOrder" onclick="Orderadd();" value="অর্ডার যুক্ত করুন " />
             </div>
         </div>
-
-
-
         <div class="row">
 
             <div class="col-lg-5">
@@ -187,7 +190,6 @@
 
             </div>
         </div>
-
     </div>
 </div>
 
@@ -285,7 +287,72 @@
             console.log(data);
         });
 
+        createBlockDressStyle();
+
     });
+
+
+    function createBlockDressStyle(val) {
+        txtid = 0;
+        totaltext = 0;
+        var strorderNO = "";
+        var intEditMode = 0;
+
+        intEditMode = $('#lblCustomerEditmode').text();
+        if (val != "") {
+            $.ajax({
+                //type: "GET",
+                //url: baseUrl + "DaynamicallyTextBoxCreate/getDataList/" + val,
+                //contentType: "application/json; charset=utf-8",
+
+                url: "/DaynamicallyTextBoxCreate/getDataList?Id=" + val + " &intAddMode=" + intEditMode + " &strOrderNo=" + strorderNO,
+                type: "POST",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+
+                success: function (res) {
+                    console.log("dd", res);
+                    let htmlData = '';
+                    htmlData += "<div class='row'>";
+                    htmlData += "<div class='col-sm-12 col-xs-12 col-md-12 col-lg-12'>";
+                    htmlData += "<div class='row'>";
+                    for (i = 0; i < res.length; i++) {
+                        htmlData +=
+                            "<div class='col-sm-4 col-xs-4 col-md-4 col-lg-4'>"
+                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'>" + res[i]['Name'] + "</legend>";
+                        + "<fieldset class='scheduler-border' id='" + i + "'> <legend class='scheduler-border'></legend>";
+                        let lblTxt = [];
+                        var txt = "";
+
+                        var concatTxt = "";
+                        lblTxt = res[i]['LabelTxt'].split(',');
+                        for (j = 0; j < lblTxt.length; j++) {
+                            txt = lblTxt[j];
+                            concatTxt = txt.replace(" ", ",");
+                            htmlData += "<label class='label' for=" + concatTxt + "> " + txt + " ";
+                            htmlData += "</label > ";
+                            htmlData += "<input class='form-control' id=" + txtid + " name=" + concatTxt + " />";
+                            txtid += 1;
+                            console.log("id", txtid)
+                        }
+
+                        htmlData += "</fieldset>"
+                            + "</div>"
+                    };
+                    console.log("totaltext", totaltext = txtid)
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+                    htmlData += "</div>";
+
+                    $("#divstyle").html(htmlData);
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+    };
 
     function showGridSeles() {
         $('#datatableseles').DataTable({

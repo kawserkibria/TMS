@@ -260,7 +260,7 @@ as
 INSERT INTO  DRESS_INFO_IMAGE(DRESS_ID ,DRESS_IMAGE) 
 VALUES (@DRESS_ID,@DRESS_IMAGE) 
 
------------------------DivCreates------------------------------------
+-----------------------DivCreates----------- Mesurment-------------------------
 
 CREATE TABLE DivCreates(
     SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
@@ -272,5 +272,15 @@ CREATE TABLE DivCreates(
 	AddDate datetime NULL,
 	UpdateDate datetime NULL
 ) 
+--------------------Style-----------------------
+CREATE TABLE DRESS_STYLE(
+    SERIAL_NO numeric(18, 0) IDENTITY(1,1) NOT NULL,
+	DRESS_ID VARCHAR(10) NOT NULL CONSTRAINT  FK_DRESS_INFO REFERENCES DRESS_INFO(DRESS_ID) ON UPDATE CASCADE,
+	STYLE_ID VARCHAR(10) NOT NULL CONSTRAINT  PK_DRESS_STYLE  PRIMARY KEY,
+	DRESS_STYLE nvarchar(150) NULL,
+	INSERT_DATE datetime DEFAULT GETDATE() NOT NULL,
+	UPDATE_DATE datetime NULL
+)
+
 
 

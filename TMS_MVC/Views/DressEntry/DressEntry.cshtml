@@ -25,7 +25,6 @@
     </div><br />
 </div>
 @* ***************End Header *@
-@* ***************End Header *@
 <div class="table-responsive">
     <table id="datatable4" class="table-bordered display" style="width:100%"></table>
 </div>
@@ -140,24 +139,75 @@
                 </div>
                 <br />
                 <div class="row">
-                  
+
                     <div class="col text-center">
                         <button id="btnAddM" onclick=" duplicationCheck(); addMesuerment()" value="Add" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>&nbsp; Add</button>
                     </div>
                 </div>
-                    <br>
-                    <div class="table-responsive">
-                        <table id="datatableMesurmrent" class="table-bordered display" style="width:100%"></table>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <span><input type="button" class="btn btn-primary" id="btnsaveOrderM" onclick="saveOrUpdatesM();" value="Save"></></span>
-                        <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
-                    </div>
+                <br>
+                <div class="table-responsive">
+                    <table id="datatableMesurmrent" class="table-bordered display" style="width:100%"></table>
                 </div>
+                <div class="modal-footer border-0">
+                    <span><input type="button" class="btn btn-primary" id="btnsaveOrderM" onclick="saveOrUpdatesM();" value="Save"></></span>
+                    <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
+                </div>
+            </div>
 
         </div>
     </div>
 </div>
+
+@* ***************Dress Style Set *@
+<div class="modal fade bd-example-modal-lg" id="StylSet" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl" style="left: 0%" role="document">
+        <div class="modal-content">
+            <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
+                <h5 style="text-align: center; text-decoration: underline;">ডিজাইন যুক্ত করুন</h5>
+                <button type="button" id="btnCancel"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
+                    <div class="col-sm-12">
+                        <div style="margin-left: 10px;">
+                            <label>পোষাকের নাম:</label><span id="reqAddress1" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtDressNameS" readonly form="usrform" style="text-transform:capitalize">
+                        </div>
+
+                        <div style="margin-left: 10px;">
+                            <label>মাপের ধরণের নাম:</label><span id="reqSerial" class="reqError"></span><br />
+                        </div>
+                        <div class="col-sm-12">
+                            <input class="form-control" name="brandName" id="txtDressStyle" form="usrform" style="text-transform:capitalize">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col text-center">
+                        <button id="btnSaveStyle" onclick=" duplicationCheck(); saveOrUpdatesStyle()" value="Add" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>&nbsp; Save</button>
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table id="datatableStyle" class="table-bordered display" style="width:100%"></table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @section scripts{
     <script>
 
@@ -183,10 +233,12 @@
         var BranchName = "";
         var tempDataList = [];
         var DressMesurmentList = [];
+        var DressStyleList = [];
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
             showGrid();
             showMesurmentGrid();
+            showStyleGrid();
             //$("#BranchConfig").on('shown.bs.modal', function () {
             //    $(this).find('#txtbranchName').focus();
             //});
@@ -492,7 +544,7 @@
                                   }
                               },
 
-                   
+
 
                            {
                                title: 'মাপ যুক্ত করুন',
@@ -505,7 +557,7 @@
                                     title: 'স্টাইল যুক্ত করুন',
 
                                     render: function (data, type, row) {
-                                        return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-eye"></i></button>';
+                                        return '<button class="btn btn-info fontsize  style-sloat-ak"  data-toggle="modal" data-target="#StylSet">   <i class="fa fa-eye"></i></button>';
                                     }
                                 },
 
@@ -538,7 +590,7 @@
 
                     });
 
-                    $(row).find(".sales-sloat-ak").click(function () {
+                    $(row).find(".style-sloat-ak").click(function () {
                         selectdata = data;
                         //console.log('hello edit dddeeeee', selectdata);
                         //saveorupdatebtntype =1;
@@ -561,36 +613,7 @@
             });
 
         }
-        function edit(data) {
 
-            ////alert(data.DefaultBranch)
-            $('#btnsaveOrder').val('Update');
-
-            $('#txtOldbranchID').val(data.BranchID);
-            //$('#txtbranchName').val(data.BranchName);
-            $("#txtAddress1").val(data.BranchAddress1);
-            $('#txtAddress2').val(data.BranchAddress2);
-            $("#txtCountry").val(data.Country);
-            $('#txtTelephone').val(data.Phone);
-            $('#txtlocation').val(data.Godown);
-            $("#txtFax").val(data.Fax);
-            $('#cboInactive').val(data.Status);
-            $('#cbodefaultBrach').val(data.DefaultBranch);
-            ////$('#txtlocation').val(data.Comments);
-            //$("#cbodefaultBrach").val(data.);
-
-            //if (data.Status == "NO") {
-            //    $("#cboInactive").val("0");
-            //}
-            //else {
-            //    $("#cboInactive").val("1");
-            //}
-
-            $('#txtComments').val(data.Comments);
-
-
-
-        }
         function deleteBranch(selectdata) {
 
             var empObj = {
@@ -642,7 +665,7 @@
             var returnValue;
 
             var name = "";
-                 //name = document.getElementById("txtbranchName").value;
+            //name = document.getElementById("txtbranchName").value;
             returnValue = true;
             if (name.trim() == "") {
                 document.getElementById("reqBranchName").innerHTML = " * Name is required.";
@@ -679,7 +702,7 @@
 
                     tempDataList = data;
                     showMesurmentGrid();
-            
+
                 },
                 error: function (ex) {
                     console.log('lkolko', "55555")
@@ -764,7 +787,7 @@
                 "paging": false,
                 "bInfo": false,
                 "bPaginate": false,
-              
+
 
                 "columns": [
 
@@ -779,7 +802,7 @@
                           ) {
                               return '<span>' + (meta.row + 1) + '</span>';
                           },
-                    
+
                       },
                       //{
                       //    title: 'স্ট্যাটাস',
@@ -804,7 +827,7 @@
                             title: 'পোষাকের নাম',
                             data: 'strDressName',
                             name: 'strDressName',
-                       
+
                         },
 
 
@@ -1045,6 +1068,313 @@
             });
 
         }
+        // Dress Style
+        function saveOrUpdatesStyle() {
+            //if (checkReqFields() == false) {
+            //    return;
+            //}
+            var btn = $('#btnSaveStyle').val();
+            if (btn == "Save") {
+                swal({
+                    title: "Do You Want to Save?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                    }
+                    else {
+                        saveStyle();
+                        clearStyleData();
+                        //$('#txtbranchName').focus();
+                    }
+
+                });
+
+
+            } else {
+
+
+                swal({
+                    title: "Do You Want to Update?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+
+                    }
+                    else {
+
+                        UpdateMesurment(mstrPrimaryFields);
+                        clearFromData();
+                        $('#btncen').click();
+
+                    }
+
+                });
+            }
+
+        }
+        function saveStyle() {
+            var empObj = {
+                strDressName: $('#txtDressNameS').val(),
+                strStyleName: $('#txtDressStyle').val(),
+            };
+            $.ajax({
+                url: "/DressEntry/DressStyleInsert",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+
+        function UpdateStyle(id) {
+            var empObj = {
+                DressSubList: this.tempDataList,
+            };
+
+            $.ajax({
+                url: "/DressEntry/DressMesurmentUpdate",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function edit(data) {
+            //$('#txtOldbranchID').val(data.BranchID);
+            //$('#txtbranchName').val(data.BranchName);
+            $("#txtDressNameS").val(data.strDressName);
+            //$('#txtAddress2').val(data.BranchAddress2);
+            //$("#txtCountry").val(data.Country);
+            //$('#txtTelephone').val(data.Phone);
+            //$('#txtlocation').val(data.Godown);
+            //$("#txtFax").val(data.Fax);
+            //$('#cboInactive').val(data.Status);
+            //$('#cbodefaultBrach').val(data.DefaultBranch);
+            ////$('#txtlocation').val(data.Comments);
+            //$("#cbodefaultBrach").val(data.);
+
+            //if (data.Status == "NO") {
+            //    $("#cboInactive").val("0");
+            //}
+            //else {
+            //    $("#cboInactive").val("1");
+            //}
+
+            $('#txtComments').val(data.Comments);
+
+
+
+        }
+        function showStyleGrid() {
+            console.log("Add List data", tempDataList);
+            this.detailsList = this.tempDataList;
+            $('#datatableStyle').DataTable({
+                data: this.tempDataList,
+                "bDestroy": true,
+                "dataSrc": function (response) {
+                    response.draw = response.draw;
+                    this.rowCount = response.recordsTotal;
+                    $('#counttotal').val(this.rowCount);
+                    response.recordsTotal = response.recordsTotal;
+                    response.recordsFiltered = response.recordsFiltered;
+                    console.log('request.responseText', response);
+                    return response;
+                },
+                "bDestroy": true,
+                "select": true,
+                //"gridlines": true,
+                //"scrollY": "1800px",
+                //"scrollCollapse": true,
+                //"scrollX": false,
+                //pageLength: 5,
+                "select": true,
+                "searching": false,
+                "paging": false,
+                "bInfo": false,
+                "bPaginate": false,
+
+
+                "columns": [
+
+
+                      {
+                          title: 'SL',
+                          render: function (
+                              data,
+                              type,
+                              row,
+                              meta
+                          ) {
+                              return '<span>' + (meta.row + 1) + '</span>';
+                          },
+
+                      },
+                      //{
+                      //    title: 'স্ট্যাটাস',
+                      //    "data": "inStatus", "autowidth": true,
+                      //    "render": function (inStatus) {
+                      //        if (inStatus == 1) {
+                      //            return "না";
+                      //        }
+                      //        else {
+                      //            return "হা";
+                      //        }
+
+                      //    }
+                      //},
+                           {
+                               title: 'ID',
+                               data: 'intDressid',
+                               name: 'intDressid',
+
+                           },
+                        {
+                            title: 'পোষাকের নাম',
+                            data: 'strDressName',
+                            name: 'strDressName',
+
+                        },
+
+
+
+                         {
+                             title: 'মাপের নাম',
+                             data: 'strDressHead',
+                             name: 'strDressHead',
+                         },
+                          {
+                              title: 'মাপের ধরণের নাম',
+                              data: 'strMesurmentNameSubtype',
+                              name: 'strMesurmentNameSubtype',
+                          },
+                        {
+                            title: 'ইডিট করুন',
+
+                            render: function (data, type, row) {
+                                return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
+                            }
+                        },
+                        {
+                            title: 'ডিলিট করুন',
+                            render: function (data, type, row) {
+                                return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                            }
+                        },
+
+
+
+                ],
+
+                "responsive": true,
+
+                "rowCallback": function (row, data) {
+
+
+                    console.log('hello delete dataddddddddd', row, data);
+                    var rowdata = data;
+
+
+                    $(row).find(".sales-sloat-ak").click(function () {
+                        selectdata = data;
+                        console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        edit(selectdata.lngSlNo);
+
+                    });
+                    $(row).find(".delete-sloat-ak").click(function () {
+                        selectdata = data;
+                        console.log('hello Delete data', selectdata);
+                        deleteledger(selectdata.strMesurmentNametype);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+        function clearStyleData() {
+
+        }
+
+        //End Dress Style
     </script>
 }
 

@@ -642,7 +642,6 @@ C:\Users\MASRUR\Desktop\TMS\TMS\TMS_MVC\bin\Antlr3.Runtime.pdb
 C:\Users\MASRUR\Desktop\TMS\TMS\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
 C:\Users\MASRUR\Desktop\TMS\TMS\TMS_MVC\obj\Debug\Jagoron.Web.dll
 C:\Users\MASRUR\Desktop\TMS\TMS\TMS_MVC\obj\Debug\Jagoron.Web.pdb
-H:\Work\ERP\Git Project\TMS\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\Jagoron.Web.dll.config
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\Jagoron.Web.dll
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\Jagoron.Web.pdb
@@ -668,5 +667,6 @@ H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\System.Web.WebPages.Deployment.xml
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\System.Web.WebPages.Razor.xml
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\Newtonsoft.Json.xml
 H:\Work\ERP\Git Project\TMS\TMS_MVC\bin\Antlr3.Runtime.pdb
+H:\Work\ERP\Git Project\TMS\TMS_MVC\obj\Debug\TMS_MVC.csprojResolveAssemblyReference.cache
 H:\Work\ERP\Git Project\TMS\TMS_MVC\obj\Debug\Jagoron.Web.dll
 H:\Work\ERP\Git Project\TMS\TMS_MVC\obj\Debug\Jagoron.Web.pdb

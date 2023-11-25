@@ -40,6 +40,7 @@ namespace Jagoron.Web.Models
     }
     public class DressStyleList
     {
+        public int intDressid { get; set; }
         public string strDressName { get; set; }
         public string strStyleName { get; set; }
     }
