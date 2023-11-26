@@ -1893,20 +1893,22 @@ namespace TMS.Repository
                 {
                     gcnMain.Close();
                 }
+                try
+                {
 
-                gcnMain.Open();
+                    gcnMain.Open();
 
-                int intBranchID = 0;
+                    int intBranchID = 0;
 
-                SqlDataReader dr;
-                SqlCommand cmdInsert = new SqlCommand();
-                SqlTransaction myTrans;
-                myTrans = gcnMain.BeginTransaction();
-                cmdInsert.Connection = gcnMain;
-                cmdInsert.Transaction = myTrans;
+                    SqlDataReader dr;
+                    SqlCommand cmdInsert = new SqlCommand();
+                    SqlTransaction myTrans;
+                    myTrans = gcnMain.BeginTransaction();
+                    cmdInsert.Connection = gcnMain;
+                    cmdInsert.Transaction = myTrans;
 
-    
-                    int intDressid = 0, intStyleId=0;
+                    string strKey = "";
+                    int intDressid = 0, intStyleId = 0;
 
                     SqlDataReader drGetGroup;
                     strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.strDressName + "' ";
@@ -1918,6 +1920,7 @@ namespace TMS.Repository
                     }
                     drGetGroup.Close();
 
+                    strKey = intDressid + obj.strStyleName;
 
                     strSQL = "SELECT (case when  MAX(STYLE_ID) is null then 0 else MAX(STYLE_ID) end) +1 as STYLE_ID FROM DRESS_STYLE ";
                     cmdInsert.CommandText = strSQL;
@@ -1932,20 +1935,20 @@ namespace TMS.Repository
 
 
                     strSQL = "INSERT INTO DRESS_STYLE";
-                    strSQL = strSQL + "(DRESS_ID,STYLE_ID,DRESS_STYLE)";
+                    strSQL = strSQL + "(STYLE_KEY,DRESS_ID,STYLE_ID,DRESS_STYLE)";
                     strSQL = strSQL + "VALUES(";
-                    strSQL = strSQL + "'" + intDressid + "','" + intStyleId + "','" + obj.strStyleName + "'," + i + " ";
+                    strSQL = strSQL + "'" + strKey + "','" + intDressid + "','" + intStyleId + "','" + obj.strStyleName + "'";
                     strSQL = strSQL + ")";
                     cmdInsert.CommandText = strSQL;
                     cmdInsert.ExecuteNonQuery();
-
-          
-
-
-
-                cmdInsert.Transaction.Commit();
-                gcnMain.Close();
-                return "OK";
+                    cmdInsert.Transaction.Commit();
+                    gcnMain.Close();
+                    return "OK";
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
 
             }
 
