@@ -173,8 +173,9 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
+                    <input type="hidden" class="form-control" name="brandName" id="txtOldkeyID" form="usrform">
                     <div class="col-sm-12">
+
                         <div style="margin-left: 10px;">
                             <label>পোষাকের নাম:</label><span id="reqAddress1" class="reqError"></span><br />
                         </div>
@@ -194,7 +195,8 @@
                 <div class="row">
 
                     <div class="col text-center">
-                        <button id="btnSaveStyle" onclick=" duplicationCheck(); saveOrUpdatesStyle()" value="Save" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>&nbsp; Save</button>
+                        @*<button id="btnSaveStyle" onclick=" duplicationCheck(); saveOrUpdatesStyle()" value="সেভ করুন" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>সেভ করুন</button>*@
+                        <span><input type="button" class="btn btn-primary" id="btnSaveStyle" onclick="saveOrUpdatesStyle();" value="সেভ করুন"></></span>
                     </div>
                 </div>
                 <br>
@@ -236,9 +238,11 @@
         var DressStyleList = [];
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
+            $('#btnSaveStyle').val('সেভ করুন');
+
             showGrid();
             showMesurmentGrid();
-            showStyleGrid();
+            
             //$("#BranchConfig").on('shown.bs.modal', function () {
             //    $(this).find('#txtbranchName').focus();
             //});
@@ -613,7 +617,33 @@
             });
 
         }
+        function edit(data) {
+            showStyleGrid(data);
+            //$('#txtOldbranchID').val(data.BranchID);
+            //$('#txtbranchName').val(data.BranchName);
+            $("#txtDressNameS").val(data.strDressName);
+            $('#txtDressStyle').val(data.strStyleName);
+            //$("#txtCountry").val(data.Country);
+            //$('#txtTelephone').val(data.Phone);
+            //$('#txtlocation').val(data.Godown);
+            //$("#txtFax").val(data.Fax);
+            //$('#cboInactive').val(data.Status);
+            //$('#cbodefaultBrach').val(data.DefaultBranch);
+            ////$('#txtlocation').val(data.Comments);
+            //$("#cbodefaultBrach").val(data.);
 
+            //if (data.Status == "NO") {
+            //    $("#cboInactive").val("0");
+            //}
+            //else {
+            //    $("#cboInactive").val("1");
+            //}
+
+            //$('#txtComments').val(data.Comments);
+
+
+
+        }
         function deleteBranch(selectdata) {
 
             var empObj = {
@@ -1074,7 +1104,7 @@
             //    return;
             //}
             var btn = $('#btnSaveStyle').val();
-            if (btn == "Save") {
+            if (btn == "সেভ করুন") {
                 swal({
                     title: "Do You Want to Save?",
                     text: "",
@@ -1114,8 +1144,10 @@
                     }
                     else {
 
-                        UpdateMesurment(mstrPrimaryFields);
-                        clearFromData();
+                        UpdateStyle();
+                        showStyleGrid();
+                        $('#btnSaveStyle').text('সেভ করুন');
+                        //clearFromData();
                         $('#btncen').click();
 
                     }
@@ -1155,7 +1187,7 @@
                             animation: true,
                             title: 'Save Successfully',
                         });
-                        showGrid();
+                        showStyleGrid();
                         clearFromData();
 
 
@@ -1167,21 +1199,22 @@
             });
 
         }
-
-        function UpdateStyle(id) {
+        function UpdateStyle() {
+ 
             var empObj = {
-                DressSubList: this.tempDataList,
+                strStyleKey: $('#txtOldkeyID').val(),
+                strDressName: $('#txtDressNameS').val(),
+                strStyleName: $('#txtDressStyle').val(),
             };
-
             $.ajax({
-                url: "/DressEntry/DressMesurmentUpdate",
+                url: "/DressEntry/DressStyleUpdate",
                 type: "POST",
                 data: JSON.stringify(empObj),
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
 
-                    if (result == "save") {
+                    if (result == "Update") {
                         //console.log('save')
 
                         var toastMixin = Swal.mixin({
@@ -1199,7 +1232,7 @@
                             animation: true,
                             title: 'Save Successfully',
                         });
-                        showGrid();
+                        showStyleGrid();
                         clearFromData();
 
 
@@ -1211,11 +1244,222 @@
             });
 
         }
-        function edit(data) {
+        function DeleteStyle(selectdata) {
+
+            var empObj = {
+                strStyleKey: selectdata.strStyleKey,
+            };
+            $.ajax({
+                url: "/DressEntry/DeleteDressStyle",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == "Delete") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Delete Successfully',
+                        });
+                        showStyleGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function showStyleGrid(data) {
+
+            var empObj = {
+                intDressid: data.intDressid,
+         
+            };
+            table = $('#datatableStyle').DataTable({
+                "bDestroy": true,
+                "select": true,
+                //"gridlines": true,
+                "ajax": {
+                    "url": "/DressEntry/mFillShowDressStyle",
+                    "type": "POST",
+                    //"data": "JSON.stringify(empObj)",
+                    "contentType": "application/json;charset=utf-8",
+                    "datatype": "json",
+
+                    "dataSrc": function (response) {
+
+                        detailsList = response;
+                        response.draw = response.draw;
+                        response.recordsTotal = response.recordsTotal;
+                        response.recordsFiltered = response.recordsFiltered;
+                        console.log('request.responseText', response);
+
+                        return response;
+                    }
+
+                },
+
+                //"order": [[1, 'Asc']],
+                "columns": [
+
+
+                      {
+                          title: 'SL',
+                          render: function (
+                              data,
+                              type,
+                              row,
+                              meta
+                          ) {
+                              return '<span>' + (meta.row + 1) + '</span>';
+                          },
+                      },
+                      //{
+                      //    title: 'স্ট্যাটাস',
+                      //    "data": "inStatus", "autowidth": true,
+                      //    "render": function (inStatus) {
+                      //        if (inStatus == 1) {
+                      //            return "না";
+                      //        }
+                      //        else {
+                      //            return "হা";
+                      //        }
+
+                      //    }
+                      //},
+                       {
+                           title: 'Key',
+                           data: 'strStyleKey',
+                           name: 'strStyleKey',
+                           "visible": false,
+                       },
+                        {
+                            title: 'DID',
+                            data: 'intDressid',
+                            name: 'intDressid',
+                            "visible": false,
+
+                        },
+                        {
+                            title: 'পোষাকের নাম',
+                            data: 'strDressName',
+                            name: 'strDressName',
+                            "visible": false,
+                        },
+                           {
+                               title: 'SID',
+                               data: 'intStyleid',
+                               name: 'intStyleid',
+                               "visible": false,
+                           },
+                              {
+                                  title: 'স্টাইল বা ডিজাইনের ক্যাটাগরির নাম',
+                                  data: 'strStyleName',
+                                  name: 'strStyleName',
+
+                              },
+
+                              //{
+                              //    title: 'ছবি',
+                              //    'data': 'strImage',
+                              //    'sortable': false,
+                              //    'searchable': false,
+                              //    'render': function (data) {
+                              //        if (!data) {
+                              //            return 'N/A';
+                              //        } else {
+                              //            var img = 'data:image/png;base64,' + data;
+                              //            return '<img src="' + img + '" height="50px" width="50px" />';
+                              //        }
+                              //    }
+                              //},
+
+
+
+                            {
+                                title: 'ডিজাইন যুক্ত করুন',
+
+                                render: function (data, type, row) {
+                                    return '<button class="btn btn-info fontsize  masurment-sloat-ak"  data-toggle="modal" data-target="#Dressmesurment">   <i class="fa fa-child"></i></button>';
+                                }
+                            },
+                            {
+                                title: 'ইডিট করুন',
+
+                                render: function (data, type, row) {
+                                    return '<button class="btn btn-info fontsize  style-sloat-ak">   <i class="fa fa-pencil"></i></button>';
+                                }
+                            },
+                            {
+                                title: 'ডিলিট করুন',
+                                render: function (data, type, row) {
+                                    return '<button class="btn btn-danger fontsize deletestyle-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                                }
+                            },
+
+
+                ],
+
+                "responsive": true,
+                "rowCallback": function (row, data) {
+                    var rowdata = data;
+
+                    $(row).find(".masurment-sloat-ak").click(function () {
+                        selectdata = data;
+                        console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        MesurmentAddUpdate(selectdata);
+
+                    });
+
+                    $(row).find(".style-sloat-ak").click(function () {
+                        selectdata = data;
+                        //console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        editStyle(selectdata);
+
+                    });
+                    $(row).find(".deletestyle-sloat-ak").click(function () {
+                        selectdata = data;
+                        DeleteStyle(selectdata);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+        function editStyle(data) {
+     
+            $('#btnSaveStyle').val('আপডেট করুন ');
             //$('#txtOldbranchID').val(data.BranchID);
-            //$('#txtbranchName').val(data.BranchName);
+            $('#txtOldkeyID').val(data.strStyleKey);
             $("#txtDressNameS").val(data.strDressName);
-            //$('#txtAddress2').val(data.BranchAddress2);
+            $('#txtDressStyle').val(data.strStyleName);
             //$("#txtCountry").val(data.Country);
             //$('#txtTelephone').val(data.Phone);
             //$('#txtlocation').val(data.Godown);
@@ -1232,142 +1476,9 @@
             //    $("#cboInactive").val("1");
             //}
 
-            $('#txtComments').val(data.Comments);
+            //$('#txtComments').val(data.Comments);
 
 
-
-        }
-        function showStyleGrid() {
-            console.log("Add List data", tempDataList);
-            this.detailsList = this.tempDataList;
-            $('#datatableStyle').DataTable({
-                data: this.tempDataList,
-                "bDestroy": true,
-                "dataSrc": function (response) {
-                    response.draw = response.draw;
-                    this.rowCount = response.recordsTotal;
-                    $('#counttotal').val(this.rowCount);
-                    response.recordsTotal = response.recordsTotal;
-                    response.recordsFiltered = response.recordsFiltered;
-                    console.log('request.responseText', response);
-                    return response;
-                },
-                "bDestroy": true,
-                "select": true,
-                //"gridlines": true,
-                //"scrollY": "1800px",
-                //"scrollCollapse": true,
-                //"scrollX": false,
-                //pageLength: 5,
-                "select": true,
-                "searching": false,
-                "paging": false,
-                "bInfo": false,
-                "bPaginate": false,
-
-
-                "columns": [
-
-
-                      {
-                          title: 'SL',
-                          render: function (
-                              data,
-                              type,
-                              row,
-                              meta
-                          ) {
-                              return '<span>' + (meta.row + 1) + '</span>';
-                          },
-
-                      },
-                      //{
-                      //    title: 'স্ট্যাটাস',
-                      //    "data": "inStatus", "autowidth": true,
-                      //    "render": function (inStatus) {
-                      //        if (inStatus == 1) {
-                      //            return "না";
-                      //        }
-                      //        else {
-                      //            return "হা";
-                      //        }
-
-                      //    }
-                      //},
-                           {
-                               title: 'ID',
-                               data: 'intDressid',
-                               name: 'intDressid',
-
-                           },
-                        {
-                            title: 'পোষাকের নাম',
-                            data: 'strDressName',
-                            name: 'strDressName',
-
-                        },
-
-
-
-                         {
-                             title: 'মাপের নাম',
-                             data: 'strDressHead',
-                             name: 'strDressHead',
-                         },
-                          {
-                              title: 'মাপের ধরণের নাম',
-                              data: 'strMesurmentNameSubtype',
-                              name: 'strMesurmentNameSubtype',
-                          },
-                        {
-                            title: 'ইডিট করুন',
-
-                            render: function (data, type, row) {
-                                return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
-                            }
-                        },
-                        {
-                            title: 'ডিলিট করুন',
-                            render: function (data, type, row) {
-                                return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
-                            }
-                        },
-
-
-
-                ],
-
-                "responsive": true,
-
-                "rowCallback": function (row, data) {
-
-
-                    console.log('hello delete dataddddddddd', row, data);
-                    var rowdata = data;
-
-
-                    $(row).find(".sales-sloat-ak").click(function () {
-                        selectdata = data;
-                        console.log('hello edit dddeeeee', selectdata);
-                        //saveorupdatebtntype =1;
-                        edit(selectdata.lngSlNo);
-
-                    });
-                    $(row).find(".delete-sloat-ak").click(function () {
-                        selectdata = data;
-                        console.log('hello Delete data', selectdata);
-                        deleteledger(selectdata.strMesurmentNametype);
-
-                    });
-                    $(row).find(".print-sloat-ak").click(function () {
-                        selectdata = data;
-                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
-
-                    });
-
-                }
-
-            });
 
         }
         function clearStyleData() {

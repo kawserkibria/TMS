@@ -72,5 +72,19 @@ namespace Jagoron.Web.Controllers
             string oogrp = objrepository.UpdateDressStyle(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
+        public ActionResult mFillShowDressStyle(DressStyleList obj)
+        {
+            List<DressStyleList> oogrp = new List<DressStyleList>();
+            oogrp = objrepository.StyleList(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        public ActionResult DeleteDressStyle(DressStyleList obj)
+        {
+
+            string oogrp = objrepository.DeleteDressStyle(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        
+        
 	}
 }
