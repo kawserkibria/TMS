@@ -1,3 +1,8 @@
+https://deeplaid.biz-motion.com/auth/login
+ha001
+admin@123456
+
+
 
 DROP TABLE COMPANY_ICON
 DROP TABLE COMPANY_NAME
@@ -229,7 +234,7 @@ drop table  DRESS_INFO
 CREATE TABLE DRESS_INFO (
 SL_NO numeric(18,0)IDENTITY(1,1) NOT NULL,
 DRESS_ID VARCHAR(10) NOT NULL CONSTRAINT PK_DRESS_ID_DRESS_INFO PRIMARY KEY,
-DRESS_NAME VARCHAR(100) NOT NULL,
+DRESS_NAME NVARCHAR(100) NOT NULL,
 DRESS_FOR numeric(3) NULL,
 DRESS_SERIAL numeric(3) NULL,
 INSERT_BY VARCHAR(60) NOT NULL,
@@ -247,8 +252,9 @@ DRESS_IMAGE image NULL,
 
 
 
+
 DROP proc SP_INSERT_DRESS_INFO
-create proc SP_INSERT_DRESS_INFO @DRESS_ID varchar (10),@DRESS_NAME varchar(100),@DRESS_FOR numeric(3),@DRESS_SERIAL numeric (4),@INSERT_BY varchar(100)
+ALTER proc [dbo].[SP_INSERT_DRESS_INFO] @DRESS_ID varchar (10),@DRESS_NAME nvarchar(100),@DRESS_FOR numeric(3),@DRESS_SERIAL numeric (4),@INSERT_BY varchar(100)
 as 
 INSERT INTO  DRESS_INFO(DRESS_ID, DRESS_NAME, DRESS_FOR,DRESS_SERIAL, INSERT_BY) 
 VALUES (
@@ -268,7 +274,7 @@ CREATE TABLE DivCreates(
 	Labelhead nvarchar(25) NULL,
 	LabelTxt nvarchar(max) NULL,
 	Total int NULL,
-	IsDeleted bit NOT NULL,
+	IsDeleted bit NULL,
 	AddDate datetime NULL,
 	UpdateDate datetime NULL
 ) 

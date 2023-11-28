@@ -68,7 +68,7 @@ namespace TMS.Repository
                 cmd1.CommandText = "SP_INSERT_DRESS_INFO";
                 cmd1.CommandType = CommandType.StoredProcedure;
                 cmd1.Parameters.Add("@DRESS_ID", SqlDbType.VarChar).Value = Convert.ToString(intDressID);
-                cmd1.Parameters.Add("@DRESS_NAME", SqlDbType.VarChar).Value = obj.strDressName;
+                cmd1.Parameters.Add("@DRESS_NAME", SqlDbType.NVarChar).Value = obj.strDressName;
                 cmd1.Parameters.Add("@DRESS_FOR", SqlDbType.Int).Value = obj.intDressFor;
                 cmd1.Parameters.Add("@DRESS_SERIAL", SqlDbType.Int).Value = obj.intPOSITION;
                 cmd1.Parameters.Add("@INSERT_BY", SqlDbType.VarChar).Value = "User";
@@ -1615,7 +1615,7 @@ namespace TMS.Repository
                     int intDressid = 0;
 
                     SqlDataReader drGetGroup;
-                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.DressSubList[i].strDressName + "' ";
+                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = N'" + obj.DressSubList[i].strDressName + "' ";
                     cmdInsert.CommandText = strSQL;
                     drGetGroup = cmdInsert.ExecuteReader();
                     drGetGroup.Read();
@@ -1628,7 +1628,7 @@ namespace TMS.Repository
                     strSQL = "INSERT INTO DivCreates";
                     strSQL = strSQL + "(DRESS_ID,Labelhead,LabelTxt,Total)";
                     strSQL = strSQL + "VALUES(";
-                    strSQL = strSQL + "" + intDressid + ",'" + obj.DressSubList[i].strDressHead + "','" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
+                    strSQL = strSQL + "" + intDressid + ",N'" + obj.DressSubList[i].strDressHead + "',N'" + obj.DressSubList[i].strMesurmentNameSubtype + "'," + i + " ";
                     strSQL = strSQL + ")";
                     cmdInsert.CommandText = strSQL;
                     cmdInsert.ExecuteNonQuery();
@@ -1882,7 +1882,7 @@ namespace TMS.Repository
         }
         #endregion
         #region "Dress Style"
-        public List<DressStyleList> StyleList(DressStyleList obj)
+        public List<DressStyleList> StyleList(int intDressid)
         {
             string strSQL = null;
             SqlDataReader dr;
@@ -1900,7 +1900,7 @@ namespace TMS.Repository
                 {
                     gcnMain.Open();
                     strSQL = "SELECT S.STYLE_KEY, S.STYLE_ID,S.STYLE_NAME,D.DRESS_NAME,D.DRESS_ID FROM DRESS_STYLE S,DRESS_INFO D WHERE S.DRESS_ID=D.DRESS_ID ";
-                    strSQL = strSQL + "WHERE D.DRESS_ID ='" + obj.intDressid + "' ";
+                    strSQL = strSQL + "AND D.DRESS_ID =" + intDressid + " ";
                     strSQL = strSQL + "ORDER BY  D.DRESS_ID,S.STYLE_ID  DESC";
                     SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
                     dr = cmd.ExecuteReader();
@@ -1956,7 +1956,7 @@ namespace TMS.Repository
                     int intDressid = 0, intStyleId = 0;
 
                     SqlDataReader drGetGroup;
-                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = '" + obj.strDressName + "' ";
+                    strSQL = "SELECT DRESS_ID FROM DRESS_INFO WHERE DRESS_NAME  = N'" + obj.strDressName + "' ";
                     cmdInsert.CommandText = strSQL;
                     drGetGroup = cmdInsert.ExecuteReader();
                     drGetGroup.Read();
