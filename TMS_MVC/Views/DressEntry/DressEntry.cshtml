@@ -160,7 +160,7 @@
 
 @* ***************Dress Style Set *@
 <div class="modal fade bd-example-modal-lg" id="StylSet" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-xl" style="left: 0%" role="document">
+    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
         <div class="modal-content">
             <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
                 <h5 style="text-align: center; text-decoration: underline;">ডিজাইন যুক্ত করুন</h5>
@@ -210,82 +210,94 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-sm" id="styleadd" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-sm" style="left: 0%" role="document">
+
+
+<div class="modal fade bd-example-modal-lg" id="styleadd" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="left: 0%" role="document">
         <div class="modal-content">
-
             <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
-                <h5 id="idstyleDHead"   style="text-align: center;  text-decoration: underline;">'কলার' ডিজাইন যুক্ত করুন</h5>
-                <h5 id="idDresid" hidden style="text-align: center;  text-decoration: underline;">'কলার' ডিজাইন যুক্ত করুন</h5>
-
+                <h5 id="idstyleDHead" style="text-align: center;  text-decoration: underline;">'কলার' ডিজাইন যুক্ত করুন</h5>
+                <h5 id="idstyleDHead2" hidden style="text-align: center;  text-decoration: underline;"></h5>
                 <button type="button" id="btnCancel"
                         class="close"
                         data-dismiss="modal"
                         aria-label="Close">
                     <span>&times;</span>
                 </button>
-
             </div>
             <div class="modal-body">
-
-                @*@Html.Partial("SalesOrderNew", Model.Count == 0 ? new Jagoron.Web.Models.SalesOrder() : Model.FirstOrDefault())*@
+          
                 <div class="row">
-
-                    <input type="hidden" class="form-control" name="brandName" id="txtOldbranchID" form="usrform">
+                    <input type="hidden" class="form-control" name="brandName" id="txtOldkeyID" form="usrform">
                     <div class="col-sm-12">
 
                         <div style="margin-left: 10px;">
                             <label>ডিজাইন বা স্টাইলের নাম:</label><span id="reqAddress1" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtDressStyleDName" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtStyleDetails"  form="usrform" style="text-transform:capitalize">
                         </div>
 
-                        <div class="col-sm-12">
-                            <div style="margin-left: 10px;">
-                                <label>কার পোষাক:</label><span id="reqDefaultBranch" class="reqError"></span><br />
-                            </div>
-                            <select id="cbodeDressFor" class="form-control">
-                                <option value="0">পুরুষ</option>
-                                <option value="1">মহিলা</option>
-                                <option value="2">বাচ্চা</option>
-                            </select>
-
-                        </div>
                         <div style="margin-left: 10px;">
-                            <label>সিরিয়াল:</label><span id="reqSerial" class="reqError"></span><br />
+                            <label>ডিজাইন সিরিয়াল:</label><span id="reqSerial" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtSerial" form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtDressStyle" form="usrform" style="text-transform:capitalize">
                         </div>
-
-                        <div class="container form-group">
-                            <label class="control-label col-md-8">পোষাকের ছবি:</label>
-                            <div class="col-md-12" style="height:150px;">
-                                <img width="120" height="120" id="productImage" />
-                                <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreview(this);">
-                            </div>
-                        </div>
-
                     </div>
 
 
+                    <div class="container form-group">
+                        <label class="control-label col-md-8">ডিজাইন বা স্টাইলের ছবি:</label>
+                        <div class="col-md-12" style="height:150px;">
+                            <img width="120" height="120" id="productImageStyle" />
+                            <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreviewStyle(this);">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col text-center">
+                        @*<button id="btnSaveStyle" onclick=" duplicationCheck(); saveOrUpdatesStyle()" value="সেভ করুন" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>সেভ করুন</button>*@
+                        <span><input type="button" class="btn btn-primary" id="btnSaveStyle" onclick="saveOrUpdatesStyle();" value="সেভ করুন"></></span>
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table id="datatableStyleDetails" class="table-bordered display" style="width:100%"></table>
                 </div>
 
-                <div class="modal-footer border-0">
-                    <span><input type="button" class="btn btn-primary" id="btnsaveStyleD" onclick="saveOrUpdates();" value="Save"></></span>
-                    <span><input type="button" class="btn btn-danger" id="btncen" data-dismiss="modal" value="Cancel" onclick="clearFromData();"></></span>
-                </div>
             </div>
 
         </div>
     </div>
 </div>
+
+
+
+
+
 @*-------------------------end-------------------------------------------------------------*@
 
 @section scripts{
     <script>
-
+        function showimagepreviewStyle(input) {
+            if (input.files && input.files[0]) {
+                var a = (input.files[0].size);
+                if (a > 200000) {
+                    alert('Photo too large. Maximum allowed size is 200 KB');
+                }
+                else {
+                    //$('#WarningMsg').val('');
+                    var filerdr = new FileReader();
+                    filerdr.onload = function (e) {
+                        $('#productImageStyle').attr('src', e.target.result);
+                    }
+                    filerdr.readAsDataURL(input.files[0]);
+                }
+            }
+        };
         function showimagepreview(input) {
             if (input.files && input.files[0]) {
                 var a = (input.files[0].size);
@@ -309,13 +321,14 @@
         var tempDataList = [];
         var DressMesurmentList = [];
         var DressStyleList = [];
+        var DressStyleDetails = [];
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
             $('#btnSaveStyle').val('সেভ করুন');
-
+            document.getElementById('productImageStyle').src = "/Images/defaultProduct.jpg";
             showGrid();
             showMesurmentGrid();
-            
+            //showStyleDetails();
             //$("#BranchConfig").on('shown.bs.modal', function () {
             //    $(this).find('#txtbranchName').focus();
             //});
@@ -785,6 +798,7 @@
             $('#txtDressName').val('');
             $('#btnBrowsePic').val('')
             document.getElementById('productImage').src = "/Images/defaultProduct.jpg";
+            document.getElementById('productImageStyle').src = "/Images/defaultProduct.jpg";
             $('#txtSerial').val('');
             $("#cbodeDressFor").prop("selectedIndex", '0').val();
         }
@@ -1527,42 +1541,178 @@
             });
 
         }
-        
         function editStyle(data) {
+         
 
             $('#idstyleDHead').text(data.strStyleName + '-' + 'ডিজাইন যুক্ত করুন');
             
             $('#idDresid').text(data.intDressid);
+            $('#idstyleDHead2').text(data.strStyleName);
             $('#btnsaveStyleD').val('আপডেট করুন ');
             //$('#txtOldbranchID').val(data.BranchID);
             $('#txtOldkeyID').val(data.strStyleKey);
-            $("#txtDressStyleDName").val(data.strStyleName);
-            $('#txtDressStyle').val(data.strStyleName);
-            //$("#txtCountry").val(data.Country);
-            //$('#txtTelephone').val(data.Phone);
-            //$('#txtlocation').val(data.Godown);
-            //$("#txtFax").val(data.Fax);
-            //$('#cboInactive').val(data.Status);
-            //$('#cbodefaultBrach').val(data.DefaultBranch);
-            ////$('#txtlocation').val(data.Comments);
-            //$("#cbodefaultBrach").val(data.);
-
-            //if (data.Status == "NO") {
-            //    $("#cboInactive").val("0");
-            //}
-            //else {
-            //    $("#cboInactive").val("1");
-            //}
-
-            //$('#txtComments').val(data.Comments);
+            $("#txtStyleDetails").val(data.strStyleName);
+            showStyleDetails();
 
 
+
+            Createcard();
+
+
+        }
+        function Createcard()
+        {
+            for (var i = 0; i < length; i++) {
+
+
+
+            }
 
         }
         function clearStyleData() {
             showStyleGrid();
         }
+        function showStyleDetails(data) {
 
+            //var empObj = {
+            //var intDressid= data.intDressid,
+
+            //};
+            table = $('#datatableStyleDetails').DataTable({
+                "bDestroy": true,
+                "select": true,
+                //"gridlines": true,
+                "ajax": {
+                    "url": "/DressEntry/mFillShowGrid",
+                    //"url": "/DressEntry/mFillShowDressStyle?intDressid=" + data.intDressid,
+                    "type": "POST",
+                    //"data": "JSON.stringify(empObj)",
+                    "contentType": "application/json;charset=utf-8",
+                    "datatype": "json",
+
+                    "dataSrc": function (response) {
+
+                        detailsList = response;
+                        response.draw = response.draw;
+                        response.recordsTotal = response.recordsTotal;
+                        response.recordsFiltered = response.recordsFiltered;
+                        console.log('request.responseText', response);
+
+                        return response;
+                    }
+
+                },
+
+                "columns": [
+
+
+                     {
+                         title: 'SL',
+                         render: function (
+                             data,
+                             type,
+                             row,
+                             meta
+                         ) {
+                             return '<span>' + (meta.row + 1) + '</span>';
+                         },
+                         "visible": false,
+                     },
+                     //{
+                     //    title: 'স্ট্যাটাস',
+                     //    "data": "inStatus", "autowidth": true,
+                     //    "render": function (inStatus) {
+                     //        if (inStatus == 1) {
+                     //            return "না";
+                     //        }
+                     //        else {
+                     //            return "হা";
+                     //        }
+
+                     //    }
+                     //},
+                      {
+                          title: 'ID',
+                          data: 'intDressid',
+                          name: 'strDressName',
+                          "visible": false,
+
+                      },
+                       {
+                           title: 'পোষাকের নাম',
+                           data: 'strDressName',
+                           name: 'strDressName',
+
+                       },
+
+                             {
+                                 title: 'ছবি',
+                                 'data': 'strImage',
+                                 'sortable': false,
+                                 'searchable': false,
+                                 'render': function (data) {
+                                     if (!data) {
+                                         return 'N/A';
+                                     } else {
+                                         var img = 'data:image/png;base64,' + data;
+                                         return '<img src="' + img + '" height="50px" width="50px" />';
+                                     }
+                                 }
+                             },
+
+                                {
+                                    title: 'ইডিট করুন',
+
+                                    render: function (data, type, row) {
+                                        return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
+                                    }
+                                },
+                                 {
+                                     title: 'ডিলিট করুন',
+                                     render: function (data, type, row) {
+                                         return '<button class="btn btn-danger fontsize delete-sloat-ak">   <i class="fa fa-trash"></i></button>';
+                                     }
+                                 },
+
+
+                ],
+
+                "responsive": true,
+                "rowCallback": function (row, data) {
+                    var rowdata = data;
+
+                    $(row).find(".stylek-sloat-ak").click(function () {
+                        selectdata = data;
+                        console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        editStyle(selectdata);
+
+                    });
+
+                    $(row).find(".style-sloat-ak").click(function () {
+                        selectdata = data;
+                        //console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        editStyle(selectdata);
+
+                    });
+                    $(row).find(".deletestyle-sloat-ak").click(function () {
+                        selectdata = data;
+                        DeleteStyle(selectdata);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+       
         //End Dress Style
     </script>
 }

@@ -1,6 +1,8 @@
 https://deeplaid.biz-motion.com/auth/login
 ha001
 admin@123456
+it
+123123
 
 
 
@@ -57,8 +59,10 @@ BUTTON_NAME varchar(25) NOT NULL Constraint PK_BUTTON_NAME Primary key ,
 BUTTON_IMAGE image NULL,
 BUTTON_STATUS smallint DEFAULT 0 
 )
+
 DROP proc INSERT_BUTTON_NAME_INFO
-create proc INSERT_BUTTON_NAME_INFO @ButtonID numeric (6),@ButtonName varchar(60), @img image,@ButtonStatus numeric (1)  as INSERT INTO  INSERT_BUTTON_NAME_INFO(BUTTON_ID,BUTTON_NAME,BUTTON_IMAGE,BUTTON_STATUS) VALUES (@ButtonID,@ButtonName,@img,@ButtonStatus) 
+create proc INSERT_BUTTON_NAME_INFO @ButtonID numeric (6),@ButtonName varchar(60), @img image,@ButtonStatus numeric (1)  as 
+INSERT INTO  INSERT_BUTTON_NAME_INFO(BUTTON_ID,BUTTON_NAME,BUTTON_IMAGE,BUTTON_STATUS) VALUES (@ButtonID,@ButtonName,@img,@ButtonStatus) 
 
 alter proc INSERT_BUTTON_ICON @ButtonID numeric (6), @img image  as INSERT INTO  BUTTON_ICON(BUTTON_ID,BUTTON_IMAGE) VALUES (@ButtonID,@img) 
 
