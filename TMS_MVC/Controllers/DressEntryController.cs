@@ -20,6 +20,8 @@ namespace Jagoron.Web.Controllers
         public ActionResult DressSave(DressSetup obj)
         {
 
+       
+
             string oogrp = objrepository.InsertDress(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
@@ -84,7 +86,39 @@ namespace Jagoron.Web.Controllers
             string oogrp = objrepository.DeleteDressStyle(obj);
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
-        
-        
-	}
+
+        #region "Cookis data Add"
+        public ActionResult mFillShowDressStyle1(int intDressid)
+        {
+            string key="1" , value="One";
+            int expireDay = 1;
+            var cookie = new HttpCookie(key, value);
+            cookie.Expires = DateTime.Now.AddDays(expireDay);
+            HttpContext.Response.Cookies.Add(cookie);
+
+
+            return new JsonResult() { Data = cookie, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        public ActionResult mFillShowDressStyle3(int intDressid)
+        {
+            string value = string.Empty;
+
+            var cookie = Request.Cookies["1"];
+
+            if (cookie != null)
+            {
+                if (string.IsNullOrWhiteSpace(cookie.Value))
+                {
+                    return new JsonResult() { Data = value, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+                }
+                value = cookie.Value;
+            }
+
+            return new JsonResult() { Data = cookie, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+
+        #endregion
+
+
+    }
 }
