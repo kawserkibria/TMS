@@ -139,6 +139,7 @@
     <Compile Include="Models\BranchEntry.cs" />
     <Compile Include="Models\ButtonName.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\DatabaseCompany.cs" />
     <Compile Include="Models\ProthistanModel.cs" />
     <Compile Include="Models\DressSetup.cs" />
     <Compile Include="Models\jsTree3Node.cs" />
@@ -6904,6 +6905,7 @@
     <Content Include="Views\Customer\Customerview.cshtml" />
     <Content Include="Views\DressEntry\DressEntry.cshtml" />
     <Content Include="Views\UserInfo\UserInfo.cshtml" />
+    <Content Include="Views\DressEntry\SelectCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -266,6 +266,8 @@
             $("#Costcategory").modal("hide");
             $('#btnsaveOrder').val('Save');
         });
+        var fdate;
+
         function saveOrUpdates() {
             if (checkReqFields() == false) {
                 return;
@@ -321,17 +323,6 @@
             }
 
         }
-        //function checkVariable(variable) {
-
-        //    if (variable == null) {
-        //        return "1";
-        //    }
-        //    else {
-        //        return "2";
-        //    }
-        //}
-        var fdate;
-
         function toTitleCase(str) {
             return str.replace(
               /\w\S*/g,
@@ -558,7 +549,6 @@
             var today = now.getFullYear() + "-" + (day) + "-" + (month);
             $('#fromDateMD').val(today);
         };
-
         function deleteBranch(selectdata) {
 
             var empObj = {
@@ -606,7 +596,6 @@
 
 
         }
-
         function checkReqFields() {
             var returnValue;
 
@@ -618,7 +607,6 @@
             }
             return returnValue;
         }
-
         function refreshformdata() {
             showGrid();
         }

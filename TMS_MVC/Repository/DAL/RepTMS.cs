@@ -13,10 +13,71 @@ namespace TMS.Repository
 {
     public class RepTMS
     {
-       
-  
+
+ 
 
         string connectionString = WebConfigurationManager.ConnectionStrings["gcnmain"].ConnectionString;
+
+        public List<DatabaseCompany> mloadDatabaseCompnay(string strDeComID)
+        {
+            string strSQL, strCompaniId = "";
+            SqlDataReader drGetGroup;
+            List<DatabaseCompany> oogrp = new List<DatabaseCompany>();
+
+            //SqlConnection con = new SqlConnection(connectionString);
+
+            strSQL = "SELECT NAME FROM master.dbo.sysdatabases WHERE NAME LIKE 'SMART%' ORDER BY NAME ";
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                gcnMain.Open();
+
+                SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                drGetGroup = cmd.ExecuteReader();
+                while (drGetGroup.Read())
+                {
+                    strCompaniId = drGetGroup["NAME"].ToString() + "~" + strCompaniId;
+                }
+                drGetGroup.Close();
+
+                if (strCompaniId != "")
+                {
+                    strCompaniId = strCompaniId.ToString().Substring(0, strCompaniId.Length - 1);
+
+                    string[] words = strCompaniId.Split('~');
+                    foreach (string name in words)
+                    {
+                        if (name.ToString() != "")
+                        {
+                            strSQL = "SELECT * FROM " + name.ToString() + ".dbo.ACC_COMPANY ";
+
+                            SqlCommand cmd1 = new SqlCommand(strSQL, gcnMain);
+                            drGetGroup = cmd1.ExecuteReader();
+                            while (drGetGroup.Read())
+                            {
+                                DatabaseCompany odc = new DatabaseCompany();
+                                odc.strComID = drGetGroup["COMPANY_ID"].ToString();
+                                odc.strComName = drGetGroup["COMPANY_ID"].ToString() + "-" + drGetGroup["COMPANY_NAME"].ToString();
+                                odc.strFDate = Convert.ToDateTime(drGetGroup["COMPANY_FINICIAL_YEAR_FROM"]).ToString("dd/MM/yyyy");
+                                odc.strTDate = Convert.ToDateTime(drGetGroup["COMPANY_FINICIAL_YEAR_TO"]).ToString("dd/MM/yyyy");
+                                odc.strStatus = "Running";
+                                oogrp.Add(odc);
+                            }
+                            drGetGroup.Close();
+                        }
+                    }
+                }
+
+
+
+
+                gcnMain.Dispose();
+                return oogrp;
+            }
+        }
         #region "Porichalok Info"
         public string InsertDress(DressSetup obj)
         {
@@ -2116,6 +2177,217 @@ namespace TMS.Repository
             }
 
         }
+
+        #region "Dress Style Details"
+        public string InsertDressStyleDetails(DressStyleList obj)
+        {
+
+            SqlDataReader dr;
+            string strSQL = "";
+
+            int intStyleDetailID = 01;
+
+
+
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+
+
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+                strSQL = "SELECT (case when  MAX(STYLE_DETILS_ID) is null then 0 else MAX(STYLE_DETILS_ID) end) +1 as STYLE_DETILS_ID FROM STYLE_DETAILS ";
+                cmd1.CommandText = strSQL;
+                cmd1.ExecuteNonQuery();
+
+                dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    intStyleDetailID = Convert.ToInt32(dr["STYLE_DETILS_ID"].ToString());
+                }
+                dr.Close();
+
+                //cmd1.CommandText = "PRO_INSERT_STYLE_DETAILS";
+                //cmd1.CommandType = CommandType.StoredProcedure;
+                //cmd1.Parameters.Add("@StyleID", SqlDbType.Int).Value = intStyleDetailID;
+                //cmd1.Parameters.Add("@StyleDetailsID", SqlDbType.Int).Value = obj.intDet;
+                //cmd1.Parameters.Add("@StyleDetailsName", SqlDbType.NVarChar).Value = obj.intDressFor;
+                //cmd1.Parameters.Add("@status", SqlDbType.Int).Value = obj.intPOSITION;
+                //cmd1.Parameters.Add("@InsertBy", SqlDbType.VarChar).Value = "User";
+                //cmd1.ExecuteNonQuery();
+
+                //cmd2.CommandText = "SP_INSERT_DRESS_INFO_IMAGE";
+                //cmd2.CommandType = CommandType.StoredProcedure;
+                //cmd2.Parameters.Add("@DRESS_ID", SqlDbType.VarChar).Value = Convert.ToString(intDressID);
+                //cmd2.Parameters.Add("@DRESS_IMAGE", SqlDbType.Image).Value = byts;
+                cmd2.ExecuteNonQuery();
+
+
+                trans.Commit();
+                return "save";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+        }
+
+        public string UpdateDressStyleDetails(DressSetup obj)
+        {
+
+            var byts = new byte[0];
+            if ((obj.Picture != null) && (obj.Picture.ContentLength > 0))
+            {
+
+                var pic = obj.Picture.InputStream;
+
+                MemoryStream ms = new MemoryStream();
+                pic.CopyTo(ms);
+                byts = ms.ToArray();
+                ms.Dispose();
+            }
+            string strSQL = "";
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd1, cmd2;
+            con.Open();
+            cmd1 = new SqlCommand("sp1", con);
+            cmd2 = new SqlCommand("sp2", con);
+            SqlTransaction trans = con.BeginTransaction();
+            cmd1.Transaction = trans;
+            cmd2.Transaction = trans;
+            try
+            {
+
+
+
+                //if (byts.Length > 0)
+                //{
+                //    strSQL = "DELETE FROM  PORICHALOK_INFO_IMAGE WHERE PORICHALOK_ID=" + obj.strPorichalokID + " ";
+                //    cmd1.CommandText = strSQL;
+                //    cmd1.ExecuteNonQuery();
+                //}
+
+
+
+
+                //cmd1.CommandText = "SP_UPDATE_PORICHALOK_INFO";
+                //cmd1.CommandType = CommandType.StoredProcedure;
+                //cmd1.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = Convert.ToString(obj.strPorichalokID);
+                //cmd1.Parameters.Add("@PORICHALOK_NAME", SqlDbType.VarChar).Value = obj.strPorichalokName;
+                //cmd1.Parameters.Add("@PORICHALOK_FATHER_NAME", SqlDbType.VarChar).Value = obj.strPorichalokFathersName;
+                //cmd1.Parameters.Add("@PORICHALOK_SEX", SqlDbType.VarChar).Value = obj.strPorichalokGendar;
+                //cmd1.Parameters.Add("@PORICHALOK_POSITION", SqlDbType.VarChar).Value = obj.strPosition;
+                //cmd1.Parameters.Add("@PORICHALOK_CITY", SqlDbType.VarChar).Value = obj.strPorichalokCity;
+                //cmd1.Parameters.Add("@PORICHALOK_POST_CODE", SqlDbType.VarChar).Value = obj.strPorichalokPostalCode;
+                //cmd1.Parameters.Add("@PORICHALOK_MOBILE", SqlDbType.VarChar).Value = obj.strPorichalokMobile;
+                //cmd1.Parameters.Add("@PORICHALOK_EMAIL", SqlDbType.VarChar).Value = obj.strPorichalokEmail;
+                //cmd1.Parameters.Add("@PORICHALOK_ADDRESS", SqlDbType.VarChar).Value = obj.strPorichalokAddress;
+                //cmd1.Parameters.Add("@PORICHALOK_DATE_OF_BARTH", SqlDbType.Date).Value = obj.strPorichalokDateOfBorth;
+                //cmd1.Parameters.Add("@UPDATE_BY", SqlDbType.VarChar).Value = "User";
+                //cmd1.ExecuteNonQuery();
+
+
+
+
+
+                //if (byts.Length > 0)
+                //{
+                //    cmd2.CommandText = "SP_PORICHALOK_INFO_IMAGE";
+                //    cmd2.CommandType = CommandType.StoredProcedure;
+                //    cmd2.Parameters.Add("@PORICHALOK_ID", SqlDbType.VarChar).Value = obj.strPorichalokID;
+                //    cmd2.Parameters.Add("@img", SqlDbType.Image).Value = byts;
+                //    cmd2.ExecuteNonQuery();
+                //}
+
+                trans.Commit();
+                return "OK";
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            return "NO";
+
+
+        }
+
+        public List<DressSetup> StyleDetailsList(string strDeComID)
+        {
+            string strSQL = null;
+            SqlDataReader dr;
+            List<DressSetup> ooDressList = new List<DressSetup>();
+
+
+
+            using (SqlConnection gcnMain = new SqlConnection(connectionString))
+            {
+                if (gcnMain.State == ConnectionState.Open)
+                {
+                    gcnMain.Close();
+                }
+                try
+                {
+                    gcnMain.Open();
+                    strSQL = "select * from DRESS_INFO, DRESS_INFO_IMAGE WHERE DRESS_INFO.DRESS_ID =DRESS_INFO_IMAGE.DRESS_ID";
+
+                    SqlCommand cmd = new SqlCommand(strSQL, gcnMain);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+
+                        DressSetup oCat = new DressSetup();
+                        oCat.intDressid = Convert.ToInt32(dr["DRESS_ID"].ToString());
+                        oCat.strDressName = dr["DRESS_NAME"].ToString();
+                        oCat.intDressFor = Convert.ToInt32(dr["DRESS_FOR"].ToString());
+                        oCat.intPOSITION = Convert.ToInt32(dr["DRESS_SERIAL"].ToString());
+
+                        if (dr["DRESS_IMAGE"] != null)
+                        {
+                            oCat.strImage = Convert.ToBase64String((byte[])dr["DRESS_IMAGE"]);
+                        }
+
+                        ooDressList.Add(oCat);
+
+                    }
+
+                    dr.Close();
+                    gcnMain.Close();
+                    gcnMain.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return ooDressList;
+            }
+
+        }
+
+
+        #endregion
         #endregion
     }
 }

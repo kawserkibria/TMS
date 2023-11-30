@@ -210,13 +210,12 @@
     </div>
 </div>
 
-
-
 <div class="modal fade bd-example-modal-lg" id="styleadd" tabindex="2" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="left: 0%" role="document">
         <div class="modal-content">
             <div class="modal-header my_modal-header" style="background:  #194771; color: white;">
                 <h5 id="idstyleDHead" style="text-align: center;  text-decoration: underline;">'কলার' ডিজাইন যুক্ত করুন</h5>
+            
                 <h5 id="idstyleDHead2" hidden style="text-align: center;  text-decoration: underline;"></h5>
                 <button type="button" id="btnCancel"
                         class="close"
@@ -235,7 +234,7 @@
                             <label>ডিজাইন বা স্টাইলের নাম:</label><span id="reqAddress1" class="reqError"></span><br />
                         </div>
                         <div class="col-sm-12">
-                            <input class="form-control" name="brandName" id="txtStyleDetails"  form="usrform" style="text-transform:capitalize">
+                            <input class="form-control" name="brandName" id="txtStyleDetailsName"  form="usrform" style="text-transform:capitalize">
                         </div>
 
                         <div style="margin-left: 10px;">
@@ -250,7 +249,7 @@
                     <div class="container form-group">
                         <label class="control-label col-md-8">ডিজাইন বা স্টাইলের ছবি:</label>
                         <div class="col-md-12" style="height:150px;">
-                            <img width="120" height="120" id="productImageStyle" />
+                            <img width="120" height="120" id="ImageStyleDetails" />
                             <input type="file" class="form-control" id="btnBrowsePic" onchange="showimagepreviewStyle(this);">
                         </div>
                     </div>
@@ -260,7 +259,7 @@
 
                     <div class="col text-center">
                         @*<button id="btnSaveStyle" onclick=" duplicationCheck(); saveOrUpdatesStyle()" value="সেভ করুন" class="btn btn-default btn btn-primary"> <i class="fa fa-plus"></i>সেভ করুন</button>*@
-                        <span><input type="button" class="btn btn-primary" id="btnSaveStyle" onclick="saveOrUpdatesStyle();" value="সেভ করুন"></></span>
+                        <span><input type="button" class="btn btn-primary" id="btnSaveStyleDetails" onclick="StyleDetailssaveOrUpdates();" value="সেভ করুন"></></span>
                     </div>
                 </div>
                 <br>
@@ -273,10 +272,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 @*-------------------------end-------------------------------------------------------------*@
 
@@ -292,7 +287,7 @@
                     //$('#WarningMsg').val('');
                     var filerdr = new FileReader();
                     filerdr.onload = function (e) {
-                        $('#productImageStyle').attr('src', e.target.result);
+                        $('#ImageStyleDetails').attr('src', e.target.result);
                     }
                     filerdr.readAsDataURL(input.files[0]);
                 }
@@ -325,7 +320,7 @@
         $(document).ready(function () {
             $('#btnsaveOrder').val('Save');
             $('#btnSaveStyle').val('সেভ করুন');
-            document.getElementById('productImageStyle').src = "/Images/defaultProduct.jpg";
+            document.getElementById('ImageStyleDetails').src = "/Images/defaultProduct.jpg";
             showGrid();
             showMesurmentGrid();
             //showStyleDetails();
@@ -1714,6 +1709,271 @@
         }
        
         //End Dress Style
+
+        //Dress Style Details
+        function StyleDetailssaveOrUpdates() {
+            //if (checkReqFields() == false) {
+            //    return;
+            //}
+            var btn = $('#btnSaveStyleDetails').val();
+            if (btn == "সেভ করুন") {
+                swal({
+                    title: "Do You Want to Save?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                    }
+                    else {
+                        saveStyleDetails();
+                        clearFromData();
+                        $('#txtbranchName').focus();
+                    }
+
+                });
+
+
+            } else {
+
+
+                swal({
+                    title: "Do You Want to Update?",
+                    text: "",
+                    icon: "warning",
+                    buttons: [
+                        'Yes',
+                        'No'
+                    ],
+                    dangerMode: true,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+
+                    }
+                    else {
+
+                        UpdateStyleDetails(mstrPrimaryFields);
+                        clearFromData();
+                        $('#btncen').click();
+
+                    }
+
+                });
+            }
+
+        }
+        function toTitleCase(str) {
+            return str.replace(
+              /\w\S*/g,
+              function (txt) {
+                  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+              }
+            );
+        }
+        function saveStyleDetails() {
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("strStyleDetailsName", $('#txtStyleDetailsName').val());
+            fd.append("strStyleName", $('#idstyleDHead2').val());
+            console.log(fd);
+
+            $.ajax({
+                url: "/DressEntry/DressStyleDetailsInsert",
+                processData: false,
+                contentType: false,
+                type: "POST",
+                datatype: "json",
+                data: fd,
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+
+        }
+        function UpdateStyleDetails(id) {
+            var fd = new FormData();
+            var files = $('input[type="file"]')[0].files;
+            for (var i = 0; i < files.length; i++) {
+                fd.append("Picture", files[i]);
+            }
+            fd.append("strPorichalokID", id);
+            fd.append("strPorichalokName", $('#txtporichalokname').val());
+            fd.append("strPorichalokFathersName", $('#txtporichalokfather').val());
+            fd.append("strPorichalokGendar", $('#txtporichalokGendar').val());
+            fd.append("strPosition", $('#txtporichalokposition').val());
+            fd.append("strPorichalokCity", $('#txtporichalokCity').val());
+            fd.append("strPorichalokPostalCode", $('#txtpostcode').val());
+            fd.append("strPorichalokMobile", $('#txtmobile').val());
+            fd.append("strPorichalokEmail", $('#txtemail').val());
+            fd.append("strPorichalokAddress", $('#txtaddress').val());
+            fd.append("strPorichalokFacebook", $('#txtFacebook').val());
+            fd.append("strPorichalokDateOfBorth", $('#fromDateMD').val());
+            console.log(fd);
+
+            $.ajax({
+                url: "/DirectorInformation/mPorichalokUpdate",
+                processData: false,
+                contentType: false,
+                type: "POST",
+                datatype: "json",
+                data: fd,
+                success: function (result) {
+
+                    if (result == "save") {
+                        //console.log('save')
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            //position: 'top-right',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Save Successfully',
+                        });
+                        showGrid();
+                        clearFromData();
+
+
+                    } else {
+                        swal("Warning!", result);
+                        //clearFromData();
+                    };
+                }
+            });
+        }
+        function Edit() {
+
+            var empObj = {
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
+            };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    console.log('data', data.strPorichalokGendar)
+                    if (data.Data != "") {
+
+                        $('#pname').text(data.strPorichalokName);
+                        $('#pposition').text(data.strPosition);
+                        $('#pfatherName').text(data.strPorichalokFathersName);
+                        $('#pMobile').text(data.strPorichalokMobile);
+                        $('#pEmail').text(data.strPorichalokEmail);
+                        $('#pAddress').text(data.strPorichalokAddress);
+                        var picString = data.Data;
+                        var image = new Image();
+                        var src = "data:image/jpeg;base64," + picString;
+                        document.getElementById('pid').src = src;
+                    }
+                    else {
+                        var logo = document.getElementById('sologo');
+                        logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
+                    }
+
+                }
+            });
+
+        }
+        function showdata() {
+
+
+            var empObj = {
+                //strPorichalokID: (selectdata.intBUTTON_ID),
+                strPorichalokID: "",
+            };
+            $.ajax({
+                url: "/DirectorInformation/mFillEdit",
+                type: "POST",
+                data: JSON.stringify(empObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.strPorichalokName != null) {
+                        console.log("kibria", Date);
+                        $('#txtporichalokname').val(data.strPorichalokName);
+                        $('#txtporichalokfather').val(data.strPorichalokFathersName);
+                        if (data.strPorichalokGendar == "1") {
+                            $('#txtporichalokGendar').val('1');
+                        }
+                        else {
+                            $('#txtporichalokGendar').val('2');
+                        }
+                        $('#txtporichalokposition').val(data.strPosition);
+                        $('#txtaddress').val(data.strPorichalokAddress);
+                        $('#txtporichalokCity').val(data.strPorichalokFathersName);
+                        $('#txtpostcode').val(data.strPorichalokFathersName);
+                        $('#txtmobile').val(data.strPorichalokMobile);
+                        $('#txtFacebook').val(data.strPorichalokFathersName);
+                        $('#txtemail').val(data.strPorichalokFathersName);
+                        strSelectdate = data.strPorichalokDateOfBorth;
+                        if (strSelectdate != "") {
+                            setInputDateEdit();
+                            var picString = data.Data;
+                            var image = new Image();
+                            var src = "data:image/jpeg;base64," + picString;
+                            document.getElementById('productImage').src = src;
+                        }
+
+                        $('#btnsaveOrder').val('Update');
+                    }
+                    else {
+                        //var logo = document.getElementById('sologo');
+                        //logo.src = 'https://t4.ftcdn.net/jpg/00/89/55/15/240_F_89551596_LdHAZRwz3i4EM4J0NHNHy2hEUYDfXc0j.jpg';
+                    }
+
+                }
+            });
+
+
+
+            $('#txtporichalokname').val($('#pname').val());
+        }
+        //End Dress Style Details
+
     </script>
 }
 

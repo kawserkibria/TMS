@@ -13,6 +13,18 @@ namespace Jagoron.Web.Controllers
         //
         // GET: /DressEntry/
         RepTMS objrepository = new RepTMS();
+
+
+        public ActionResult SelectCompanyList(DatabaseCompany obj)
+        {
+            List<DatabaseCompany> oogrp = new List<DatabaseCompany>();
+            oogrp = objrepository.mloadDatabaseCompnay("0004");
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+        public ActionResult SelectCompany()
+        {
+            return View();
+        }
         public ActionResult DressEntry()
         {
             return View();
@@ -87,7 +99,16 @@ namespace Jagoron.Web.Controllers
             return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
-        #region "Cookis data Add"
+        public ActionResult DressStyleDetailsInsert(DressStyleList obj)
+        {
+
+
+
+            string oogrp = objrepository.InsertDressStyleDetails(obj);
+            return new JsonResult() { Data = oogrp, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+        }
+
+        #region "Cookis data Add and Get"
         public ActionResult mFillShowDressStyle1(int intDressid)
         {
             string key="1" , value="One";

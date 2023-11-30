@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "SelectCompany";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="width:1200px">
+    <div class="table-responsive">
+        <table id="selectcompany" class="table-bordered display" style="width:100%"></table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+      
+        var SelectCompanyList = [];
+        $(document).ready(function () {
+           
+            showGrid();
+          
+        })
+       
+        function showGrid() {
+
+
+            table = $('#selectcompany').DataTable({
+                "bDestroy": false,
+                "select": false,
+                "gridlines": false,
+                "select": true,
+                "searching": false,
+                "paging": false,
+                "bInfo": false,
+                "bPaginate": false,
+                "ajax": {
+                    "url": "/DressEntry/SelectCompanyList",
+                    "type": "POST",
+                    "datatype": "json",
+
+                    "dataSrc": function (response) {
+
+                        detailsList = response;
+                        response.draw = response.draw;
+                        response.recordsTotal = response.recordsTotal;
+                        response.recordsFiltered = response.recordsFiltered;
+                        console.log('request.responseText', response);
+
+                        return response;
+                    }
+
+                },
+                "columns": [
+
+
+                      {
+                          title: 'SL',
+                          render: function (
+                              data,
+                              type,
+                              row,
+                              meta
+                          ) {
+                              return '<span>' + (meta.row + 1) + '</span>';
+                          },
+                      },
+                     
+                       {
+                           title: 'ID',
+                           data: 'strComID',
+                           name: 'strComID',
+
+                       },
+                        {
+                            title: 'Name',
+                            data: 'strComName',
+                            name: 'strComName',
+
+                        },
+
+                         {
+                             title: 'From Date',
+                             data: 'strFDate',
+                             name: 'strFDate',
+
+                         },
+                               {
+                                   title: 'To Date',
+                                   data: 'strTDate',
+                                   name: 'strTDate',
+
+                               },
+                                 {
+                                     title: 'Status',
+                                     data: 'strStatus',
+                                     name: 'strStatus',
+
+                                 },
+
+                                 {
+                                     title: 'Select',
+
+                                     render: function (data, type, row) {
+                                         return '<button class="btn btn-info fontsize  sales-sloat-ak"  data-toggle="modal" data-target="#BranchConfig">   <i class="fa fa-pencil"></i></button>';
+                                     }
+                                 },
+                         
+
+
+                ],
+
+                "responsive": true,
+                "rowCallback": function (row, data) {
+                    var rowdata = data;
+
+                    $(row).find(".masurment-sloat-ak").click(function () {
+                        selectdata = data;
+                        console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        MesurmentAddUpdate(selectdata);
+
+                    });
+
+                    $(row).find(".style-sloat-ak").click(function () {
+                        selectdata = data;
+                        //console.log('hello edit dddeeeee', selectdata);
+                        //saveorupdatebtntype =1;
+                        edit(selectdata);
+
+                    });
+                    $(row).find(".delete-sloat-ak").click(function () {
+                        selectdata = data;
+                        deleteBranch(selectdata);
+
+                    });
+                    $(row).find(".print-sloat-ak").click(function () {
+                        selectdata = data;
+                        orderprint(selectdata.strVoucherNoMerz, selectdata.strMerzeName)
+
+                    });
+
+                }
+
+            });
+
+        }
+     
+
+    </script>
+}
+
+
+
+
+
+
+
