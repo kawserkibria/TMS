@@ -319,8 +319,10 @@ create proc PRO_INSERT_STYLE_DETAILS @StyleID numeric (6),@StyleDetailsID numeri
 INSERT INTO  STYLE_DETAILS(STYLE_ID,STYLE_DETILS_ID,STYLE_DETAILS_NAME,STYLE_DETAILS_STATUS,INSERT_BY) VALUES (@StyleID,@StyleDetailsID,@StyleDetailsName,@status,@InsertBy) 
 
 DROP proc PRO_INSERT_COMPANY_ICON
-create proc PRO_INSERT_STYLE_DETAILS_ICON @StyleDetailsID numeric (6), @img image  as
+
+Create proc [dbo].[PRO_INSERT_STYLE_DETAILS_IMAGE] @StyleDetailsID numeric (6), @img image  as
 INSERT INTO  STYLE_DETAILS_ICON(STYLE_DETILS_ID,STYLE_DETILS_IMAGE) VALUES (@StyleDetailsID,@img) 
+
 
 
 DROP proc PRO_UPDATE_STYLE_DETAILS

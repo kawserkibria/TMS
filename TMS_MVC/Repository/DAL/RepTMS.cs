@@ -2183,6 +2183,7 @@ namespace TMS.Repository
         {
 
             SqlDataReader dr;
+  
             string strSQL = "";
 
             int intStyleDetailID = 01;
@@ -2215,10 +2216,21 @@ namespace TMS.Repository
             {
 
 
+                int  intStyleId = 0;
+
+       
+                strSQL = "SELECT STYLE_ID FROM DRESS_STYLE WHERE STYLE_NAME  = N'" + obj.strStyleName + "' ";
+                cmd1.CommandText = strSQL;
+                dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    intStyleId = Convert.ToInt32(dr["STYLE_ID"].ToString());
+                }
+                dr.Close();
+
+               
                 strSQL = "SELECT (case when  MAX(STYLE_DETILS_ID) is null then 0 else MAX(STYLE_DETILS_ID) end) +1 as STYLE_DETILS_ID FROM STYLE_DETAILS ";
                 cmd1.CommandText = strSQL;
-                cmd1.ExecuteNonQuery();
-
                 dr = cmd1.ExecuteReader();
                 if (dr.Read())
                 {
@@ -2226,24 +2238,25 @@ namespace TMS.Repository
                 }
                 dr.Close();
 
-                //cmd1.CommandText = "PRO_INSERT_STYLE_DETAILS";
-                //cmd1.CommandType = CommandType.StoredProcedure;
-                //cmd1.Parameters.Add("@StyleID", SqlDbType.Int).Value = intStyleDetailID;
-                //cmd1.Parameters.Add("@StyleDetailsID", SqlDbType.Int).Value = obj.intDet;
-                //cmd1.Parameters.Add("@StyleDetailsName", SqlDbType.NVarChar).Value = obj.intDressFor;
-                //cmd1.Parameters.Add("@status", SqlDbType.Int).Value = obj.intPOSITION;
-                //cmd1.Parameters.Add("@InsertBy", SqlDbType.VarChar).Value = "User";
-                //cmd1.ExecuteNonQuery();
+                cmd1.CommandText = "PRO_INSERT_STYLE_DETAILS";
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@StyleID", SqlDbType.Int).Value = intStyleId;
+                cmd1.Parameters.Add("@StyleDetailsID", SqlDbType.Int).Value = intStyleDetailID;
+                cmd1.Parameters.Add("@StyleDetailsName", SqlDbType.NVarChar).Value = obj.strStyleDetailsName;
+                cmd1.Parameters.Add("@status", SqlDbType.Int).Value = 1;
+                cmd1.Parameters.Add("@InsertBy", SqlDbType.VarChar).Value = "User";
+                cmd1.ExecuteNonQuery();
 
-                //cmd2.CommandText = "SP_INSERT_DRESS_INFO_IMAGE";
-                //cmd2.CommandType = CommandType.StoredProcedure;
-                //cmd2.Parameters.Add("@DRESS_ID", SqlDbType.VarChar).Value = Convert.ToString(intDressID);
-                //cmd2.Parameters.Add("@DRESS_IMAGE", SqlDbType.Image).Value = byts;
+                cmd2.CommandText = "PRO_INSERT_STYLE_DETAILS_IMAGE";
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.Add("@StyleDetailsID", SqlDbType.Int).Value = intStyleDetailID;
+                cmd2.Parameters.Add("@img", SqlDbType.Image).Value = byts;
                 cmd2.ExecuteNonQuery();
 
 
                 trans.Commit();
                 return "save";
+
             }
             catch (Exception)
             {

@@ -41,6 +41,7 @@ namespace Jagoron.Web.Models
     public class DressStyleList
     {
         public string Data { get; set; }
+        public string strImage { get; set; }
         public byte[] strIamge { get; set; }
         public HttpPostedFileBase Picture { get; set; }
         public string strStyleKey { get; set; }
